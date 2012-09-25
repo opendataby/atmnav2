@@ -19,6 +19,7 @@ var app = app || {};
         },
 
         markersArray: [],
+        infoWindow: new google.maps.InfoWindow(),
         serverUrl: 'http://atmnav-server.appspot.com',
 
         initialize: function () {
@@ -31,7 +32,8 @@ var app = app || {};
             this.mapOptions.center = new google.maps.LatLng(latLng.lat, latLng.lng);
             this.map = new google.maps.Map(this.el, this.mapOptions);
 
-            this.customizeMap();
+            this.addMapControls();
+            this.addMapEvents();
 
             var self = this;
             if (navigator.geolocation) {
@@ -50,7 +52,7 @@ var app = app || {};
             }
         },
 
-        customizeMap: function () {
+        addMapControls: function () {
             var currentLocationControl = document.createElement('div');
             currentLocationControl.id = 'currentLocationControl';
 
@@ -69,7 +71,15 @@ var app = app || {};
             }
             });
 
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);            
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);  
+        },
+
+        addMapEvents: function () {
+            var self = this;
+
+            google.maps.event.addListener(this.map, 'click', function() {
+                self.infoWindow.close();
+            });
         },
 
         createMarker: function (args, markersArray) {
@@ -77,6 +87,8 @@ var app = app || {};
 
             markersArray = markersArray || this.markersArray;
             markersArray.push(marker);
+
+            return marker;
         },
 
         createCurrentPositionMarker: function (latLng) {
@@ -98,6 +110,24 @@ var app = app || {};
             this.markersArray = [];
         },
 
+        connectMarkerHandlers: function (markers, data) {
+            var handler = function (msg) {
+                alert(msg);
+            };
+
+            var self = this;
+            var infoWindow = this.infoWindow;
+            var addListener = google.maps.event.addListener;
+
+            _.each(markers, function (marker, index) {
+                addListener(marker, 'click', function () {
+                    infoWindow.close();
+                    infoWindow.setContent(data[index].addr);
+                    infoWindow.open(self.map, marker);
+                });
+            });
+        },
+
         onFetchError: function () {
             alert('Невозможно загрузить данные с сервера. Попробуйте позже.');
         },
@@ -106,15 +136,19 @@ var app = app || {};
             this.deleteMarkers();
 
             var map = this.map;
+            var data = JSON.parse(data);
             var markersArray = this.markersArray;
             var createMarker = this.createMarker;
-            _.each(JSON.parse(data), function (markerData) {
+
+            _.each(data, function (markerData) {
                 createMarker({
                     map: map,
-                    animation: google.maps.Animation.DROP,
+                    icon: markerData.type + '.png',
                     position: new google.maps.LatLng(markerData.lat, markerData.lng)
                 }, markersArray);
             })
+
+            this.connectMarkerHandlers(markersArray, data);
         },
 
         fetchMarkers: function (args) {
