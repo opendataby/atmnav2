@@ -31,6 +31,8 @@ var app = app || {};
             this.mapOptions.center = new google.maps.LatLng(latLng.lat, latLng.lng);
             this.map = new google.maps.Map(this.el, this.mapOptions);
 
+            this.customizeMap();
+
             var self = this;
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -48,6 +50,28 @@ var app = app || {};
             }
         },
 
+        customizeMap: function () {
+            var currentLocationControl = document.createElement('div');
+            currentLocationControl.id = 'currentLocationControl';
+
+            var self = this;
+            google.maps.event.addDomListener(currentLocationControl, 'click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    var currentPositionLatLng = new google.maps.LatLng(lat, lng);
+
+                    self.map.setCenter(currentPositionLatLng);
+
+                    app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
+                });
+            }
+            });
+
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);            
+        },
+
         createMarker: function (args, markersArray) {
             var marker = new google.maps.Marker(args);
 
@@ -63,7 +87,6 @@ var app = app || {};
             this.currentPositionMarker = new google.maps.Marker({
                 map: this.map,
                 position: latLng,
-                animation: google.maps.Animation.BOUNCE
             });
         },
 
