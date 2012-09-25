@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget
+    xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id = "com.appspot.atm-by"
+    versionCode="200"
+    version = "2.0 alpha">
+
+    <name>ATM Навигатор</name>
+
+    <description>
+        Приложение для поиска ближайших банкоматов в городе Минск.
+    </description>
+
+    <author email="maxusachev@gmail.com">Max Usachev</author>
+    <author email="pavel.tyslyatsky@gmail.com">Pavel Tyslyatsky</author>
+
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+
+    <preference name="phonegap-version" value="2.0.0" />
+    <preference name="orientation" value="portrait" />
+    <preference name="android-minSdkVersion" value="8" />
+    <preference name="android-installLocation" value="auto" />
+    <preference name="stay-in-webview" value="false" />
+
+    <icon src="icon_ldpi.png" width="36" height="36"/>
+    <icon src="icon_mdpi.png" width="48" height="48"/>
+    <icon src="icon_hdpi.png" width="72" height="72"/>
+
+    <gap:splash src="splash.png" />
+
+    <access origin="*" />
+</widget>
