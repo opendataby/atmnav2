@@ -65,13 +65,6 @@ var app = app || {};
                 position: latLng,
                 animation: google.maps.Animation.BOUNCE
             });
-
-            /*
-            var self = this;
-            setTimeout(function () {
-                self.currentPositionMarker.setAnimation(null);
-            }, 4000);
-            */
         },
 
         deleteMarkers: function () {
@@ -82,13 +75,11 @@ var app = app || {};
             this.markersArray = [];
         },
 
-        onFetchError: function (jqXHR, textStatus, errorThrown) {
-            //TODO: log errors here
-
+        onFetchError: function () {
             alert('Невозможно загрузить данные с сервера. Попробуйте позже.');
         },
 
-        onFetchSuccess: function (data, textStatus, jqXHR) {
+        onFetchSuccess: function (data) {
             this.deleteMarkers();
 
             var map = this.map;
@@ -108,6 +99,15 @@ var app = app || {};
             var selectedFilters = app.utils.loadArrayData('filters');
 
             if (!selectedObjects.length || !selectedFilters.length) {
+                console.log('no selected filters or selected objects, abort fetching');
+                this.deleteMarkers();
+                return;
+            }
+
+            if (this.lastSelectedObjects && this.lastSelectedFilters &&
+                !_.difference(selectedObjects, this.lastSelectedObjects).length &&
+                !_.difference(selectedFilters, this.lastSelectedFilters).length) {
+                console.log('selected filters and objects not changed, abort fetching');
                 return;
             }
 
@@ -122,17 +122,13 @@ var app = app || {};
             }
 
             var self = this;
-            jQuery.ajax({
-                url: this.serverUrl,
-                method: 'GET',
-                data: params,
-                error: function (jqXHR, textStatus, errorThrown) {
-                    self.onFetchError(jqXHR, textStatus, errorThrown);
-                },
-                success: function (data, textStatus, jqXHR) {
-                    self.onFetchSuccess(data, textStatus, jqXHR);
-                }
+            var jqxhr = jQuery.get(this.serverUrl, params, function (data) {
+                self.onFetchSuccess(data);
             });
+            jqxhr.error(this.onFetchError);
+
+            this.lastSelectedObjects = selectedObjects;
+            this.lastSelectedFilters = selectedFilters;
         },
 
         updateMarkers: function () {
