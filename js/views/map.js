@@ -27,11 +27,10 @@ var app = app || {};
                     var lng = position.coords.longitude;
                     var currentPositionLatLng = new google.maps.LatLng(lat, lng);
 
-                    self.fetchMarkers();
-
-                    self.map.setCenter(currentPositionLatLng);
                     self.createCurrentPositionMarker(currentPositionLatLng);
+                    self.map.setCenter(currentPositionLatLng);
 
+                    self.fetchMarkers();
                     app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
                 });
             }
@@ -108,6 +107,9 @@ var app = app || {};
                     templateContext.title = app.settings.objects[templateContext.prov];
 
                     infoWindow.close();
+                    infoWindow.setOptions({
+                        maxWidth: screen.width / 7 * 5
+                    });
                     infoWindow.setContent(infoWindowTemplate(templateContext));
                     infoWindow.open(self.map, marker);
                 });
