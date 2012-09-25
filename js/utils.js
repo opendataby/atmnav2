@@ -16,6 +16,6 @@ var app = app || {};
 
         saveData: function (keyName, data) {
             localStorage.setItem(keyName, JSON.stringify(data));
-        },
+        }
     }
 })(jQuery);

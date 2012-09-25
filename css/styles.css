@@ -67,6 +67,16 @@ a {
 }
 
 
+/* InfoWindow */
+#info-window-title {
+    margin-left: 10px;
+}
+
+#info-window-icon {
+    float: left;
+    margin-right: 10px;
+}
+
 /* About block */
 #about-block {
     width: 100%;

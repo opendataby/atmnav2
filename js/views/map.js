@@ -4,33 +4,18 @@ var app = app || {};
     app.MapView = Backbone.View.extend({
         id: 'map-canvas',
 
-        mapOptions: {
-            zoom: 15,
-            keyboardShortcuts: false,
-            panControl: false,
-            rotateControl: false,
-            streetViewControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        },
-
-        defaultLatLng: {
-            lat: 53.902257,
-            lng: 27.561640
-        },
-
         markersArray: [],
         infoWindow: new google.maps.InfoWindow(),
-        serverUrl: 'http://atmnav-server.appspot.com',
 
         initialize: function () {
             var latLng = app.utils.loadData('mapLastLocation');
 
             if (!latLng) {
-                latLng = this.defaultLatLng;
+                latLng = app.settings.defaultLatLng;
             }
 
-            this.mapOptions.center = new google.maps.LatLng(latLng.lat, latLng.lng);
-            this.map = new google.maps.Map(this.el, this.mapOptions);
+            app.settings.mapOptions.center = new google.maps.LatLng(latLng.lat, latLng.lng);
+            this.map = new google.maps.Map(this.el, app.settings.mapOptions);
 
             this.addMapControls();
             this.addMapEvents();
@@ -111,18 +96,19 @@ var app = app || {};
         },
 
         connectMarkerHandlers: function (markers, data) {
-            var handler = function (msg) {
-                alert(msg);
-            };
-
             var self = this;
             var infoWindow = this.infoWindow;
             var addListener = google.maps.event.addListener;
+            var infoWindowTemplate = _.template($('#info-window-template').html());
 
             _.each(markers, function (marker, index) {
                 addListener(marker, 'click', function () {
+                    var templateContext = data[index];
+                    templateContext.type = app.settings.types[templateContext.type];
+                    templateContext.title = app.settings.objects[templateContext.prov];
+
                     infoWindow.close();
-                    infoWindow.setContent(data[index].addr);
+                    infoWindow.setContent(infoWindowTemplate(templateContext));
                     infoWindow.open(self.map, marker);
                 });
             });
@@ -172,7 +158,7 @@ var app = app || {};
             }
 
             var self = this;
-            var jqxhr = jQuery.get(this.serverUrl, params, function (data) {
+            var jqxhr = jQuery.get(app.settings.serverUrl, params, function (data) {
                 self.onFetchSuccess(data);
             });
             jqxhr.error(this.onFetchError);
