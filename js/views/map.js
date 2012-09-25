@@ -161,13 +161,6 @@ var app = app || {};
                 return;
             }
 
-            if (this.lastSelectedObjects && this.lastSelectedFilters &&
-                !_.difference(selectedObjects, this.lastSelectedObjects).length &&
-                !_.difference(selectedFilters, this.lastSelectedFilters).length) {
-                console.log('selected filters and objects not changed, abort fetching');
-                return;
-            }
-
             var params = {
                 'filters[]': selectedFilters,
                 'objects[]': selectedObjects
@@ -183,9 +176,6 @@ var app = app || {};
                 self.onFetchSuccess(data);
             });
             jqxhr.error(this.onFetchError);
-
-            this.lastSelectedObjects = selectedObjects;
-            this.lastSelectedFilters = selectedFilters;
         },
 
         updateMarkers: function () {

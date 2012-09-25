@@ -24,23 +24,29 @@ var app = app || {};
         },
 
         banks: function () {
-            if (!this.objectsView) {
-                this.objectsView = new app.ObjectsView();
+            if (this.objectsView) {
+                this.objectsView.remove();
             }
+            
+            this.objectsView = new app.ObjectsView();
             this.swithToView(this.objectsView);
         },
 
         filters: function () {
-            if (!this.filtersView) {
-                this.filtersView = new app.FiltersView();
+            if (this.filtersView) {
+                this.filtersView.remove();
             }
+            
+            this.filtersView = new app.FiltersView();
             this.swithToView(this.filtersView);
         },
 
         about: function () {
-            if (!this.aboutView) {
-                this.aboutView = new app.AboutView();
+            if (this.aboutView) {
+                this.aboutView.remove();
             }
+            
+            this.aboutView = new app.AboutView();
             this.swithToView(this.aboutView);
         }
     });
