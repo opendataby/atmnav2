@@ -57,33 +57,35 @@
             </script>
 
             <script type="text/template" id="info-window-template">
-                <div id="info-window-title-bar">
-                    <img id="info-window-icon" src="img/<%= prov %>.png" />
-                    <div id="info-window-title"><%= title %></div>
-                </div><br/>
-                <% if (typeof(type) != "undefined") {%>
-                    <div id="info-window-type"><b>Тип:</b> <%= type %></div>
-                <%}%>
+                <div id="info-window-container">
+                    <div id="info-window-title-bar">
+                        <img id="info-window-icon" src="img/<%= prov %>.png" />
+                        <div id="info-window-title"><%= title %></div>
+                    </div><br/>
+                    <% if (typeof(type) != "undefined") {%>
+                        <div id="info-window-type"><b>Тип:</b> <%= type %></div>
+                    <%}%>
 
-                <% if (typeof(currency) != "undefined") {%>
-                    <div id="info-window-currency"><b>Валюта:</b> <%= currency %></div>
-                <%}%>
+                    <% if (typeof(currency) != "undefined") {%>
+                        <div id="info-window-currency"><b>Валюта:</b> <%= currency %></div>
+                    <%}%>
 
-                <% if (typeof(addr) != "undefined") {%>
-                    <div id="info-window-addr"><b>Адрес:</b> <%= addr %></div>
-                <%}%>
+                    <% if (typeof(addr) != "undefined") {%>
+                        <div id="info-window-addr"><b>Адрес:</b> <%= addr %></div>
+                    <%}%>
 
-                <% if (typeof(place) != "undefined") {%>
-                    <div id="info-window-place"><b>Расположение:</b> <%= place %></div>
-                <%}%>
+                    <% if (typeof(place) != "undefined") {%>
+                        <div id="info-window-place"><b>Расположение:</b> <%= place %></div>
+                    <%}%>
 
-                <% if (typeof(time) != "undefined") {%>
-                    <div id="info-window-time"><b>Время работы:</b> <%= time %></div>
-                <%}%>
+                    <% if (typeof(time) != "undefined") {%>
+                        <div id="info-window-time"><b>Время работы:</b> <%= time %></div>
+                    <%}%>
 
-                <% if (typeof(phone) != "undefined") {%>
-                    <div id="info-window-phone"><b>Телефон:</b> <%= phone %></div>
-                <%}%>
+                    <% if (typeof(phone) != "undefined") {%>
+                        <div id="info-window-phone"><b>Телефон:</b> <%= phone %></div>
+                    <%}%>
+                </div>
             </script>
 
             <script src="cordova.js"></script>

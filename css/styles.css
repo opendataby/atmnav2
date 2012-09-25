@@ -77,6 +77,10 @@ a {
     margin-right: 10px;
 }
 
+#info-window-container {
+    font-size: small;
+}
+
 /* About block */
 #about-block {
     width: 100%;
