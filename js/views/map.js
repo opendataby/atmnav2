@@ -25,17 +25,36 @@ var app = app || {};
             var self = this;
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
-                    var currentPositionLatLng = new google.maps.LatLng(lat, lng);
-
-                    self.createCurrentPositionMarker(currentPositionLatLng);
-                    self.map.setCenter(currentPositionLatLng);
+                    self.onGeolocationSuccess(self, position);
+                    
+                    self.createCurrentPositionMarker(new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    ));
 
                     self.fetchMarkers();
-                    app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
-                });
+                    
+                }, this.onGeolocationError, app.settings.geolocationOptions);
             }
+        },
+
+        onGeolocationSuccess: function (self, position) {
+            app.utils.log('map:onGeolocationSuccess');
+
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            self.map.setCenter(new google.maps.LatLng(lat, lng));
+
+            setTimeout(function () {
+                app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});    
+            }, 0);
+        },
+
+        onGeolocationError: function () {
+            app.utils.log('map:onGeolocationError');
+
+            alert('Невозможно определить текущее местоположение');
         },
 
         addMapControls: function () {
@@ -48,15 +67,9 @@ var app = app || {};
             google.maps.event.addDomListener(currentLocationControl, 'click', function() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
-                    var currentPositionLatLng = new google.maps.LatLng(lat, lng);
-
-                    self.map.setCenter(currentPositionLatLng);
-
-                    app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
-                });
-            }
+                        self.onGeolocationSuccess(self, position);
+                    }, this.onGeolocationError, app.settings.geolocationOptions);
+                }
             });
 
             this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);  

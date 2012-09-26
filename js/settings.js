@@ -13,6 +13,10 @@ var app = app || {};
             mapTypeId: google.maps.MapTypeId.ROADMAP
         },
 
+        geolocationOptions: {
+            enableHighAccuracy: true
+        },
+
         defaultLatLng: {
             lat: 53.902257,
             lng: 27.561640
