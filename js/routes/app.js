@@ -11,10 +11,14 @@ var app = app || {};
         },
 
         swithToView: function (view) {
+            app.utils.log('swithToView');
+
             $('#content').html(view.el);
         },
 
         map: function () {
+            app.utils.log('#map link clicked');
+
             if (!this.mapView) {
                 this.mapView = new app.MapView();
             } else {
@@ -24,6 +28,8 @@ var app = app || {};
         },
 
         banks: function () {
+            app.utils.log('#banks link clicked');
+
             if (this.objectsView) {
                 this.objectsView.remove();
             }
@@ -33,6 +39,8 @@ var app = app || {};
         },
 
         filters: function () {
+            app.utils.log('#filters link clicked');
+
             if (this.filtersView) {
                 this.filtersView.remove();
             }
@@ -42,6 +50,8 @@ var app = app || {};
         },
 
         about: function () {
+            app.utils.log('#about link clicked');
+
             if (this.aboutView) {
                 this.aboutView.remove();
             }

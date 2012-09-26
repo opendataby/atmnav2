@@ -16,6 +16,15 @@ var app = app || {};
 
         saveData: function (keyName, data) {
             localStorage.setItem(keyName, JSON.stringify(data));
+        },
+
+        log: function (args) {
+            if (!app.settings.debug) {
+                return;
+            }
+
+            var date = new Date();
+            console.log([date.toLocaleTimeString(), '.', date.getMilliseconds(), ' ',  args].join(''));
         }
     }
 })(jQuery);

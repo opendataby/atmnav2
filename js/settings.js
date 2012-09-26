@@ -2,6 +2,8 @@ var app = app || {};
 
 (function ($) {
     app.settings = {
+        debug: true,
+
         mapOptions: {
             zoom: 16,
             keyboardShortcuts: false,

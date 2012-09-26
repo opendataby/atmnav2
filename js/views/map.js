@@ -8,6 +8,8 @@ var app = app || {};
         infoWindow: new google.maps.InfoWindow(),
 
         initialize: function () {
+            app.utils.log('map:initialize');
+
             var latLng = app.utils.loadData('mapLastLocation');
 
             if (!latLng) {
@@ -37,6 +39,8 @@ var app = app || {};
         },
 
         addMapControls: function () {
+            app.utils.log('map:addMapControls');
+
             var currentLocationControl = document.createElement('div');
             currentLocationControl.id = 'currentLocationControl';
 
@@ -59,6 +63,8 @@ var app = app || {};
         },
 
         addMapEvents: function () {
+            app.utils.log('map:addMapEvents');
+
             var self = this;
 
             google.maps.event.addListener(this.map, 'click', function() {
@@ -76,6 +82,8 @@ var app = app || {};
         },
 
         createCurrentPositionMarker: function (latLng) {
+            app.utils.log('map:createCurrentPositionMarker');
+
             if (this.currentPositionMarker) {
                 this.currentPositionMarker.setMap(null);
             }
@@ -87,6 +95,8 @@ var app = app || {};
         },
 
         deleteMarkers: function () {
+            app.utils.log('map:deleteMarkers');
+
             _.each(this.markersArray, function (marker) {
                 marker.setMap(null);
             });
@@ -95,6 +105,8 @@ var app = app || {};
         },
 
         connectMarkerHandlers: function (markers, data) {
+            app.utils.log('map:connectMarkerHandlers');
+
             var self = this;
             var infoWindow = this.infoWindow;
             var addListener = google.maps.event.addListener;
@@ -117,10 +129,14 @@ var app = app || {};
         },
 
         onFetchError: function () {
+            app.utils.log('map:onFetchError');
+
             alert('Невозможно загрузить данные с сервера. Попробуйте позже.');
         },
 
         onFetchSuccess: function (data) {
+            app.utils.log('map:onFetchSuccess');
+
             this.deleteMarkers();
 
             var map = this.map;
@@ -140,6 +156,8 @@ var app = app || {};
         },
 
         fetchMarkers: function (args) {
+            app.utils.log('map:fetchMarkers');
+
             var selectedObjects = app.utils.loadArrayData('objects');
             var selectedFilters = app.utils.loadArrayData('filters');
 
@@ -167,6 +185,8 @@ var app = app || {};
         },
 
         updateMarkers: function () {
+            app.utils.log('map:updateMarkers');
+
             var mapCenter = this.map.getCenter();
 
             this.fetchMarkers({

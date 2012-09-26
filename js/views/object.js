@@ -8,15 +8,21 @@ var app = app || {};
         },
 
         initialize: function (args) {
+            app.utils.log('object:initialize');
+
             this.render(args);
         },
 
         render: function (args) {
+            app.utils.log('object:render');
+
             var template = _.template($('#object-template').html());
             this.$el.html(template(args));
         },
 
         onChange: function (event) {
+            app.utils.log('object:onChange');
+
             var storageKey = 'objects';
             var checked = event.target.checked;
             var selectedObjects = app.utils.loadArrayData(storageKey);

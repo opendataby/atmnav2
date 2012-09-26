@@ -6,6 +6,8 @@ var app = app || {};
         id: 'objects-block',
 
         initialize: function (args) {
+            app.utils.log('objects:initialize');
+
             var objects = [];
             var selectedObjects = app.utils.loadArrayData('objects');
 

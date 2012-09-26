@@ -6,6 +6,8 @@ var app = app || {};
         id: 'filters-block',
 
         initialize: function (args) {
+            app.utils.log('filters:initialize');
+
             var filters = [];
             var selectedFilters = app.utils.loadArrayData('filters');
 
