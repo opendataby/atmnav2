@@ -7,16 +7,9 @@ var app = app || {};
             'change input': 'onChange'
         },
 
-        initialize: function (args) {
+        initialize: function (template, args) {
             app.utils.log('filter:initialize');
 
-            this.render(args);
-        },
-
-        render: function (args) {
-            app.utils.log('filter:render');
-
-            var template = _.template($('#filter-template').html());
             this.$el.html(template(args));
         },
 
