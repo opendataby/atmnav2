@@ -3,6 +3,8 @@ var app = app || {};
 (function ($) {
     app.FilterView = Backbone.View.extend({
         tagName: 'li',
+        className: 'nt-filter-item',
+
         events: {
             'change input': 'onChange'
         },

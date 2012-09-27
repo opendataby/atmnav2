@@ -1,109 +1,102 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="css/styles.css" rel="stylesheet" media="all" />
-        <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <script>
-            window.onload = function () {
-                document.addEventListener("deviceready", function () {
-                    document.addEventListener("backbutton", function () {
-                        navigator.app.exitApp();
-                    }, false);
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="css/styles.less" rel="stylesheet/less" media="all" />
+    <script src="js/libs/less-1.3.0.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
+
+    <script>
+        window.onload = function () {
+            document.addEventListener("deviceready", function () {
+                document.addEventListener("backbutton", function () {
+                    navigator.app.exitApp();
                 }, false);
-            };
-        </script>
-    </head>
+            }, false);
+        };
+    </script>
+</head>
 
-    <body>
-        <div id='app'>
-            <div id='content'></div>
-            <div id='nav'>
-                <ul>
-                    <li><a href='#map' class='active-tab'>Map</a></li>
-                    <li><a href='#banks'>Banks</a></li>
-                    <li><a href='#filters'>Filters</a></li>
-                    <li><a href='#about'>About</a></li>
-                </ul>
-            </div>
+<body class="nt-application">
+    <div class="nt-content"></div>
+    <div class="nt-nav">
+        <ul class="nt-nav-tab-container">
+            <li class="nt-nav-tab"><a href="#map" class="nt-nav-tab-link active-tab">Map</a></li>
+            <li class="nt-nav-tab"><a href="#banks" class="nt-nav-tab-link">Banks</a></li>
+            <li class="nt-nav-tab"><a href="#filters" class="nt-nav-tab-link">Filters</a></li>
+            <li class="nt-nav-tab"><a href="#about" class="nt-nav-tab-link">About</a></li>
+        </ul>
+    </div>
 
-            <script type="text/template" id="filter-template">
-                <div class="filter-item">
-                    <div class="filter-item-title-block">
-                        <%= title %>
-                    </div>
-                    <div class="filter-item-checkbox-block">
-                        <input type="checkbox" class="filter-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
-                    </div>
-                </div>
-            </script>
+    <script type="text/template" id="filter-template">
+        <span class="nt-filter-item-title-block"><%= title %></span>
+        <input type="checkbox" class="nt-filter-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
+    </script>
 
-            <script type="text/template" id="object-template">
-                <div class="object-item">
-                    <div class="object-item-title-block">
-                        <%= title %>
-                    </div>
-                    <div class="object-item-checkbox-block">
-                        <input type="checkbox" class="object-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
-                    </div>
-                </div>
-            </script>
+    <script type="text/template" id="object-template">
+        <span class="nt-object-item-title-block"><%= title %></span>
+        <input type="checkbox" class="nt-object-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
+    </script>
 
-            <script type="text/template" id="about-template">
-                <div id="about-block">
-                    <div id="about-program-name">ATM Навигатор</div>
-                    <div id="about-program-version">Версия 2.0</div>
-                </div>
-            </script>
+    <script type="text/template" id="about-template">
+        <div class="nt-about-program-name">ATM Навигатор</div>
+        <div class="nt-about-program-version">Версия 2.0</div>
+    </script>
 
-            <script type="text/template" id="info-window-template">
-                <div id="info-window-container">
-                    <div id="info-window-title-bar">
-                        <img id="info-window-icon" src="img/<%= prov %>.png" />
-                        <div id="info-window-title"><%= title %></div>
-                    </div><br/>
-                    <% if (typeof(type) != "undefined") {%>
-                        <div id="info-window-type"><b>Тип:</b> <%= type %></div>
-                    <%}%>
+    <script type="text/template" id="info-window-template">
+        <div class="nt-info-window-container">
+            <div class="nt-info-window-title-bar">
+                <img class="nt-info-window-icon" src="img/<%= prov %>.png" />
+                <div class="nt-info-window-title"><%= title %></div>
+            </div><br/>
+            <% if (typeof(type) != "undefined") {%>
+                <div class="nt-info-window-type"><b>Тип:</b> <%= type %></div>
+            <%}%>
 
-                    <% if (typeof(currency) != "undefined") {%>
-                        <div id="info-window-currency"><b>Валюта:</b> <%= currency %></div>
-                    <%}%>
+            <% if (typeof(currency) != "undefined") {%>
+                <div class="nt-info-window-currency"><b>Валюта:</b> <%= currency %></div>
+            <%}%>
 
-                    <% if (typeof(addr) != "undefined") {%>
-                        <div id="info-window-addr"><b>Адрес:</b> <%= addr %></div>
-                    <%}%>
+            <% if (typeof(addr) != "undefined") {%>
+                <div class="nt-info-window-addr"><b>Адрес:</b> <%= addr %></div>
+            <%}%>
 
-                    <% if (typeof(place) != "undefined") {%>
-                        <div id="info-window-place"><b>Расположение:</b> <%= place %></div>
-                    <%}%>
+            <% if (typeof(place) != "undefined") {%>
+                <div class="nt-info-window-place"><b>Расположение:</b> <%= place %></div>
+            <%}%>
 
-                    <% if (typeof(time) != "undefined") {%>
-                        <div id="info-window-time"><b>Время работы:</b> <%= time %></div>
-                    <%}%>
+            <% if (typeof(time) != "undefined") {%>
+                <div class="nt-info-window-time"><b>Время работы:</b> <%= time %></div>
+            <%}%>
 
-                    <% if (typeof(phone) != "undefined") {%>
-                        <div id="info-window-phone"><b>Телефон:</b> <%= phone %></div>
-                    <%}%>
-                </div>
-            </script>
+            <% if (typeof(phone) != "undefined") {%>
+                <div class="nt-info-window-phone"><b>Телефон:</b> <%= phone %></div>
+            <%}%>
+        </div>
+    </script>
 
-            <script src="cordova.js"></script>
+    <script src="cordova.js"></script>
 
-            <script src="js/libs/jquery.js"></script>
-            <script src="js/libs/underscore.js"></script>
-            <script src="js/libs/backbone.js"></script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/underscore.js"></script>
+    <script src="js/libs/backbone.js"></script>
 
-            <script src="js/settings.js"></script>
-            <script src="js/utils.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/utils.js"></script>
 
-            <script src="js/views/map.js"></script>
-            <script src="js/views/filter.js"></script>
-            <script src="js/views/filters.js"></script>
-            <script src="js/views/object.js"></script>
-            <script src="js/views/objects.js"></script>
-            <script src="js/views/about.js"></script>
-            <script src="js/views/panel.js"></script>
-            <script src="js/routes/app.js"></script>
-    </body>
+    <script src="js/views/map.js"></script>
+    <script src="js/views/filter.js"></script>
+    <script src="js/views/filters.js"></script>
+    <script src="js/views/object.js"></script>
+    <script src="js/views/objects.js"></script>
+    <script src="js/views/about.js"></script>
+    <script src="js/views/panel.js"></script>
+    <script src="js/routes/app.js"></script>
+</body>
 </html>

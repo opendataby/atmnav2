@@ -1,0 +1,36 @@
+/* Navigation block */
+.nt-nav {
+  width: 100%;
+  height: @navigation-bar-height;
+  text-align: center;
+  background: @navigation-bar-color;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+.nt-nav-tab-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.nt-nav-tab {
+  display: inline-block;
+  width: @navigation-bar-height;
+  text-align: center;
+  height: 100%;
+}
+
+.nt-nav-tab-link {
+  display: table-cell;
+  vertical-align: middle;
+  width: @navigation-bar-height;
+  height: @navigation-bar-height;
+  background: @navigation-bar-tab-color;
+}
+
+.active-tab {
+  background: @navigation-bar-active-tab-color;
+}

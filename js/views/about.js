@@ -2,6 +2,8 @@ var app = app || {};
 
 (function ($) {
     app.AboutView = Backbone.View.extend({
+        className: 'nt-about-page',
+
         initialize: function () {
             this.render();
         },

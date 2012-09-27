@@ -2,9 +2,8 @@ var app = app || {};
 
 (function ($) {
     app.PanelView = Backbone.View.extend({
-        el: '#nav',
-
-        tabs: $('#nav a'),
+        el: '.nt-nav',
+        tabs: $('.nt-nav-tab-link'),
 
         events: {
             'click a': 'onClick'

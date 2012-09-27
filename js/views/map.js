@@ -2,7 +2,7 @@ var app = app || {};
 
 (function ($) {
     app.MapView = Backbone.View.extend({
-        id: 'map-canvas',
+        className: 'nt-map-page',
 
         markersArray: [],
         infoWindow: new google.maps.InfoWindow(),
@@ -62,7 +62,7 @@ var app = app || {};
             app.utils.log('map:addMapControls:start');
 
             var currentLocationControl = document.createElement('div');
-            currentLocationControl.id = 'currentLocationControl';
+            currentLocationControl.className = 'nt-map-current-location-control';
 
             var self = this;
             google.maps.event.addDomListener(currentLocationControl, 'click', function() {

@@ -13,7 +13,7 @@ var app = app || {};
         swithToView: function (view) {
             app.utils.log('swithToView');
 
-            $('#content').html(view.el);
+            $('.nt-content').html(view.el);
         },
 
         map: function () {

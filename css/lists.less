@@ -1,0 +1,42 @@
+/* Filters, Objects */
+.nt-filters-page,
+.nt-objects-page {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.nt-filter-item:nth-child(odd),
+.nt-object-item:nth-child(odd) {
+  background: #EFEFEF;
+}
+
+.nt-filter-item,
+.nt-object-item {
+  display: block;
+  height: @list-item-height;
+  font-size: large;
+  border-bottom: 1px solid gray;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding-right: @list-item-height;
+}
+
+.nt-filter-item-title-block,
+.nt-object-item-title-block {
+  display: inline-block;
+  width: 100%;
+  padding-top: 13px;
+}
+
+.nt-filter-checkbox,
+.nt-object-checkbox {
+  position: absolute;
+  right: 0;
+  width: @list-item-height;
+  height: @list-item-height;
+}
