@@ -8,13 +8,15 @@ var app = app || {};
         },
 
         initialize: function (template, args) {
-            app.utils.log('object:initialize');
+            app.utils.log('object:initialize:start');
 
             this.$el.html(template(args));
+
+            app.utils.log('object:initialize:end');
         },
 
         onChange: function (event) {
-            app.utils.log('object:onChange');
+            app.utils.log('object:onChange:start');
 
             var storageKey = 'objects';
             var checked = event.target.checked;
@@ -27,6 +29,8 @@ var app = app || {};
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedObjects));
+
+            app.utils.log('object:onChange:end');
         }
     });
 })(jQuery);

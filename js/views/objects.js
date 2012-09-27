@@ -6,7 +6,7 @@ var app = app || {};
         id: 'objects-block',
 
         initialize: function (args) {
-            app.utils.log('objects:initialize');
+            app.utils.log('objects:initialize:start');
 
             var objects = [];
             var selectedObjects = app.utils.loadArrayData('objects');
@@ -21,6 +21,8 @@ var app = app || {};
             });
 
             this.$el.append(objects);
+
+            app.utils.log('objects:initialize:end');
         }
     });
 })(jQuery);

@@ -10,7 +10,7 @@ var app = app || {};
             panControl: false,
             rotateControl: false,
             streetViewControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: 'roadmap'
         },
 
         geolocationOptions: {

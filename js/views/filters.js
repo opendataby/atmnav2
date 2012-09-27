@@ -6,7 +6,7 @@ var app = app || {};
         id: 'filters-block',
 
         initialize: function (args) {
-            app.utils.log('filters:initialize');
+            app.utils.log('filters:initialize:start');
 
             var filters = [];
             var selectedFilters = app.utils.loadArrayData('filters');
@@ -21,6 +21,8 @@ var app = app || {};
             });
 
             this.$el.append(filters);
+
+            app.utils.log('filters:initialize:end');
         }
     });
 })(jQuery);

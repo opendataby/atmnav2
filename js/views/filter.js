@@ -8,13 +8,15 @@ var app = app || {};
         },
 
         initialize: function (template, args) {
-            app.utils.log('filter:initialize');
+            app.utils.log('filter:initialize:start');
 
             this.$el.html(template(args));
+
+            app.utils.log('filter:initialize:end');
         },
 
         onChange: function (event) {
-            app.utils.log('filter:onChange');
+            app.utils.log('filter:onChange:start');
 
             var storageKey = 'filters';
             var checked = event.target.checked;
@@ -27,6 +29,8 @@ var app = app || {};
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedFilters));
+
+            app.utils.log('filter:onChange:end');
         }
     });
 })(jQuery);

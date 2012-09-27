@@ -8,7 +8,7 @@ var app = app || {};
         infoWindow: new google.maps.InfoWindow(),
 
         initialize: function () {
-            app.utils.log('map:initialize');
+            app.utils.log('map:initialize:start');
 
             var latLng = app.utils.loadData('mapLastLocation');
 
@@ -36,19 +36,20 @@ var app = app || {};
                     
                 }, this.onGeolocationError, app.settings.geolocationOptions);
             }
+
+            app.utils.log('map:initialize:end');
         },
 
         onGeolocationSuccess: function (self, position) {
-            app.utils.log('map:onGeolocationSuccess');
+            app.utils.log('map:onGeolocationSuccess:start');
 
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
 
             self.map.setCenter(new google.maps.LatLng(lat, lng));
+            app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});    
 
-            setTimeout(function () {
-                app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});    
-            }, 0);
+            app.utils.log('map:onGeolocationSuccess:end');
         },
 
         onGeolocationError: function () {
@@ -58,7 +59,7 @@ var app = app || {};
         },
 
         addMapControls: function () {
-            app.utils.log('map:addMapControls');
+            app.utils.log('map:addMapControls:start');
 
             var currentLocationControl = document.createElement('div');
             currentLocationControl.id = 'currentLocationControl';
@@ -73,16 +74,19 @@ var app = app || {};
             });
 
             this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);  
+
+            app.utils.log('map:addMapControls:end');
         },
 
         addMapEvents: function () {
-            app.utils.log('map:addMapEvents');
+            app.utils.log('map:addMapEvents:start');
 
             var self = this;
-
             google.maps.event.addListener(this.map, 'click', function() {
                 self.infoWindow.close();
             });
+
+            app.utils.log('map:addMapEvents:end');
         },
 
         createMarker: function (args, markersArray) {
@@ -95,7 +99,7 @@ var app = app || {};
         },
 
         createCurrentPositionMarker: function (latLng) {
-            app.utils.log('map:createCurrentPositionMarker');
+            app.utils.log('map:createCurrentPositionMarker:start');
 
             if (this.currentPositionMarker) {
                 this.currentPositionMarker.setMap(null);
@@ -105,20 +109,24 @@ var app = app || {};
                 map: this.map,
                 position: latLng,
             });
+
+            app.utils.log('map:createCurrentPositionMarker:end');
         },
 
         deleteMarkers: function () {
-            app.utils.log('map:deleteMarkers');
+            app.utils.log('map:deleteMarkers:start');
 
             _.each(this.markersArray, function (marker) {
                 marker.setMap(null);
             });
 
             this.markersArray = [];
+
+            app.utils.log('map:deleteMarkers:end');
         },
 
         connectMarkerHandlers: function (markers, data) {
-            app.utils.log('map:connectMarkerHandlers');
+            app.utils.log('map:connectMarkerHandlers:start');
 
             var self = this;
             var infoWindow = this.infoWindow;
@@ -139,6 +147,8 @@ var app = app || {};
                     infoWindow.open(self.map, marker);
                 });
             });
+
+            app.utils.log('map:connectMarkerHandlers:end');
         },
 
         onFetchError: function () {
@@ -148,7 +158,7 @@ var app = app || {};
         },
 
         onFetchSuccess: function (data) {
-            app.utils.log('map:onFetchSuccess');
+            app.utils.log('map:onFetchSuccess:start');
 
             this.deleteMarkers();
 
@@ -166,10 +176,12 @@ var app = app || {};
             })
 
             this.connectMarkerHandlers(markersArray, data);
+
+            app.utils.log('map:onFetchSuccess:end');
         },
 
         fetchMarkers: function (args) {
-            app.utils.log('map:fetchMarkers');
+            app.utils.log('map:fetchMarkers:start');
 
             var selectedObjects = app.utils.loadArrayData('objects');
             var selectedFilters = app.utils.loadArrayData('filters');
@@ -195,10 +207,12 @@ var app = app || {};
                 self.onFetchSuccess(data);
             });
             jqxhr.error(this.onFetchError);
+
+            app.utils.log('map:fetchMarkers:end');
         },
 
         updateMarkers: function () {
-            app.utils.log('map:updateMarkers');
+            app.utils.log('map:updateMarkers:start');
 
             var mapCenter = this.map.getCenter();
 
@@ -206,6 +220,8 @@ var app = app || {};
                 lat: mapCenter.lat(),
                 lng: mapCenter.lng()
             });
+
+            app.utils.log('map:updateMarkers:end');
         }
     });
 })(jQuery);
