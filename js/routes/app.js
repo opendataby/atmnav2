@@ -11,9 +11,30 @@ var app = app || {};
         },
 
         swithToView: function (view) {
-            app.utils.log('swithToView');
+            app.utils.log('utils:swithToView:start');
 
             $('#content').html(view.el);
+
+            this.activeView = view;
+            this.deleteHiddenViews();
+
+            app.utils.log('utils:swithToView:end');
+        },
+
+        deleteHiddenViews: function () {
+            app.utils.log('utils:deleteHiddenViews:start');
+            var self = this;
+
+            _.each(['filtersView', 'objectsView', 'aboutView'], function (viewName) {
+                var view = self[viewName];
+
+                if (view && view != self.activeView) {
+                    app.utils.log(viewName + ' was deleted');
+                    view.remove();
+                }
+            });
+
+            app.utils.log('utils:deleteHiddenViews:end');
         },
 
         map: function () {
@@ -30,10 +51,6 @@ var app = app || {};
         banks: function () {
             app.utils.log('#banks link clicked');
 
-            if (this.objectsView) {
-                this.objectsView.remove();
-            }
-            
             this.objectsView = new app.ObjectsView();
             this.swithToView(this.objectsView);
         },
@@ -41,10 +58,6 @@ var app = app || {};
         filters: function () {
             app.utils.log('#filters link clicked');
 
-            if (this.filtersView) {
-                this.filtersView.remove();
-            }
-            
             this.filtersView = new app.FiltersView();
             this.swithToView(this.filtersView);
         },
@@ -52,10 +65,6 @@ var app = app || {};
         about: function () {
             app.utils.log('#about link clicked');
 
-            if (this.aboutView) {
-                this.aboutView.remove();
-            }
-            
             this.aboutView = new app.AboutView();
             this.swithToView(this.aboutView);
         }
