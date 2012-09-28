@@ -19,13 +19,16 @@ var app = app || {};
             app.utils.log('filter:onChange:start');
 
             var storageKey = 'filters';
-            var checked = event.target.checked;
+            var element = event.target;
+            var checked = element.checked;
             var selectedFilters = app.utils.loadArrayData(storageKey);
 
             if (checked) {
                 selectedFilters.push(this.id);
+                element.setAttribute('checked', 'checked');
             } else {
                 selectedFilters = _.without(selectedFilters, this.id);
+                element.removeAttribute('checked');
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedFilters));

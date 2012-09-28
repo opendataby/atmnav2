@@ -19,13 +19,16 @@ var app = app || {};
             app.utils.log('object:onChange:start');
 
             var storageKey = 'objects';
-            var checked = event.target.checked;
+            var element = event.target;
+            var checked = element.checked;
             var selectedObjects = app.utils.loadArrayData(storageKey);
 
             if (checked) {
                 selectedObjects.push(this.id);
+                element.setAttribute('checked', 'checked');
             } else {
                 selectedObjects = _.without(selectedObjects, this.id);
+                element.removeAttribute('checked');
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedObjects));
