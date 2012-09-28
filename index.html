@@ -2,9 +2,10 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="css/styles.css" rel="stylesheet" media="all" />
+        <script src="js/libs/jquery.js"></script>
 
         <script>
-            window.onload = function () {
+            $(document).ready(function() {
                 window.onGoogleMapsLoaded = function () {
                     location.href = '#map';
                 };
@@ -13,7 +14,9 @@
                 script.type = "text/javascript";
                 script.src = "http://maps.googleapis.com/maps/api/js?&sensor=false&callback=onGoogleMapsLoaded";
                 document.body.appendChild(script);
+            });
 
+            window.onload = function () {
                 document.addEventListener("deviceready", function () {
                     document.addEventListener("backbutton", function () {
                         navigator.app.exitApp();
@@ -98,7 +101,6 @@
 
             <script src="cordova.js" async="async"></script>
 
-            <script src="js/libs/jquery.js"></script>
             <script src="js/libs/underscore.js"></script>
             <script src="js/libs/backbone.js"></script>
 
