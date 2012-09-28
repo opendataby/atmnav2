@@ -5,11 +5,11 @@ var app = app || {};
         id: 'map-canvas',
 
         markersArray: [],
-        infoWindow: new google.maps.InfoWindow(),
 
         initialize: function () {
             app.utils.log('map:initialize:start');
 
+            this.infoWindow = new google.maps.InfoWindow();
             var latLng = app.utils.loadData('mapLastLocation');
 
             if (!latLng) {
@@ -26,14 +26,14 @@ var app = app || {};
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     self.onGeolocationSuccess(self, position);
-                    
+
                     self.createCurrentPositionMarker(new google.maps.LatLng(
                         position.coords.latitude,
                         position.coords.longitude
                     ));
 
                     self.fetchMarkers();
-                    
+
                 }, this.onGeolocationError, app.settings.geolocationOptions);
             }
 

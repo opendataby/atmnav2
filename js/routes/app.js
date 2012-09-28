@@ -3,7 +3,6 @@ var app = app || {};
 (function ($) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            '': 'map',
             'map': 'map',
             'banks': 'banks',
             'filters': 'filters',
