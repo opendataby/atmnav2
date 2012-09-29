@@ -10,8 +10,8 @@ var app = app || {};
         },
 
         onClick: function (event) {
-            this.tabs.removeClass('active-tab');
-            $(event.target).addClass('active-tab');
+            this.tabs.removeClass('active');
+            $(event.target).closest('.nt-nav-tab-link').addClass('active');
         }
     });
 
