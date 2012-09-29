@@ -10,6 +10,7 @@ var app = app || {};
         initialize: function (template, args) {
             app.utils.log('object:initialize:start');
 
+            this.id = args.id;
             this.$el.html(template(args));
 
             app.utils.log('object:initialize:end');
@@ -31,7 +32,7 @@ var app = app || {};
                 element.removeAttribute('checked');
             }
 
-            app.utils.saveData(storageKey, _.uniq(selectedObjects));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));
 
             app.utils.log('object:onChange:end');
         }

@@ -10,6 +10,7 @@ var app = app || {};
         initialize: function (template, args) {
             app.utils.log('filter:initialize:start');
 
+            this.id = args.id;
             this.$el.html(template(args));
 
             app.utils.log('filter:initialize:end');
@@ -31,7 +32,7 @@ var app = app || {};
                 element.removeAttribute('checked');
             }
 
-            app.utils.saveData(storageKey, _.uniq(selectedFilters));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));
 
             app.utils.log('filter:onChange:end');
         }
