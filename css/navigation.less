@@ -1,38 +1,40 @@
 /* Navigation block */
 .nt-nav {
+  position: absolute;
   width: 100%;
   height: @navigation-bar-height;
-  text-align: center;
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAA1CAAAAABDvBWqAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEhEVCmw8iW0AAAACYktHRAD/h4/MvwAAAKBJREFUGBkFwQtywyAQREEU3izYlaPm9knJ+xGQbn7e3ZluovcSxVPURdHTQDtFWiTRLHlFE5cSwvqiLooRp3OpNj764qQaFg2O8uCzL3aqMe9j7OmL+zWC7ibMUyxl4UNJiwHj48aaH+fvPYMZJlgpkip8ksiH0E6RFok3FdMNurIRtgtvSt73ML5mbO6phx3WGJHiog6feR6etMP375n//PloF/qTjEkAAAAASUVORK5CYII=") repeat-x;
-  border-top: @navigation-bar-border-height solid black;
-  padding: 0;
   margin: 0;
-  position: absolute;
+  padding: 0;
+  border-top: @navigation-bar-border-height solid black;
   bottom: 0;
   overflow: hidden;
+  background: url("gradient.png") repeat-x;
+  text-align: center;
 }
 
 .nt-nav-tab-container {
   height: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .nt-nav-tab {
   display: inline-block;
   width: @navigation-bar-height;
-  text-align: center;
   height: 100%;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .nt-nav-tab-link {
   display: inline-block;
   width: @navigation-bar-height;
   height: @navigation-bar-height;
+  color: @navigation-bar-tab-color;
   font-size: 0.8em;
   font-weight: bold;
   text-decoration: none;
-  color: @navigation-bar-tab-color;
 }
 
 .nt-nav-tab-link:focus {
@@ -40,10 +42,10 @@
 }
 
 .nt-nav-tab-icon {
-  padding: 3px 0 0;
+  display: inline-block;
   width: @navigation-bar-tab-icon-size;
   height: @navigation-bar-tab-icon-size;
-  display: inline-block;
+  padding: 3px 0 0;
 }
 
 .nt-nav-tab-icon.active {
