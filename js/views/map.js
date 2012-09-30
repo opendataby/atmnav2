@@ -61,10 +61,11 @@ var app = app || {};
         addMapControls: function () {
             app.utils.log('map:addMapControls:start');
 
+            var self = this;            
+
             var currentLocationControl = document.createElement('div');
             currentLocationControl.id = 'currentLocationControl';
 
-            var self = this;
             google.maps.event.addDomListener(currentLocationControl, 'click', function() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
@@ -73,7 +74,15 @@ var app = app || {};
                 }
             });
 
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);  
+            var addNewPointControl = document.createElement('div');
+            addNewPointControl.id = 'addNewPointControl';
+
+            google.maps.event.addDomListener(addNewPointControl, 'click', function() {
+                app.Router.navigate('#create', true);
+            });
+
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addNewPointControl);  
 
             app.utils.log('map:addMapControls:end');
         },

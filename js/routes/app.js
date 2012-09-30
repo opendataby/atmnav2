@@ -6,7 +6,8 @@ var app = app || {};
             'map': 'map',
             'banks': 'banks',
             'filters': 'filters',
-            'about': 'about'
+            'about': 'about',
+            'create': 'create'
         },
 
         swithToView: function (view) {
@@ -24,12 +25,13 @@ var app = app || {};
             app.utils.log('utils:deleteHiddenViews:start');
             var self = this;
 
-            _.each(['filtersView', 'objectsView', 'aboutView'], function (viewName) {
+            _.each(['filtersView', 'objectsView', 'aboutView', 'createView'], function (viewName) {
                 var view = self[viewName];
 
                 if (view && view != self.activeView) {
-                    app.utils.log(viewName + ' was deleted');
                     view.remove();
+                    self[viewName] = null;
+                    app.utils.log(viewName + ' was deleted');
                 }
             });
 
@@ -66,6 +68,15 @@ var app = app || {};
 
             this.aboutView = new app.AboutView();
             this.swithToView(this.aboutView);
+        },
+
+        create: function () {
+            app.utils.log('#create link clicked');
+
+            $('#nav a').removeClass('active-tab');
+
+            this.createView = new app.CreateView();
+            this.swithToView(this.createView);
         }
     });
 
