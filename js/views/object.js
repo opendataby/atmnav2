@@ -3,7 +3,7 @@ var app = app || {};
 (function ($) {
     app.ObjectView = Backbone.View.extend({
         tagName: 'li',
-        className: 'nt-object-item',
+        className: 'nt-list-item',
 
         events: {
             'change input': 'onChange'

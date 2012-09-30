@@ -3,7 +3,7 @@ var app = app || {};
 (function ($) {
     app.FiltersView = Backbone.View.extend({
         tagName: 'ul',
-        className: 'nt-filters-page',
+        className: 'nt-list-page',
 
         initialize: function (args) {
             app.utils.log('filters:initialize:start');

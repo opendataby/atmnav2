@@ -3,7 +3,7 @@ var app = app || {};
 (function ($) {
     app.ObjectsView = Backbone.View.extend({
         tagName: 'ul',
-        className: 'nt-objects-page',
+        className: 'nt-list-page',
 
         initialize: function (args) {
             app.utils.log('objects:initialize:start');

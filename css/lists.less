@@ -1,6 +1,5 @@
 /* Filters, Objects */
-.nt-filters-page,
-.nt-objects-page {
+.nt-list-page {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -10,8 +9,7 @@
   list-style-type: none;
 }
 
-.nt-filter-item,
-.nt-object-item {
+.nt-list-item {
   display: block;
   position: relative;
   box-sizing: border-box;
@@ -23,13 +21,11 @@
   font-size: large;
 }
 
-.nt-filter-item:nth-child(odd),
-.nt-object-item:nth-child(odd) {
+.nt-list-item:nth-child(odd) {
   background: #EFEFEF;
 }
 
-.nt-filter-item-icon,
-.nt-object-item-icon {
+.nt-list-item-icon {
   display: inline-block;
   width: @list-item-icon-height;
   height: @list-item-icon-height;
@@ -37,15 +33,13 @@
   float: left;
 }
 
-.nt-filter-item-title,
-.nt-object-item-title {
+.nt-list-item-title {
   display: inline-block;
   float: left;
   line-height: @list-item-height;
 }
 
-.nt-filter-item-checkbox,
-.nt-object-item-checkbox {
+.nt-list-item-checkbox {
   position: absolute;
   width: @list-item-height - 5px * 2;
   height: @list-item-height - 5px * 2;
