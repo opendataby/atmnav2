@@ -13,10 +13,11 @@ var app = app || {};
             var filterTemplate = _.template($('#filter-template').html());
 
             _.each(app.settings.filters, function (title, id) {
-                filters.push(new app.FilterView(filterTemplate, {
-                    'id': id,
-                    'title': title,
-                    'checked': _.include(selectedFilters, id)
+                filters.push(new app.FilterView({
+                    template: filterTemplate,
+                    id: id,
+                    title: title,
+                    checked: _.include(selectedFilters, id)
                 }).el);
             });
 

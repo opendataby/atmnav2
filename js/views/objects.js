@@ -13,11 +13,12 @@ var app = app || {};
             var objectTemplate = _.template($('#object-template').html());
 
             _.each(app.settings.objects, function (title, id) {
-                objects.push(new app.ObjectView(objectTemplate, {
-                    'id': id,
-                    'title': title,
-                    'icon': id.indexOf('spec:') !== 0,
-                    'checked': _.include(selectedObjects, id)
+                objects.push(new app.ObjectView({
+                    template: objectTemplate,
+                    id: id,
+                    title: title,
+                    icon: id.indexOf('spec:') !== 0,
+                    checked: _.include(selectedObjects, id)
                 }).el);
             });
 

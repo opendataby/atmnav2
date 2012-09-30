@@ -2,24 +2,14 @@ var app = app || {};
 
 (function ($) {
     app.FilterView = Backbone.View.extend({
-        tagName: 'li',
-        className: 'nt-list-item',
-
         events: {
             'click': 'onChange'
         },
 
-        initialize: function (template, args) {
-            app.utils.log('filter:initialize:start');
+        make: function () {
+            app.utils.log('filter:make');
 
-            this.id = args.id;
-            var element = this.$el;
-            if (args.checked) {
-                element.addClass('checked');
-            }
-            element.html(template(args));
-
-            app.utils.log('filter:initialize:end');
+            return this.options.template(this.options);
         },
 
         onChange: function (event) {
@@ -31,9 +21,9 @@ var app = app || {};
             var selectedFilters = app.utils.loadArrayData(storageKey);
 
             if (checked) {
-                selectedFilters.push(this.id);
+                selectedFilters.push(this.options.id);
             } else {
-                selectedFilters = _.without(selectedFilters, this.id);
+                selectedFilters = _.without(selectedFilters, this.options.id);
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedFilters));

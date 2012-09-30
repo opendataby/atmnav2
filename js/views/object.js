@@ -2,26 +2,14 @@ var app = app || {};
 
 (function ($) {
     app.ObjectView = Backbone.View.extend({
-        tagName: 'li',
-        className: 'nt-list-item',
-
         events: {
             'click': 'onChange'
         },
 
-        initialize: function (template, args) {
-            app.utils.log('object:initialize:start');
+        make: function () {
+            app.utils.log('filter:make');
 
-            this.id = args.id;
-            if (args.icon) {
-                this.$el.addClass('nt-list-item-with-icon');
-            }
-            if (args.checked) {
-                this.$el.addClass('checked');
-            }
-            this.$el.html(template(args));
-
-            app.utils.log('object:initialize:end');
+            return this.options.template(this.options);
         },
 
         onChange: function (event) {
@@ -34,9 +22,9 @@ var app = app || {};
             var selectedObjects = app.utils.loadArrayData(storageKey);
 
             if (checked) {
-                selectedObjects.push(this.id);
+                selectedObjects.push(this.options.id);
             } else {
-                selectedObjects = _.without(selectedObjects, this.id);
+                selectedObjects = _.without(selectedObjects, this.options.id);
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedObjects));
