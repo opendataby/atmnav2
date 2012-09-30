@@ -55,19 +55,17 @@
   height: @list-item-checkbox-size;
   margin: (@list-item-height - @list-item-checkbox-size) / 2;
   right: 0;
+  background-repeat: no-repeat;
 }
 
-.nt-list-item.checked .nt-list-item-checkbox.checked,
-.nt-list-item.related .nt-list-item-checkbox.related,
 .nt-list-item .nt-list-item-checkbox {
-  display: block;
+  background-image: url("img/check-inactive.png");
 }
 
-.nt-list-item.checked .nt-list-item-checkbox.related,
-.nt-list-item.checked .nt-list-item-checkbox,
-.nt-list-item.related .nt-list-item-checkbox.checked,
-.nt-list-item.related .nt-list-item-checkbox,
-.nt-list-item .nt-list-item-checkbox.checked,
-.nt-list-item .nt-list-item-checkbox.related {
-  display: none;
+.nt-list-item.related .nt-list-item-checkbox {
+  background-image: url("img/check-related.png");
+}
+
+.nt-list-item.checked .nt-list-item-checkbox {
+  background-image: url("img/check-active.png");
 }
