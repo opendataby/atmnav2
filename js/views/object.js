@@ -7,7 +7,7 @@ var app = app || {};
         },
 
         make: function () {
-            app.utils.log('filter:make');
+            app.utils.log('object:make');
 
             return this.options.template(this.options);
         },
