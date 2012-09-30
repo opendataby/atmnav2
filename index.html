@@ -68,8 +68,25 @@
             </script>
 
             <script type="text/template" id="create-template">
-                <div id="create-block">
-                    create
+                <div id="create-form-block">
+                    <form>
+                        <label for="type">Тип объекта</label><br/>
+                        <input type="text" name="type" placeholder="банк, банкомат, ..."/><br/>
+
+                        <label for="city">Город</label><br/>
+                        <input type="text" name="city" placeholder="Минск"/><br/>
+
+                        <label for="address">Адрес</label><br/>
+                        <input type="text" name="address" placeholder="ул. Московская 1"/><br/>
+
+                        <label for="place">Расположение</label><br/>
+                        <input type="text" name="place" placeholder="ЦУМ, кинотеатр 'Беларусь', ..." /><br/>
+
+                        <input type="checkbox" name="use_location" id="create-form-use-location" />
+                        <label for="use_location">Использовать текущее местоположение</label><br/>
+                        
+                        <input type="submit" value="Оставить заявку"/>
+                    </form>
                 </div>
             </script>
 

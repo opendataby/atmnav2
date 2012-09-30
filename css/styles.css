@@ -140,3 +140,18 @@ a {
 
 .object-item {
 }
+
+/* Create from */
+#create-form-block {
+    padding: 5px;
+
+}
+
+#create-form-block label {
+    float: left;
+}
+
+#create-form-block input {
+    width: 99%;
+    margin-bottom: 2%;
+}
