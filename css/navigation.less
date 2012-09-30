@@ -8,7 +8,7 @@
   border-top: @navigation-bar-border-height solid black;
   bottom: 0;
   overflow: hidden;
-  background: url("gradient.png") repeat-x;
+  background: url("img/gradient.png") repeat-x;
   text-align: center;
 }
 
@@ -41,29 +41,58 @@
   outline: 0;
 }
 
+.nt-nav-tab-link.active {
+  color: @navigation-bar-active-tab-color;
+}
+
 .nt-nav-tab-icon {
   display: inline-block;
   width: @navigation-bar-tab-icon-size;
   height: @navigation-bar-tab-icon-size;
-  padding: 3px 0 0;
+  margin: 3px 0 0;
+  background-repeat: no-repeat;
 }
 
-.nt-nav-tab-icon.active {
-  display: none;
+.nt-nav-tab-link .map-icon {
+  background-image: url("img/map-inactive.png");
+}
+
+.nt-nav-tab-link.active .map-icon {
+  background-image: url("img/map-active.png");
+}
+
+.nt-nav-tab-link .objects-icon {
+  background-image: url("img/objects-inactive.png");
+}
+
+.nt-nav-tab-link.active .objects-icon {
+  background-image: url("img/objects-active.png");
+}
+
+.nt-nav-tab-link .filters-icon {
+  background-image: url("img/filters-inactive.png");
+}
+
+.nt-nav-tab-link.active .filters-icon {
+  background-image: url("img/filters-active.png");
+}
+
+.nt-nav-tab-link .settings-icon {
+  background-image: url("img/settings-inactive.png");
+}
+
+.nt-nav-tab-link.active .settings-icon {
+  background-image: url("img/settings-active.png");
+}
+
+.nt-nav-tab-link .info-icon {
+  background-image: url("img/info-inactive.png");
+}
+
+.nt-nav-tab-link.active .info-icon {
+  background-image: url("img/info-active.png");
 }
 
 .nt-nav-tab-text {
 
-}
-
-.active {
-  color: @navigation-bar-active-tab-color;
-}
-
-.nt-nav-tab-link.active .nt-nav-tab-icon {
-  display: none;
-}
-
-.nt-nav-tab-link.active .nt-nav-tab-icon.active {
-  display: inline-block;
 }
