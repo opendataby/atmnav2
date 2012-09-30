@@ -40,13 +40,14 @@
     </div>
 
     <script type="text/template" id="filter-template">
-        <span class="nt-filter-item-title-block"><%= title %></span>
-        <input type="checkbox" class="nt-filter-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
+        <span class="nt-filter-item-title"><%= title %></span>
+        <input class="nt-filter-item-checkbox" type="checkbox" id="<%= id %>" <% if (checked) { %>checked="checked"<% } %> />
     </script>
 
     <script type="text/template" id="object-template">
-        <span class="nt-object-item-title-block"><%= title %></span>
-        <input type="checkbox" class="nt-object-checkbox" id="<%=id%>" <% if (checked) { %>checked="checked"<% } %> />
+        <% if (icon) { %><img class="nt-object-item-icon" src="img/<%= id %>.png" /><% } %>
+        <span class="nt-object-item-title"><%= title %></span>
+        <input class="nt-object-item-checkbox" type="checkbox" id="<%= id %>" <% if (checked) { %>checked="checked"<% } %> />
     </script>
 
     <script type="text/template" id="about-template">

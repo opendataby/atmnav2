@@ -1,13 +1,26 @@
 /* Filters, Objects */
 .nt-filters-page,
 .nt-objects-page {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
   overflow-y: scroll;
+  list-style-type: none;
+}
+
+.nt-filter-item,
+.nt-object-item {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: @list-item-height;
+  padding: 0 @list-item-height 0 5px;
+  border-bottom: 1px solid gray;
+  font-size: large;
 }
 
 .nt-filter-item:nth-child(odd),
@@ -15,31 +28,27 @@
   background: #EFEFEF;
 }
 
-.nt-filter-item,
-.nt-object-item {
-  display: block;
-  position: relative;
-  height: @list-item-height;
-  font-size: large;
-  border-bottom: 1px solid gray;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  padding: 0 @list-item-height 0 5px;
+.nt-filter-item-icon,
+.nt-object-item-icon {
+  display: inline-block;
+  width: @list-item-icon-height;
+  height: @list-item-icon-height;
+  margin: ((@list-item-height - @list-item-icon-height) / 2) 5px ((@list-item-height - @list-item-icon-height) / 2) 0;
+  float: left;
 }
 
-.nt-filter-item-title-block,
-.nt-object-item-title-block {
+.nt-filter-item-title,
+.nt-object-item-title {
   display: inline-block;
-  width: 100%;
+  float: left;
   line-height: @list-item-height;
 }
 
-.nt-filter-checkbox,
-.nt-object-checkbox {
+.nt-filter-item-checkbox,
+.nt-object-item-checkbox {
   position: absolute;
-  right: 0;
   width: @list-item-height - 5px * 2;
   height: @list-item-height - 5px * 2;
   margin: 5px;
+  right: 0;
 }

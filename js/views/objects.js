@@ -16,6 +16,7 @@ var app = app || {};
                 objects.push(new app.ObjectView(objectTemplate, {
                     'id': id,
                     'title': title,
+                    'icon': id.indexOf('spec:') !== 0,
                     'checked': _.include(selectedObjects, id)
                 }).el);
             });
