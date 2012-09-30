@@ -6,7 +6,7 @@ var app = app || {};
         tabs: $('.nt-nav-tab-link'),
 
         events: {
-            'click a': 'onClick'
+            'click': 'onClick'
         },
 
         onClick: function (event) {

@@ -6,12 +6,16 @@ var app = app || {};
         className: 'nt-list-item',
 
         events: {
-            'change input': 'onChange'
+            'click': 'onChange'
         },
 
         initialize: function (template, args) {
             app.utils.log('object:initialize:start');
 
+            this.id = args.id;
+            if (args.checked) {
+                this.$el.addClass('checked');
+            }
             this.$el.html(template(args));
 
             app.utils.log('object:initialize:end');
@@ -22,15 +26,14 @@ var app = app || {};
 
             var storageKey = 'objects';
             var element = event.target;
-            var checked = element.checked;
+            var checked = $(element).closest('.nt-list-item').toggleClass('checked').hasClass('checked');
+
             var selectedObjects = app.utils.loadArrayData(storageKey);
 
             if (checked) {
                 selectedObjects.push(this.id);
-                element.setAttribute('checked', 'checked');
             } else {
                 selectedObjects = _.without(selectedObjects, this.id);
-                element.removeAttribute('checked');
             }
 
             app.utils.saveData(storageKey, _.uniq(selectedObjects));

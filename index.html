@@ -41,13 +41,17 @@
 
     <script type="text/template" id="filter-template">
         <span class="nt-list-item-title"><%= title %></span>
-        <input class="nt-list-item-checkbox" type="checkbox" id="<%= id %>" <% if (checked) { %>checked="checked"<% } %> />
+        <img class="nt-list-item-checkbox checked" src="check-active.png" />
+        <img class="nt-list-item-checkbox related" src="check-related.png" />
+        <img class="nt-list-item-checkbox" src="check-inactive.png" />
     </script>
 
     <script type="text/template" id="object-template">
         <% if (icon) { %><img class="nt-list-item-icon" src="img/<%= id %>.png" /><% } %>
         <span class="nt-list-item-title"><%= title %></span>
-        <input class="nt-list-item-checkbox" type="checkbox" id="<%= id %>" <% if (checked) { %>checked="checked"<% } %> />
+        <img class="nt-list-item-checkbox checked" src="check-active.png" />
+        <img class="nt-list-item-checkbox related" src="check-related.png" />
+        <img class="nt-list-item-checkbox" src="check-inactive.png" />
     </script>
 
     <script type="text/template" id="about-template">
