@@ -13,6 +13,9 @@ var app = app || {};
             app.utils.log('object:initialize:start');
 
             this.id = args.id;
+            if (args.icon) {
+                this.$el.addClass('nt-list-item-with-icon');
+            }
             if (args.checked) {
                 this.$el.addClass('checked');
             }
