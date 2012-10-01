@@ -47,7 +47,7 @@ var app = app || {};
             var lng = position.coords.longitude;
 
             self.map.setCenter(new google.maps.LatLng(lat, lng));
-            app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});    
+            app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
 
             app.utils.log('map:onGeolocationSuccess:end');
         },
@@ -82,7 +82,8 @@ var app = app || {};
             position = position || google.maps.ControlPosition.TOP_LEFT;
             var control = document.createElement('div');
             control.className = 'nt-map-control-wrapper';
-            control.innerHTML = '<div class="nt-map-control-button"><div class="nt-map-control-icon ' + className + '"></div></div>';
+            control.innerHTML = '<div class="nt-map-control-button">' +
+                '<div class="nt-map-control-icon ' + className + '"></div></div>';
             google.maps.event.addDomListener(control, 'click', handler);
             this.map.controls[position].push(control);
         },
@@ -150,7 +151,7 @@ var app = app || {};
 
                     infoWindow.close();
                     infoWindow.setOptions({
-                        maxWidth: screen.width / 7 * 5
+                        maxWidth: screen.width / 7 * 6
                     });
                     infoWindow.setContent(infoWindowTemplate(templateContext));
                     infoWindow.open(self.map, marker);
