@@ -26,7 +26,7 @@ var app = app || {};
                 selectedFilters = _.without(selectedFilters, this.options.id);
             }
 
-            app.utils.saveData(storageKey, _.uniq(selectedFilters));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));
 
             app.utils.log('filter:onChange:end');
         }

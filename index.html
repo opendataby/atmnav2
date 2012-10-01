@@ -59,6 +59,29 @@
         <div class="nt-about-program-version">Версия 2.0</div>
     </script>
 
+    <script type="text/template" id="create-template">
+        <div class="nt-create-form-page">
+            <form>
+                <label class="nt-create-form-label" for="type">Тип объекта</label><br/>
+                <input class="nt-create-form-input" type="text" name="type" placeholder="банк, банкомат, ..."/><br/>
+
+                <label class="nt-create-form-label" for="city">Город</label><br/>
+                <input class="nt-create-form-input" type="text" name="city" placeholder="Минск"/><br/>
+
+                <label class="nt-create-form-label" for="address">Адрес</label><br/>
+                <input class="nt-create-form-input" type="text" name="address" placeholder="ул. Московская 1"/><br/>
+
+                <label class="nt-create-form-label" for="place">Расположение</label><br/>
+                <input class="nt-create-form-input" type="text" name="place" placeholder="ЦУМ, кинотеатр 'Беларусь', ..." /><br/>
+
+                <input class="nt-create-form-label" type="checkbox" name="use_location" id="create-form-use-location" />
+                <label class="nt-create-form-input" for="use_location">Использовать текущее местоположение</label><br/>
+
+                <input class="nt-create-form-input" type="submit" value="Оставить заявку"/>
+            </form>
+        </div>
+    </script>
+
     <script type="text/template" id="info-window-template">
         <div class="nt-info-window-container">
             <div class="nt-info-window-title-bar">
@@ -106,6 +129,7 @@
     <script src="js/views/object.js"></script>
     <script src="js/views/objects.js"></script>
     <script src="js/views/about.js"></script>
+    <script src="js/views/create.js"></script>
     <script src="js/views/panel.js"></script>
     <script src="js/routes/app.js"></script>
 

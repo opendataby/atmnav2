@@ -27,7 +27,7 @@ var app = app || {};
                 selectedObjects = _.without(selectedObjects, this.options.id);
             }
 
-            app.utils.saveData(storageKey, _.uniq(selectedObjects));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));
 
             app.utils.log('object:onChange:end');
         }

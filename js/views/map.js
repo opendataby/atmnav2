@@ -61,10 +61,11 @@ var app = app || {};
         addMapControls: function () {
             app.utils.log('map:addMapControls:start');
 
+            var self = this;            
+
             var currentLocationControl = document.createElement('div');
             currentLocationControl.className = 'nt-map-current-location-control';
 
-            var self = this;
             google.maps.event.addDomListener(currentLocationControl, 'click', function() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
@@ -73,7 +74,15 @@ var app = app || {};
                 }
             });
 
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);  
+            var addNewPointControl = document.createElement('div');
+            addNewPointControl.className = 'nt-map-add-new-point-control';
+
+            google.maps.event.addDomListener(addNewPointControl, 'click', function() {
+                app.Router.navigate('#create', true);
+            });
+
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addNewPointControl);  
 
             app.utils.log('map:addMapControls:end');
         },
@@ -173,7 +182,7 @@ var app = app || {};
                     icon: markerData.type + '.png',
                     position: new google.maps.LatLng(markerData.lat, markerData.lng)
                 }, markersArray);
-            })
+            });
 
             this.connectMarkerHandlers(markersArray, data);
 
@@ -195,7 +204,7 @@ var app = app || {};
             var params = {
                 'filters[]': selectedFilters,
                 'objects[]': selectedObjects
-            }
+            };
 
             if (args && args.lat && args.lng) {
                 params.lat = args.lat;
