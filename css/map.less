@@ -4,19 +4,36 @@
   height: 100%;
 }
 
-.nt-map-current-location-control {
-  /* TODO: refactor map controls */
-  margin: 5px;
-  width: 40px;
-  height: 40px;
-  background: #AA0000;
+.nt-map-control-wrapper {
+  margin: 3px;
 }
 
-.nt-map-add-new-point-control {
-  /* TODO: refactor map controls */
-  width: 40px;
-  height: 40px;
-  background: #00AA00;
-  margin: 5px;
+.nt-map-control-button {
+  padding: 3px;
+  border: 1px solid @map-cpntrol-icon-color;
+  border-radius: 5px;
+  background: fade(@map-control-color, 80%);
+}
+
+.nt-map-control-icon {
+  width: @map-control-size;
+  height: @map-control-size;
+  background-repeat: no-repeat;
+}
+
+.zoom-in-icon {
+  background-image: url("img/zoominc.png");
+}
+
+.zoom-out-icon {
+  background-image: url("img/zoomdec.png");
+}
+
+.current-location-icon {
+  background-image: url("img/locate.png");
+}
+
+.add-point-icon {
+  background-image: url("img/add-point.png");
 }
 

@@ -61,30 +61,40 @@ var app = app || {};
         addMapControls: function () {
             app.utils.log('map:addMapControls:start');
 
-            var self = this;            
+            var self = this;
 
-            var currentLocationControl = document.createElement('div');
-            currentLocationControl.className = 'nt-map-current-location-control';
+            this.addMapControl('zoom-out-icon', function () {
+                var map = self.map;
+                map.setZoom(map.getZoom() - 1);
+            }, google.maps.ControlPosition.RIGHT_BOTTOM);
 
-            google.maps.event.addDomListener(currentLocationControl, 'click', function() {
+            this.addMapControl('zoom-in-icon', function () {
+                var map = self.map;
+                map.setZoom(map.getZoom() + 1);
+            }, google.maps.ControlPosition.RIGHT_BOTTOM);
+
+            this.addMapControl('current-location-icon', function () {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         self.onGeolocationSuccess(self, position);
                     }, this.onGeolocationError, app.settings.geolocationOptions);
                 }
-            });
+            }, google.maps.ControlPosition.RIGHT_BOTTOM);
 
-            var addNewPointControl = document.createElement('div');
-            addNewPointControl.className = 'nt-map-add-new-point-control';
-
-            google.maps.event.addDomListener(addNewPointControl, 'click', function() {
+            this.addMapControl('add-point-icon', function () {
                 app.Router.navigate('#create', true);
-            });
-
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(currentLocationControl);
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addNewPointControl);  
+            }, google.maps.ControlPosition.RIGHT_TOP);
 
             app.utils.log('map:addMapControls:end');
+        },
+
+        addMapControl: function (className, handler, position) {
+            position = position || google.maps.ControlPosition.TOP_LEFT;
+            var control = document.createElement('div');
+            control.className = 'nt-map-control-wrapper';
+            control.innerHTML = '<div class="nt-map-control-button"><div class="nt-map-control-icon ' + className + '"></div></div>';
+            google.maps.event.addDomListener(control, 'click', handler);
+            this.map.controls[position].push(control);
         },
 
         addMapEvents: function () {

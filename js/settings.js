@@ -6,11 +6,22 @@ var app = app || {};
 
         mapOptions: {
             zoom: 16,
+            mapTypeId: 'roadmap',
+            mapTypeControl: false,
+            zoomControl: false,
             keyboardShortcuts: false,
             panControl: false,
             rotateControl: false,
             streetViewControl: false,
-            mapTypeId: 'roadmap'
+            styles: [
+                {
+                    featureType: 'poi',
+                    elementType: 'labels',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                }
+            ]
         },
 
         geolocationOptions: {
