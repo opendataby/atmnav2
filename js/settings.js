@@ -7,8 +7,8 @@ var app = app || {};
         mapOptions: {
             zoom: 16,
             mapTypeId: 'roadmap',
-            mapTypeControl: false,
-            zoomControl: false,
+            mapTypeControl: true,
+            zoomControl: true,
             keyboardShortcuts: false,
             panControl: false,
             rotateControl: false,

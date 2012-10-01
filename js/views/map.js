@@ -63,27 +63,17 @@ var app = app || {};
 
             var self = this;
 
-            this.addMapControl('zoom-out-icon', function () {
-                var map = self.map;
-                map.setZoom(map.getZoom() - 1);
-            }, google.maps.ControlPosition.RIGHT_BOTTOM);
-
-            this.addMapControl('zoom-in-icon', function () {
-                var map = self.map;
-                map.setZoom(map.getZoom() + 1);
-            }, google.maps.ControlPosition.RIGHT_BOTTOM);
-
             this.addMapControl('current-location-icon', function () {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         self.onGeolocationSuccess(self, position);
                     }, this.onGeolocationError, app.settings.geolocationOptions);
                 }
-            }, google.maps.ControlPosition.RIGHT_BOTTOM);
+            }, google.maps.ControlPosition.TOP_LEFT);
 
             this.addMapControl('add-point-icon', function () {
                 app.Router.navigate('#create', true);
-            }, google.maps.ControlPosition.RIGHT_TOP);
+            }, google.maps.ControlPosition.TOP_LEFT);
 
             app.utils.log('map:addMapControls:end');
         },
