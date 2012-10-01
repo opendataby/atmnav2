@@ -47,5 +47,5 @@ var app = app || {};
         },
 
         serverUrl: 'http://atmnav-server.appspot.com'
-    }
+    };
 })(jQuery);

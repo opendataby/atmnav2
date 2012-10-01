@@ -26,5 +26,5 @@ var app = app || {};
             var date = new Date();
             console.log([date.toLocaleTimeString(), '.', date.getMilliseconds(), ' ',  args].join(''));
         }
-    }
+    };
 })(jQuery);
