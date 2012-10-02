@@ -26,14 +26,7 @@ var app = app || {};
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     self.onGeolocationSuccess(self, position);
-
-                    self.createCurrentPositionMarker(new google.maps.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude
-                    ));
-
                     self.fetchMarkers();
-
                 }, this.onGeolocationError, app.settings.geolocationOptions);
             }
 
@@ -45,8 +38,10 @@ var app = app || {};
 
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
+            var gLatLng = new google.maps.LatLng(lat, lng);
 
-            self.map.setCenter(new google.maps.LatLng(lat, lng));
+            self.createCurrentPositionMarker(gLatLng);
+            self.map.setCenter(gLatLng);
             app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
 
             app.utils.log('map:onGeolocationSuccess:end');
