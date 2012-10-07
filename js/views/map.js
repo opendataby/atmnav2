@@ -40,7 +40,7 @@ var app = app || {};
             var lng = position.coords.longitude;
             var gLatLng = new google.maps.LatLng(lat, lng);
 
-            self.createCurrentPositionMarker(gLatLng);
+            self.createOrUpdateCurrentPositionMarker(gLatLng);
             self.map.setCenter(gLatLng);
             app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
 
@@ -103,19 +103,19 @@ var app = app || {};
             return marker;
         },
 
-        createCurrentPositionMarker: function (latLng) {
-            app.utils.log('map:createCurrentPositionMarker:start');
+        createOrUpdateCurrentPositionMarker: function (latLng) {
+            app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
-            if (this.currentPositionMarker) {
-                this.currentPositionMarker.setMap(null);
+            if (!this.currentPositionMarker) {
+                this.currentPositionMarker = new google.maps.Marker({
+                    map: this.map,
+                    position: latLng,
+                });
+            } else {
+                this.currentPositionMarker.setPosition(latLng);
             }
 
-            this.currentPositionMarker = new google.maps.Marker({
-                map: this.map,
-                position: latLng,
-            });
-
-            app.utils.log('map:createCurrentPositionMarker:end');
+            app.utils.log('map:createOrUpdateCurrentPositionMarker:end');
         },
 
         deleteMarkers: function () {
