@@ -9,12 +9,23 @@ var AppRouter = Backbone.Router.extend({
     aboutView: null,
     createView: null,
 
+    baseRoute: 'map',
+
     routes: {
         'map': 'map',
         'banks': 'objects',
         'filters': 'filters',
         'about': 'about',
         'create': 'create'
+    },
+
+    navigate: function (fragment, options) {
+        options = options || {trigger: true, replace: true};
+        if (Backbone.history.getHash() === this.baseRoute) {
+            options.replace = false;
+        }
+        Backbone.Router.prototype.navigate.call(this, fragment, options);
+        return this;
     },
 
     switchToView: function (view) {
@@ -53,5 +64,5 @@ var AppRouter = Backbone.Router.extend({
     }
 });
 
-app.Router = new AppRouter();
+app.router = new AppRouter();
 Backbone.history.start();

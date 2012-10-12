@@ -30,8 +30,8 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:initialize:end');
     },
 
-    attach: function () {
-        app.PageView.prototype.attach.apply(this, arguments);
+    attach: function (container) {
+        app.PageView.prototype.attach.call(this, container);
         this.updateMarkers();
         return this;
     },
@@ -70,7 +70,7 @@ app.MapView = app.PageView.extend({
         }, google.maps.ControlPosition.TOP_LEFT);
 
         this.addMapControl('add-point-icon', function () {
-            app.Router.navigate('#create', true);
+            app.router.navigate('#create');
         }, google.maps.ControlPosition.TOP_LEFT);
 
         app.utils.log('map:addMapControls:end');

@@ -7,8 +7,10 @@ app.PanelView = Backbone.View.extend({
     },
 
     onClick: function (event) {
-        this.tabs.removeClass('active');
-        $(event.target).closest('.nt-nav-tab-link').addClass('active');
+        var link = $(event.target).closest('.nt-nav-tab-link');
+        this.tabs.removeClass('active').filter(link).addClass('active');
+        app.router.navigate(link.attr('href'));
+        return false;
     }
 });
 
