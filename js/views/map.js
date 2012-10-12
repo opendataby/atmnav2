@@ -33,6 +33,7 @@ app.MapView = app.PageView.extend({
     attach: function () {
         app.PageView.prototype.attach.apply(this, arguments);
         this.updateMarkers();
+        return this;
     },
 
     onGeolocationSuccess: function (self, position) {
