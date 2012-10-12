@@ -108,7 +108,7 @@ app.MapView = Backbone.View.extend({
         if (!this.currentPositionMarker) {
             this.currentPositionMarker = new google.maps.Marker({
                 map: this.map,
-                position: latLng,
+                position: latLng
             });
         } else {
             this.currentPositionMarker.setPosition(latLng);
@@ -167,11 +167,11 @@ app.MapView = Backbone.View.extend({
         this.deleteMarkers();
 
         var map = this.map;
-        var data = JSON.parse(data);
+        var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
         var createMarker = this.createMarker;
 
-        _.each(data, function (markerData) {
+        _.each(parsedData, function (markerData) {
             createMarker({
                 map: map,
                 icon: markerData.type + '.png',
@@ -179,7 +179,7 @@ app.MapView = Backbone.View.extend({
             }, markersArray);
         });
 
-        this.connectMarkerHandlers(markersArray, data);
+        this.connectMarkerHandlers(markersArray, parsedData);
 
         app.utils.log('map:onFetchSuccess:end');
     },
