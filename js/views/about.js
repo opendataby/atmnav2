@@ -1,14 +1,9 @@
 var app = app || {};
 
 app.AboutView = Backbone.View.extend({
-    className: 'nt-about-page',
+    make: function () {
+        app.utils.log('about:make');
 
-    initialize: function () {
-        this.render();
-    },
-
-    render: function () {
-        var template = _.template($('#about-template').html());
-        this.$el.html(template);
+        return _.template($('#about-template').html())();
     }
 });
