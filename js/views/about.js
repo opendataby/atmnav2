@@ -1,16 +1,14 @@
 var app = app || {};
 
-(function ($) {
-    app.AboutView = Backbone.View.extend({
-        className: 'nt-about-page',
+app.AboutView = Backbone.View.extend({
+    className: 'nt-about-page',
 
-        initialize: function () {
-            this.render();
-        },
+    initialize: function () {
+        this.render();
+    },
 
-        render: function () {
-            var template = _.template($('#about-template').html());
-            this.$el.html(template);
-        }
-    });
-})(jQuery);
+    render: function () {
+        var template = _.template($('#about-template').html());
+        this.$el.html(template);
+    }
+});

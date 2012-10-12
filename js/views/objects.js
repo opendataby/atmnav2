@@ -1,30 +1,28 @@
 var app = app || {};
 
-(function ($) {
-    app.ObjectsView = Backbone.View.extend({
-        tagName: 'ul',
-        className: 'nt-list-page',
+app.ObjectsView = Backbone.View.extend({
+    tagName: 'ul',
+    className: 'nt-list-page',
 
-        initialize: function (args) {
-            app.utils.log('objects:initialize:start');
+    initialize: function (args) {
+        app.utils.log('objects:initialize:start');
 
-            var objects = [];
-            var selectedObjects = app.utils.loadArrayData('objects');
-            var objectTemplate = _.template($('#object-template').html());
+        var objects = [];
+        var selectedObjects = app.utils.loadArrayData('objects');
+        var objectTemplate = _.template($('#object-template').html());
 
-            _.each(app.settings.objects, function (title, id) {
-                objects.push(new app.ObjectView({
-                    template: objectTemplate,
-                    id: id,
-                    title: title,
-                    icon: id.indexOf('spec:') !== 0,
-                    checked: _.include(selectedObjects, id)
-                }).el);
-            });
+        _.each(app.settings.objects, function (title, id) {
+            objects.push(new app.ObjectView({
+                template: objectTemplate,
+                id: id,
+                title: title,
+                icon: id.indexOf('spec:') !== 0,
+                checked: _.include(selectedObjects, id)
+            }).el);
+        });
 
-            this.$el.append(objects);
+        this.$el.append(objects);
 
-            app.utils.log('objects:initialize:end');
-        }
-    });
-})(jQuery);
+        app.utils.log('objects:initialize:end');
+    }
+});
