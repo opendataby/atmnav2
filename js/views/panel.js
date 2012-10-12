@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.PanelView = Backbone.View.extend({
     el: '.nt-nav',
     tabs: $('.nt-nav-tab-link'),

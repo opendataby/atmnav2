@@ -1,81 +1,55 @@
-var app = app || {};
-
 var AppRouter = Backbone.Router.extend({
+    container: $('.nt-content'),
+
+    activeView: null,
+
+    mapView: null,
+    objectsView: null,
+    filtersView: null,
+    aboutView: null,
+    createView: null,
+
     routes: {
         'map': 'map',
-        'banks': 'banks',
+        'banks': 'objects',
         'filters': 'filters',
         'about': 'about',
         'create': 'create'
     },
 
-    swithToView: function (view) {
-        app.utils.log('utils:swithToView:start');
-
-        $('.nt-content').html(view.el);
-
-        this.activeView = view;
-        this.deleteHiddenViews();
-
-        app.utils.log('utils:swithToView:end');
-    },
-
-    deleteHiddenViews: function () {
-        app.utils.log('utils:deleteHiddenViews:start');
-        var self = this;
-
-        _.each(['filtersView', 'objectsView', 'aboutView', 'createView'], function (viewName) {
-            var view = self[viewName];
-
-            if (view && view != self.activeView) {
-                view.remove();
-                self[viewName] = null;
-                app.utils.log(viewName + ' was deleted');
+    switchToView: function (view) {
+        if (this.activeView !== view) {
+            if (this.activeView) {
+                this.activeView.detach();
             }
-        });
-
-        app.utils.log('utils:deleteHiddenViews:end');
+            this.activeView = view.attach(this.container);
+        }
     },
 
     map: function () {
         app.utils.log('#map link clicked');
-
-        if (!this.mapView) {
-            this.mapView = new app.MapView();
-        } else {
-            this.mapView.updateMarkers();
-        }
-        this.swithToView(this.mapView);
+        this.switchToView(this.mapView || (this.mapView = new app.MapView()));
     },
 
-    banks: function () {
+    objects: function () {
         app.utils.log('#banks link clicked');
-
-        this.objectsView = new app.ObjectsView();
-        this.swithToView(this.objectsView);
+        this.switchToView(this.objectsView || (this.objectsView = new app.ObjectsView()));
     },
 
     filters: function () {
         app.utils.log('#filters link clicked');
-
-        this.filtersView = new app.FiltersView();
-        this.swithToView(this.filtersView);
+        this.switchToView(this.filtersView || (this.filtersView = new app.FiltersView()));
     },
 
     about: function () {
         app.utils.log('#about link clicked');
-
-        this.aboutView = new app.AboutView();
-        this.swithToView(this.aboutView);
+        this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()));
     },
 
     create: function () {
         app.utils.log('#create link clicked');
-
         $('.nt-nav-tab-link').removeClass('active');
-
-        this.createView = new app.CreateView();
-        this.swithToView(this.createView);
+        this.switchToView(this.createView || (this.createView = new app.CreateView()));
     }
 });
 

@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.ObjectView = Backbone.View.extend({
     events: {
         'click': 'onChange'

@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.settings = {
     debug: true,
 

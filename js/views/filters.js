@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.FiltersView = Backbone.View.extend({
+app.FiltersView = app.PageView.extend({
     tagName: 'ul',
     className: 'nt-list-page',
 

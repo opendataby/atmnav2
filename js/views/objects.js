@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.ObjectsView = Backbone.View.extend({
+app.ObjectsView = app.PageView.extend({
     tagName: 'ul',
     className: 'nt-list-page',
 

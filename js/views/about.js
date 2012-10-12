@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.AboutView = Backbone.View.extend({
+app.AboutView = app.PageView.extend({
     make: function () {
         app.utils.log('about:make');
 

@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.utils = {
     loadArrayData: function (keyName) {
         try {

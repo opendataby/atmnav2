@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.FilterView = Backbone.View.extend({
     events: {
         'click': 'onChange'

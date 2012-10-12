@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.MapView = Backbone.View.extend({
+app.MapView = app.PageView.extend({
     className: 'nt-map-page',
 
     markersArray: [],
@@ -30,6 +28,11 @@ app.MapView = Backbone.View.extend({
         }
 
         app.utils.log('map:initialize:end');
+    },
+
+    attach: function () {
+        app.PageView.prototype.attach.apply(this, arguments);
+        this.updateMarkers();
     },
 
     onGeolocationSuccess: function (self, position) {
