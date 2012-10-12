@@ -100,7 +100,7 @@
                 <div class="nt-info-window-addr"><b>Адрес:</b> <%= addr %></div>
             <%}%>
 
-            <% if (typeof(place) != "undefined") {%>
+            <% if (typeof(place) != "undefined" && place != "") {%>
                 <div class="nt-info-window-place"><b>Расположение:</b> <%= place %></div>
             <%}%>
 
@@ -116,9 +116,7 @@
 
     <script src="cordova.js" async="async"></script>
 
-    <script src="js/libs/jquery.js"></script>
-    <script src="js/libs/underscore.js"></script>
-    <script src="js/libs/backbone.js"></script>
+    <script src="js/libs/libs.js"></script>
 
     <script src="js/settings.js"></script>
     <script src="js/utils.js"></script>
@@ -141,6 +139,7 @@
 
             var script = document.createElement("script");
             script.type = "text/javascript";
+            script.async = true;
             script.src = "http://maps.googleapis.com/maps/api/js?&sensor=true&callback=onGoogleMapsLoaded";
             document.body.appendChild(script);
         });
