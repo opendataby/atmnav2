@@ -3,29 +3,21 @@ app.MapView = app.PageView.extend({
 
     markersArray: [],
 
+    map: null,
+    infoWindow: null,
+    currentPositionMarker: null,
+
     initialize: function () {
         app.utils.log('map:initialize:start');
 
         this.infoWindow = new google.maps.InfoWindow();
-        var latLng = app.utils.loadData('mapLastLocation');
-
-        if (!latLng) {
-            latLng = app.settings.defaultLatLng;
-        }
-
+        var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
         app.settings.mapOptions.center = new google.maps.LatLng(latLng.lat, latLng.lng);
         this.map = new google.maps.Map(this.el, app.settings.mapOptions);
 
         this.addMapControls();
         this.addMapEvents();
-
-        var self = this;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                self.onGeolocationSuccess(self, position);
-                self.fetchMarkers();
-            }, this.onGeolocationError, app.settings.geolocationOptions);
-        }
+        this.moveToLocation(true);
 
         app.utils.log('map:initialize:end');
     },
@@ -36,15 +28,15 @@ app.MapView = app.PageView.extend({
         return this;
     },
 
-    onGeolocationSuccess: function (self, position) {
+    onGeolocationSuccess: function (position) {
         app.utils.log('map:onGeolocationSuccess:start');
 
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        var gLatLng = new google.maps.LatLng(lat, lng);
+        var latLng = new google.maps.LatLng(lat, lng);
 
-        self.createOrUpdateCurrentPositionMarker(gLatLng);
-        self.map.setCenter(gLatLng);
+        this.createOrUpdateCurrentPositionMarker(latLng);
+        this.map.setCenter(latLng);
         app.utils.saveData('mapLastLocation', {lat: lat, lng: lng});
 
         app.utils.log('map:onGeolocationSuccess:end');
@@ -56,19 +48,25 @@ app.MapView = app.PageView.extend({
         alert('Невозможно определить текущее местоположение');
     },
 
+    moveToLocation: function (fetchMarkers) {
+        var self = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                self.onGeolocationSuccess(position);
+                if (fetchMarkers) {
+                    self.fetchMarkers();
+                }
+            }, this.onGeolocationError, app.settings.geolocationOptions);
+        }
+    },
+
     addMapControls: function () {
         app.utils.log('map:addMapControls:start');
 
         var self = this;
-
         this.addMapControl('current-location-icon', function () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    self.onGeolocationSuccess(self, position);
-                }, this.onGeolocationError, app.settings.geolocationOptions);
-            }
+            self.moveToLocation(false);
         }, google.maps.ControlPosition.TOP_LEFT);
-
         this.addMapControl('add-point-icon', function () {
             app.router.navigate('#create');
         }, google.maps.ControlPosition.TOP_LEFT);
@@ -97,26 +95,15 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:addMapEvents:end');
     },
 
-    createMarker: function (args, markersArray) {
-        var marker = new google.maps.Marker(args);
-
-        markersArray = markersArray || this.markersArray;
-        markersArray.push(marker);
-
-        return marker;
-    },
-
     createOrUpdateCurrentPositionMarker: function (latLng) {
         app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
         if (!this.currentPositionMarker) {
             this.currentPositionMarker = new google.maps.Marker({
-                map: this.map,
-                position: latLng
+                map: this.map
             });
-        } else {
-            this.currentPositionMarker.setPosition(latLng);
         }
+        this.currentPositionMarker.setPosition(latLng);
 
         app.utils.log('map:createOrUpdateCurrentPositionMarker:end');
     },
@@ -127,36 +114,9 @@ app.MapView = app.PageView.extend({
         _.each(this.markersArray, function (marker) {
             marker.setMap(null);
         });
-
         this.markersArray = [];
 
         app.utils.log('map:deleteMarkers:end');
-    },
-
-    connectMarkerHandlers: function (markers, data) {
-        app.utils.log('map:connectMarkerHandlers:start');
-
-        var self = this;
-        var infoWindow = this.infoWindow;
-        var addListener = google.maps.event.addListener;
-        var infoWindowTemplate = _.template($('#info-window-template').html());
-
-        _.each(markers, function (marker, index) {
-            addListener(marker, 'click', function () {
-                var templateContext = data[index];
-                templateContext.type = app.settings.types[templateContext.type];
-                templateContext.title = app.settings.objects[templateContext.prov];
-
-                infoWindow.close();
-                infoWindow.setOptions({
-                    maxWidth: screen.width / 7 * 6
-                });
-                infoWindow.setContent(infoWindowTemplate(templateContext));
-                infoWindow.open(self.map, marker);
-            });
-        });
-
-        app.utils.log('map:connectMarkerHandlers:end');
     },
 
     onFetchError: function () {
@@ -171,19 +131,34 @@ app.MapView = app.PageView.extend({
         this.deleteMarkers();
 
         var map = this.map;
+        var infoWindow = this.infoWindow;
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
-        var createMarker = this.createMarker;
+        var Marker = google.maps.Marker;
+        var LatLng = google.maps.LatLng;
+        var addListener = google.maps.event.addListener;
+        var infoWindowTemplate = _.template($('#info-window-template').html());
 
         _.each(parsedData, function (markerData) {
-            createMarker({
+            var marker = new Marker({
                 map: map,
                 icon: markerData.type + '.png',
-                position: new google.maps.LatLng(markerData.lat, markerData.lng)
-            }, markersArray);
-        });
+                position: new LatLng(markerData.lat, markerData.lng)
+            });
+            addListener(marker, 'click', function () {
+                var templateContext = parsedData[index];
+                templateContext.type = app.settings.types[templateContext.type];
+                templateContext.title = app.settings.objects[templateContext.prov];
 
-        this.connectMarkerHandlers(markersArray, parsedData);
+                infoWindow.close();
+                infoWindow.setOptions({
+                    maxWidth: screen.width / 7 * 6
+                });
+                infoWindow.setContent(infoWindowTemplate(templateContext));
+                infoWindow.open(map, marker);
+            });
+            markersArray.push(marker);
+        });
 
         app.utils.log('map:onFetchSuccess:end');
     },
@@ -223,7 +198,6 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:updateMarkers:start');
 
         var mapCenter = this.map.getCenter();
-
         this.fetchMarkers({
             lat: mapCenter.lat(),
             lng: mapCenter.lng()
