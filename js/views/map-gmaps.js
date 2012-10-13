@@ -146,15 +146,14 @@ app.MapView = app.PageView.extend({
                 position: new LatLng(markerData.lat, markerData.lng)
             });
             addListener(marker, 'click', function () {
-                var templateContext = parsedData[index];
-                templateContext.type = app.settings.types[templateContext.type];
-                templateContext.title = app.settings.objects[templateContext.prov];
+                markerData.type = app.settings.types[markerData.type];
+                markerData.title = app.settings.objects[markerData.prov];
 
                 infoWindow.close();
                 infoWindow.setOptions({
                     maxWidth: screen.width / 7 * 6
                 });
-                infoWindow.setContent(infoWindowTemplate(templateContext));
+                infoWindow.setContent(infoWindowTemplate(markerData));
                 infoWindow.open(map, marker);
             });
             markersArray.push(marker);
