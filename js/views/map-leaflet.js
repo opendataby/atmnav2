@@ -113,9 +113,9 @@ app.MapView = app.PageView.extend({
             var currentLocationTemplate = _.template($('#current-location-template').html());
             this.currentPositionMarker = L.marker(latLng, {
                 icon: L.icon({
-                    iconUrl: 'css/img/leaflet/marker-icon.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [13, 41]
+                    iconUrl: 'css/img/leaflet/marker-location.png',
+                    iconSize: [31, 42],
+                    iconAnchor: [16, 40]
                 })
             }).on('click', function () {
                 L.popup({
@@ -163,9 +163,9 @@ app.MapView = app.PageView.extend({
             var latLng = [markerData.lat, markerData.lng];
             var marker = L.marker(latLng, {
                 icon: L.icon({
-                    iconUrl: markerData.type + '.png',
-                    iconSize: [32, 37],
-                    iconAnchor: [17, 36]
+                    iconUrl: 'img/markers/' + markerData.prov + '.png',
+                    iconSize: [37, 42],
+                    iconAnchor: [19, 40]
                 })
             }).on('click', function () {
                 markerData.type = app.settings.types[markerData.type];

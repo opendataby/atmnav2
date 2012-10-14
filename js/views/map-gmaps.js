@@ -142,7 +142,7 @@ app.MapView = app.PageView.extend({
         _.each(parsedData, function (markerData) {
             var marker = new Marker({
                 map: map,
-                icon: markerData.type + '.png',
+                icon: 'img/markers/' + markerData.type + '.png',
                 position: new LatLng(markerData.lat, markerData.lng)
             });
             addListener(marker, 'click', function () {
