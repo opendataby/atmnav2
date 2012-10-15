@@ -16,7 +16,8 @@ var AppRouter = Backbone.Router.extend({
         'banks': 'objects',
         'filters': 'filters',
         'about': 'about',
-        'create': 'create'
+        'create': 'create',
+        'more-info/:id': 'moreInfo'
     },
 
     navigate: function (fragment, options) {
@@ -61,6 +62,12 @@ var AppRouter = Backbone.Router.extend({
         app.utils.log('#create link clicked');
         $('.nt-nav-tab-link').removeClass('active');
         this.switchToView(this.createView || (this.createView = new app.CreateView()));
+    },
+
+    moreInfo: function (id) {
+        app.utils.log('#more-info link clicked');
+        $('.nt-nav-tab-link').removeClass('active');
+        this.switchToView(new app.MoreInfoView({id: id}));
     }
 });
 
