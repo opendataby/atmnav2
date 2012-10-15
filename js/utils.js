@@ -22,5 +22,13 @@ app.utils = {
 
         var date = new Date();
         console.log([date.toLocaleTimeString(), '.', date.getMilliseconds(), ' ',  args].join(''));
+    },
+
+    roundDistance: function (distance) {
+        if (distance >= 10000) {
+            return Math.round(distance / 1000) + ' км';
+        } else {
+            return Math.round(distance) + ' м';
+        }
     }
 };

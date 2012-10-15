@@ -110,6 +110,11 @@
                     <span class="nt-info-window-title"><b>Телефон:</b> <%= phone %></span><br/>
                 <%}%>
             </div>
+            <div class="nt-info-window-additional">
+                <% if (typeof(distance) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Расстояние:</b> <%= distance %></span>
+                <%}%>
+           </div>
         </div>
     </script>
 
