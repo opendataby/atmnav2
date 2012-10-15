@@ -86,41 +86,38 @@
 
     <script type="text/template" id="info-window-template">
         <div class="nt-info-window-container">
-            <div class="nt-info-window-title-bar">
+            <div class="nt-info-window-caption">
                 <img class="nt-info-window-icon" src="img/icons/<%= prov %>.png" />
-                <div class="nt-info-window-title"><%= title %></div>
-            </div><br/>
-            <% if (typeof(type) != "undefined") {%>
-                <div class="nt-info-window-type"><b>Тип:</b> <%= type %></div>
-            <%}%>
-
-            <% if (typeof(currency) != "undefined") {%>
-                <div class="nt-info-window-currency"><b>Валюта:</b> <%= currency %></div>
-            <%}%>
-
-            <% if (typeof(addr) != "undefined") {%>
-                <div class="nt-info-window-addr"><b>Адрес:</b> <%= addr %></div>
-            <%}%>
-
-            <% if (typeof(place) != "undefined" && place != "") {%>
-                <div class="nt-info-window-place"><b>Расположение:</b> <%= place %></div>
-            <%}%>
-
-            <% if (typeof(time) != "undefined") {%>
-                <div class="nt-info-window-time"><b>Время работы:</b> <%= time %></div>
-            <%}%>
-
-            <% if (typeof(phone) != "undefined") {%>
-                <div class="nt-info-window-phone"><b>Телефон:</b> <%= phone %></div>
-            <%}%>
+                <span class="nt-info-window-title"><%= title %></span>
+            </div>
+            <div class="nt-info-window-body">
+                <% if (typeof(type) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Тип:</b> <%= type %></span><br/>
+                <%}%>
+                <% if (typeof(currency) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Валюта:</b> <%= currency %></span><br/>
+                <%}%>
+                <% if (typeof(addr) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Адрес:</b> <%= addr %></span><br/>
+                <%}%>
+                <% if (typeof(place) != "undefined" && place != "") {%>
+                    <span class="nt-info-window-title"><b>Расположение:</b> <%= place %></span><br/>
+                <%}%>
+                <% if (typeof(time) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Время работы:</b> <%= time %></span><br/>
+                <%}%>
+                <% if (typeof(phone) != "undefined") {%>
+                    <span class="nt-info-window-title"><b>Телефон:</b> <%= phone %></span><br/>
+                <%}%>
+            </div>
         </div>
     </script>
 
     <script type="text/template" id="current-location-template">
         <div class="nt-info-window-container">
-            <div class="nt-info-window-title-bar">
+            <div class="nt-info-window-caption">
                 <img class="nt-info-window-icon" src="css/img/leaflet/marker-location.png" />
-                <div class="nt-info-window-title">Текущее положение</div>
+                <span class="nt-info-window-title">Текущее положение</span>
             </div>
         </div>
     </script>
