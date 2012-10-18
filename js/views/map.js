@@ -153,12 +153,12 @@ app.MapView = app.PageView.extend({
     onFetchSuccess: function(data) {
         app.utils.log('map:onFetchSuccess:start');
 
-        var self = this;
         var map = this.map;
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
         var currentPosition = this.currentPositionMarker ? this.currentPositionMarker.getLatLng() : null;
         var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
+        var showInfoWindow = this.showInfoWindow;
 
         _.each(parsedData, function (markerData) {
             var marker = L.marker([markerData.lat, markerData.lng], {
@@ -166,18 +166,12 @@ app.MapView = app.PageView.extend({
                     iconUrl: 'img/markers/' + markerData.prov + '.png',
                     iconSize: [37, 42],
                     iconAnchor: [19, 40]
-                })
-            });
-
-            marker.addEventListener('click', self.showInfoWindow, {
-                'map': map,
-                'marker': marker,
-                'latLng': latLng,
-                'markerData': markerData,
-                'currentPosition': currentPosition,
-                'infoWindowTemplate': infoWindowTemplate
-            });
-            marker.addTo(map);
+                }),
+                map: map,
+                markerData: markerData,
+                currentPosition: currentPosition,
+                infoWindowTemplate: infoWindowTemplate
+            }).on('click', showInfoWindow).addTo(map);
             markersArray.push(marker);
         });
 
@@ -187,22 +181,23 @@ app.MapView = app.PageView.extend({
     showInfoWindow: function() {
         app.utils.log('map:showInfoWindow:start');
 
-        var markerData = this.markerData, currentPosition = this.currentPosition, marker = this.marker;
+        var options = this.options;
+        var markerData = options.markerData;
+        var currentPosition = options.currentPosition;
 
         markerData.type = app.settings.types[markerData.type];
         markerData.title = app.settings.objects[markerData.prov];
-        var latLng = this.getLatLng();
-
+        var markerLatLng = this.getLatLng();
         if (currentPosition) {
-            markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(latLng));
+            markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(markerLatLng));
         }
 
         L.popup({
-            marker: marker,
+            marker: this,
             closeButton: false,
             maxWidth: 260,
             minWidth: 260
-        }).setLatLng(latLng).setContent(this.infoWindowTemplate(markerData)).openOn(this.map);
+        }).setLatLng(markerLatLng).setContent(options.infoWindowTemplate(markerData)).openOn(options.map);
 
         app.utils.log('map:showInfoWindow:end');
     },
