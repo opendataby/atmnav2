@@ -158,21 +158,14 @@
     <script src="cordova.js" async="async"></script>
 
     <script src="js/libs/libs.js"></script>
+    <script src="js/libs/leaflet.js"></script>
 
     <script>var app = {};</script>
     <script src="js/settings.js"></script>
     <script src="js/utils.js"></script>
 
     <script src="js/views/page.js"></script>
-    <!-- gmaps:start -->
-    <!--<script src="http://maps.googleapis.com/maps/api/js?&sensor=true"></script>-->
-    <!--<script src="js/views/map-gmaps.js"></script>-->
-    <!-- gmaps:end -->
-    <!-- leaflet:start -->
-    <script src="js/libs/leaflet.js"></script>
-    <script src="js/views/map-leaflet.js"></script>
-    <!-- leaflet:end -->
-
+    <script src="js/views/map.js"></script>
     <script src="js/views/filter.js"></script>
     <script src="js/views/filters.js"></script>
     <script src="js/views/object.js"></script>
@@ -188,12 +181,6 @@
             window.onGoogleMapsLoaded = function () {
                 location.href = '#map';
             };
-
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.async = true;
-            script.src = "http://maps.googleapis.com/maps/api/js?&sensor=true&callback=onGoogleMapsLoaded";
-            document.body.appendChild(script);
         });
 
         window.onload = function () {
