@@ -3,22 +3,7 @@ app.settings = {
 
     mapOptions: {
         zoom: 16,
-        mapTypeId: 'roadmap',
-        mapTypeControl: true,
-        zoomControl: true,
-        keyboardShortcuts: false,
-        panControl: false,
-        rotateControl: false,
-        streetViewControl: false,
-        styles: [
-            {
-                featureType: 'poi',
-                elementType: 'labels',
-                stylers: [{
-                    visibility: 'off'
-                }]
-            }
-        ]
+        zoomControl: false
     },
 
     geolocationOptions: {
