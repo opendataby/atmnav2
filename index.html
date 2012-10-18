@@ -9,12 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
     <link href="css/styles.less" rel="stylesheet/less" media="all" />
+
     <script src="js/libs/less-1.3.0.min.js"></script>
     <script src="cordova.js" async="async"></script>
-    <script src="js/libs/jquery.js"></script>
-    <script src="js/libs/underscore.js"></script>
-    <script src="js/libs/backbone.js"></script>
-    <script src="js/libs/leaflet.js"></script>
 </head>
 
 <body class="nt-application">
@@ -160,6 +157,14 @@
         </div>
     </script>
 
+    <!--compress:js:libs:start-->
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/underscore.js"></script>
+    <script src="js/libs/backbone.js"></script>
+    <script src="js/libs/leaflet.js"></script>
+    <!--compress:js:libs:end-->
+
+    <!--compress:js:app:start-->
     <script src="js/app.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/utils.js"></script>
@@ -174,6 +179,7 @@
     <script src="js/views/more-info.js"></script>
     <script src="js/views/panel.js"></script>
     <script src="js/routes/app.js"></script>
+    <!--compress:js:app:end-->
 
     <script>
         $(document).ready(function() {
