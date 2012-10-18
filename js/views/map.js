@@ -11,11 +11,7 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:initialize:start');
 
         var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
-        var map = this.map = L.map(this.el, {
-            center: latLng,
-            zoom: 13,
-            zoomControl: false
-        });
+        var map = this.map = L.map(this.el, _.extend(app.settings.mapOptions, {center: latLng}));
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
         this.addMapControls();
