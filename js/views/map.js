@@ -153,14 +153,14 @@ app.MapView = app.PageView.extend({
     onFetchSuccess: function(data) {
         app.utils.log('map:onFetchSuccess:start');
 
-        this.deleteMarkers();
-
+        var self = this;
         var map = this.map;
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
         var currentPosition = this.currentPositionMarker ? this.currentPositionMarker.getLatLng() : null;
-
         var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
+
+        this.deleteMarkers();
 
         _.each(parsedData, function(markerData) {
             var latLng = [markerData.lat, markerData.lng];
@@ -170,23 +170,43 @@ app.MapView = app.PageView.extend({
                     iconSize: [37, 42],
                     iconAnchor: [19, 40]
                 })
-            }).on('click', function() {
-                markerData.type = app.settings.types[markerData.type];
-                markerData.title = app.settings.objects[markerData.prov];
-                if (currentPosition) {
-                    markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(this.getLatLng()));
-                }
-                L.popup({
-                    marker: this,
-                    closeButton: false,
-                    maxWidth: 260,
-                    minWidth: 260
-                }).setLatLng(latLng).setContent(infoWindowTemplate(markerData)).openOn(map);
-            }).addTo(map);
+            });
+
+            marker.addEventListener('click', self.showInfoWindow, {
+                'map': map,
+                'marker': marker,
+                'latLng': latLng,
+                'markerData': markerData,
+                'currentPosition': currentPosition,
+                'infoWindowTemplate': infoWindowTemplate,
+            });
+            marker.addTo(map);
             markersArray.push(marker);
         });
 
         app.utils.log('map:onFetchSuccess:end');
+    },
+
+    showInfoWindow: function() {
+        app.utils.log('map:showInfoWindow:start');
+
+        var markerData = this.markerData, currentPosition = this.currentPosition, marker = this.marker;
+
+        markerData.type = app.settings.types[markerData.type];
+        markerData.title = app.settings.objects[markerData.prov];
+
+        if (currentPosition) {
+            markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(marker.getLatLng()));
+        }
+
+        L.popup({
+            marker: marker,
+            closeButton: false,
+            maxWidth: 260,
+            minWidth: 260
+        }).setLatLng(this.latLng).setContent(this.infoWindowTemplate(markerData)).openOn(this.map);
+
+        app.utils.log('map:showInfoWindow:end');
     },
 
     fetchMarkers: function(args) {
