@@ -119,7 +119,7 @@ app.MapView = app.PageView.extend({
                     closeButton: false,
                     maxWidth: 260,
                     minWidth: 260
-                }).setLatLng(latLng).setContent(currentLocationTemplate()).openOn(map);
+                }).setLatLng(this.getLatLng()).setContent(currentLocationTemplate()).openOn(map);
             }).addTo(map);
         }
         this.currentPositionMarker.setLatLng(latLng);
@@ -157,8 +157,7 @@ app.MapView = app.PageView.extend({
         var infoWindowTemplate = _.template($('#info-window-template').html());
 
         _.each(parsedData, function (markerData) {
-            var latLng = [markerData.lat, markerData.lng];
-            var marker = L.marker(latLng, {
+            var marker = L.marker([markerData.lat, markerData.lng], {
                 icon: L.icon({
                     iconUrl: 'img/markers/' + markerData.prov + '.png',
                     iconSize: [37, 42],
@@ -167,8 +166,9 @@ app.MapView = app.PageView.extend({
             }).on('click', function () {
                 markerData.type = app.settings.types[markerData.type];
                 markerData.title = app.settings.objects[markerData.prov];
+                var latLng = this.getLatLng();
                 if (currentPosition) {
-                    markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(this.getLatLng()));
+                    markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(latLng));
                 }
                 L.popup({
                     marker: this,
