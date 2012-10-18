@@ -7,7 +7,7 @@ app.MapView = app.PageView.extend({
     infoWindow: null,
     currentPositionMarker: null,
 
-    initialize: function () {
+    initialize: function() {
         app.utils.log('map:initialize:start');
 
         var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
@@ -16,19 +16,23 @@ app.MapView = app.PageView.extend({
 
         this.addMapControls();
         this.addMapEvents();
-        this.moveToLocation(true);
+        this.moveToLocation();
 
         app.utils.log('map:initialize:end');
     },
 
-    attach: function (container) {
+    attach: function(container) {
+        app.utils.log('map:attach:start');
+
         app.PageView.prototype.attach.call(this, container);
         this.map.invalidateSize();
         this.updateMarkers();
+
+        app.utils.log('map:attach:end');
         return this;
     },
 
-    onGeolocationSuccess: function (position) {
+    onGeolocationSuccess: function(position) {
         app.utils.log('map:onGeolocationSuccess:start');
 
         var lat = position.coords.latitude;
@@ -42,25 +46,26 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:onGeolocationSuccess:end');
     },
 
-    onGeolocationError: function () {
+    onGeolocationError: function() {
         app.utils.log('map:onGeolocationError');
 
         alert('Невозможно определить текущее местоположение');
     },
 
-    moveToLocation: function (fetchMarkers) {
+    moveToLocation: function() {
+        app.utils.log('map:moveToLocation:start');
+
         var self = this;
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(function(position) {
                 self.onGeolocationSuccess(position);
-                if (fetchMarkers) {
-                    self.fetchMarkers();
-                }
             }, this.onGeolocationError, app.settings.geolocationOptions);
         }
+
+        app.utils.log('map:moveToLocation:end');
     },
 
-    addMapControls: function () {
+    addMapControls: function() {
         app.utils.log('map:addMapControls:start');
 
         var self = this;
@@ -68,10 +73,10 @@ app.MapView = app.PageView.extend({
             onAdd: function (map) {
                 var container = L.Control.Zoom.prototype.onAdd.call(this, map);
 
-                this._createButton('Locate', 'current-location-icon', container, function () {
-                    self.moveToLocation(false);
+                this._createButton('Locate', 'current-location-icon', container, function() {
+                    self.moveToLocation();
                 }, map);
-                this._createButton('Add item', 'add-point-icon', container, function () {
+                this._createButton('Add item', 'add-point-icon', container, function() {
                     app.router.navigate('#create');
                 }, map);
 
@@ -83,15 +88,15 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:addMapControls:end');
     },
 
-    addMapEvents: function () {
+    addMapEvents: function() {
         app.utils.log('map:addMapEvents:start');
 
-        this.map.on('popupopen', function (event) {
+        this.map.on('popupopen', function(event) {
             var marker = event.popup.options.marker;
             if (marker) {
                 marker.setOpacity(0);
             }
-        }).on('popupclose', function (event) {
+        }).on('popupclose', function(event) {
             var marker = event.popup.options.marker;
             if (marker) {
                 marker.setOpacity(1);
@@ -101,7 +106,7 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:addMapEvents:end');
     },
 
-    createOrUpdateCurrentPositionMarker: function (latLng) {
+    createOrUpdateCurrentPositionMarker: function(latLng) {
         app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
         if (!this.currentPositionMarker) {
@@ -127,11 +132,11 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:createOrUpdateCurrentPositionMarker:end');
     },
 
-    deleteMarkers: function () {
+    deleteMarkers: function() {
         app.utils.log('map:deleteMarkers:start');
 
         var map = this.map;
-        _.each(this.markersArray, function (marker) {
+        _.each(this.markersArray, function(marker) {
             map.removeLayer(marker);
         });
         this.markersArray = [];
@@ -139,13 +144,13 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:deleteMarkers:end');
     },
 
-    onFetchError: function () {
+    onFetchError: function() {
         app.utils.log('map:onFetchError');
 
         alert('Невозможно загрузить данные с сервера. Попробуйте позже.');
     },
 
-    onFetchSuccess: function (data) {
+    onFetchSuccess: function(data) {
         app.utils.log('map:onFetchSuccess:start');
 
         this.deleteMarkers();
@@ -154,9 +159,10 @@ app.MapView = app.PageView.extend({
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
         var currentPosition = this.currentPositionMarker ? this.currentPositionMarker.getLatLng() : null;
-        var infoWindowTemplate = _.template($('#info-window-template').html());
 
-        _.each(parsedData, function (markerData) {
+        var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
+
+        _.each(parsedData, function(markerData) {
             var latLng = [markerData.lat, markerData.lng];
             var marker = L.marker(latLng, {
                 icon: L.icon({
@@ -164,7 +170,7 @@ app.MapView = app.PageView.extend({
                     iconSize: [37, 42],
                     iconAnchor: [19, 40]
                 })
-            }).on('click', function () {
+            }).on('click', function() {
                 markerData.type = app.settings.types[markerData.type];
                 markerData.title = app.settings.objects[markerData.prov];
                 if (currentPosition) {
@@ -183,7 +189,7 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:onFetchSuccess:end');
     },
 
-    fetchMarkers: function (args) {
+    fetchMarkers: function(args) {
         app.utils.log('map:fetchMarkers:start');
 
         var selectedObjects = app.utils.loadArrayData('objects');
@@ -214,7 +220,7 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:fetchMarkers:end');
     },
 
-    updateMarkers: function () {
+    updateMarkers: function() {
         app.utils.log('map:updateMarkers:start');
 
         this.fetchMarkers(this.map.getCenter());
