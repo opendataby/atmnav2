@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+CACHE:
+app.js
+cordova.js
+css/styles.css
+
+FALLBACK:
+
+NETWORK:
+*
