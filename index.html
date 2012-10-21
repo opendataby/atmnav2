@@ -58,8 +58,30 @@
 
     <script type="text/template" id="about-template">
         <div class="nt-about-page">
-            <div class="nt-about-program-name">ATM Навигатор</div>
-            <div class="nt-about-program-version">Версия 2.0</div>
+            <div class="nt-about-vindent"></div>
+            <div class="nt-about-header">
+                <div class="nt-about-program-name">ATM Навигатор</div>
+                <div class="nt-about-program-version">Версия 2.0</div>
+            </div>
+            <div class="nt-about-main">
+                <div class="nt-about-program-paragraph">Приложение для поиска ближайших банков и банкоматов в городе Минск</div>
+                <div class="nt-about-program-paragraph">Веб версия: <a target="_blank" href="http://atm-by.appspot.com">http://atm-by.appspot.com</a></div>
+            </div>
+            <div class="nt-about-developers">
+                <div class="nt-about-developers-dev">
+                    <div class="nt-about-program-paragraph">Разработчики:</div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:maxusachev@gmail.com?subject=ATM Navigator">Максим Усачев</a></div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:pavel.tyslyatsky@gmail.com?subject=ATM Navigator">Павел Тысляцкий</a></div>
+                </div>
+                <div class="nt-about-developers-sep"></div>
+                <div class="nt-about-developers-design">
+                    <div class="nt-about-program-paragraph">Дизайн:</div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:tatusya.ch@gmail.com?subject=ATM Navigator">Татьяна Чернявская</a></div>
+                </div>
+            </div>
+            <div class="nt-about-license">
+                <div class="nt-about-program-paragraph">Лицензия: <a target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
+            </div>
         </div>
     </script>
 
@@ -157,14 +179,12 @@
         </div>
     </script>
 
-    <!--compress:js:libs:start-->
+    <!--compress:js:start-->
     <script src="js/libs/jquery.js"></script>
     <script src="js/libs/underscore.js"></script>
     <script src="js/libs/backbone.js"></script>
     <script src="js/libs/leaflet.js"></script>
-    <!--compress:js:libs:end-->
 
-    <!--compress:js:app:start-->
     <script src="js/app.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/utils.js"></script>
@@ -175,11 +195,10 @@
     <script src="js/views/object.js"></script>
     <script src="js/views/objects.js"></script>
     <script src="js/views/about.js"></script>
-    <script src="js/views/create.js"></script>
     <script src="js/views/more-info.js"></script>
     <script src="js/views/panel.js"></script>
     <script src="js/routes/app.js"></script>
-    <!--compress:js:app:end-->
+    <!--compress:js:end-->
 
     <script>
         $(document).ready(function() {

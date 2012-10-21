@@ -3,7 +3,10 @@ app.settings = {
 
     mapOptions: {
         zoom: 16,
-        zoomControl: false
+        zoomControl: false,
+        fadeAnimation: false,
+        zoomAnimation: false,
+        markerZoomAnimation: false
     },
 
     geolocationOptions: {
