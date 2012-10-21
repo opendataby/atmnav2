@@ -4,9 +4,6 @@ CACHE:
 app.js
 cordova.js
 css/styles.css
-http://a.tile.openstreetmap.org/
-http://b.tile.openstreetmap.org/
-http://c.tile.openstreetmap.org/
 
 FALLBACK:
 
