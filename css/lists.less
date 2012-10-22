@@ -16,7 +16,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   height: @list-item-height;
-  padding: 0 @list-item-height 0 5px;
+  padding: 0 @list-item-height 0 @list-item-left-padding;
   border-bottom: 1px solid @list-item-border-color;
   font-size: large;
   white-space: nowrap;
@@ -28,7 +28,7 @@
 }
 
 .nt-list-item-with-icon {
-  padding-left: @list-item-icon-height + 5px * 2;
+  padding-left: @list-item-icon-height + @list-item-left-padding * 2;
 }
 
 .nt-list-item-icon {
@@ -36,7 +36,7 @@
   position: absolute;
   width: @list-item-icon-height;
   height: @list-item-icon-height;
-  margin: ((@list-item-height - @list-item-icon-height) / 2) 5px ((@list-item-height - @list-item-icon-height) / 2);
+  margin: ((@list-item-height - @list-item-icon-height) / 2) @list-item-left-padding ((@list-item-height - @list-item-icon-height) / 2);
   left: 0;
 }
 
