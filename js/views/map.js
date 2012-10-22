@@ -91,15 +91,12 @@ app.MapView = app.PageView.extend({
     addMapEvents: function() {
         app.utils.log('map:addMapEvents:start');
 
-        this.map.on('popupopen', function(event) {
-            var marker = event.popup.options.marker;
-            if (marker) {
-                marker.setOpacity(0);
-            }
-        }).on('popupclose', function(event) {
+        var map = this.map;
+        map.on('popupclose', function(event) {
             var marker = event.popup.options.marker;
             if (marker) {
                 marker.setOpacity(1);
+                map.invalidateSize();
             }
         });
 
@@ -192,6 +189,7 @@ app.MapView = app.PageView.extend({
             markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(markerLatLng));
         }
 
+        this.setOpacity(0);
         L.popup({
             marker: this,
             closeButton: false,
