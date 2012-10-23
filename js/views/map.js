@@ -65,25 +65,40 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:moveToLocation:end');
     },
 
+    addMapControl: function(title, position, className, handler, context) {
+        var Control = L.Control.extend({
+            onAdd: function (map) {
+                var button = L.DomUtil.create('a',
+                    'nt-map-control-button ' + (L.Browser.mobile ? 'mobile ': '') + className);
+                button.href = '#';
+                button.title = title;
+
+                L.DomEvent
+                    .on(button, 'click', L.DomEvent.stopPropagation)
+                    .on(button, 'click', L.DomEvent.preventDefault)
+                    .on(button, 'click', handler, context || map)
+                    .on(button, 'dblclick', L.DomEvent.stopPropagation);
+
+                return button;
+            }
+        });
+
+        this.map.addControl(new Control({position: position}));
+    },
+
     addMapControls: function() {
         app.utils.log('map:addMapControls:start');
 
         var self = this;
-        var Controls = L.Control.Zoom.extend({
-            onAdd: function (map) {
-                var container = L.Control.Zoom.prototype.onAdd.call(this, map);
-
-                this._createButton('Locate', 'current-location-icon', container, function() {
-                    self.moveToLocation();
-                }, map);
-                this._createButton('Add item', 'add-point-icon', container, function() {
-                    app.router.navigate('#create');
-                }, map);
-
-                return container;
-            }
-        });
-        this.map.addControl(new Controls());
+        if (L.Browser.mobile) {
+            this.addMapControl('Locate', 'topright', 'locate-icon', self.moveToLocation, self);
+            this.addMapControl('Zoom Out', 'bottomright', 'zoom-out-icon', this.map.zoomOut);
+            this.addMapControl('Zoom In', 'bottomright', 'zoom-in-icon', this.map.zoomIn);
+        } else {
+            this.addMapControl('Zoom In', 'topleft', 'zoom-in-icon', this.map.zoomIn);
+            this.addMapControl('Zoom Out', 'topleft', 'zoom-out-icon', this.map.zoomOut);
+            this.addMapControl('Locate', 'topleft', 'locate-icon', self.moveToLocation, self);
+        }
 
         app.utils.log('map:addMapControls:end');
     },
@@ -111,7 +126,7 @@ app.MapView = app.PageView.extend({
             var currentLocationTemplate = _.template($('#current-location-template').html());
             this.currentPositionMarker = L.marker(latLng, {
                 icon: L.icon({
-                    iconUrl: 'css/img/leaflet/marker-location.png',
+                    iconUrl: 'css/img/marker-location.png',
                     iconSize: [31, 42],
                     iconAnchor: [16, 40]
                 })

@@ -3,7 +3,7 @@ import os
 ORIGINAL_IMAGES_IN_PATH = '../img/icons'
 
 MARKER_IMAGES_OUT_PATH = '../img/markers'
-MARKER_TEMPLATE_PATH = '../css/img/leaflet/marker-template.png'
+MARKER_TEMPLATE_PATH = '../css/img-base/marker-template.png'
 
 script = '''
 import os

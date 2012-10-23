@@ -4,6 +4,7 @@ app.settings = {
     mapOptions: {
         zoom: 16,
         zoomControl: false,
+        attributionControl: false,
         fadeAnimation: false,
         zoomAnimation: false,
         markerZoomAnimation: false
