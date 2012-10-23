@@ -168,10 +168,10 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:onFetchSuccess:start');
 
         var map = this.map;
+        var instance = this;
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
         var showInfoWindow = this.showInfoWindow;
-        var currentPosition = this.currentPositionMarker;
         var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
 
         _.each(parsedData, function (markerData) {
@@ -182,8 +182,8 @@ app.MapView = app.PageView.extend({
                     iconAnchor: [19, 40]
                 }),
                 map: map,
+                instance: instance,
                 markerData: markerData,
-                currentPosition: currentPosition,
                 infoWindowTemplate: infoWindowTemplate
             }).on('click', showInfoWindow).addTo(map);
             markersArray.push(marker);
@@ -198,7 +198,7 @@ app.MapView = app.PageView.extend({
         var options = this.options;
         var markerLatLng = this.getLatLng();
         var markerData = options.markerData;
-        var currentPosition = options.currentPosition;
+        var currentPosition = options.instance.currentPositionMarker;
 
         markerData.type = app.settings.types[markerData.type];
         markerData.title = app.settings.objects[markerData.prov];
