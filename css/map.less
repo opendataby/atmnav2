@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.nt-map-control-button:hover {
+  background-color: fade(lighten(@map-control-color, 20%), 80%);
+  border-color: lighten(@map-cpntrol-icon-color, 20%);
+}
+
 .nt-map-control-button.mobile {
   display: block;
   width: @map-control-size;
@@ -27,11 +32,6 @@
   -webkit-border-radius: @map-control-radius;
   border-radius: @map-control-radius;
   background-size: @map-control-icon-size @map-control-icon-size;
-}
-
-.nt-map-control-button:hover {
-  background-color: fade(lighten(@map-control-color, 20%), 80%);
-  border-color: lighten(@map-cpntrol-icon-color, 20%);
 }
 
 .zoom-in-icon {

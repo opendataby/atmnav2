@@ -71,9 +71,8 @@ app.MapView = app.PageView.extend({
     addMapControl: function(title, position, className, handler, context) {
         var Control = L.Control.extend({
             onAdd: function (map) {
-                var button = L.DomUtil.create('a',
+                var button = L.DomUtil.create('div',
                     'nt-map-control-button ' + (L.Browser.mobile ? 'mobile ': '') + className);
-                button.href = '#';
                 button.title = title;
 
                 L.DomEvent
