@@ -170,9 +170,9 @@ app.MapView = app.PageView.extend({
         var map = this.map;
         var parsedData = JSON.parse(data);
         var markersArray = this.markersArray;
-        var currentPosition = this.currentPositionMarker ? this.currentPositionMarker.getLatLng() : null;
-        var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
         var showInfoWindow = this.showInfoWindow;
+        var currentPosition = this.currentPositionMarker;
+        var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
 
         _.each(parsedData, function (markerData) {
             var marker = L.marker([markerData.lat, markerData.lng], {
@@ -196,14 +196,15 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:showInfoWindow:start');
 
         var options = this.options;
+        var markerLatLng = this.getLatLng();
         var markerData = options.markerData;
         var currentPosition = options.currentPosition;
 
         markerData.type = app.settings.types[markerData.type];
         markerData.title = app.settings.objects[markerData.prov];
-        var markerLatLng = this.getLatLng();
+
         if (currentPosition) {
-            markerData.distance = app.utils.roundDistance(currentPosition.distanceTo(markerLatLng));
+            markerData.distance = app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));
         }
 
         this.setOpacity(0);
