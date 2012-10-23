@@ -1,3 +1,5 @@
+var app = app || {};
+
 app.utils = {
     loadArrayData: function (keyName) {
         try {
@@ -12,7 +14,9 @@ app.utils = {
     },
 
     saveData: function (keyName, data) {
-        localStorage.setItem(keyName, JSON.stringify(data));
+        setTimeout(function() {
+            localStorage.setItem(keyName, JSON.stringify(data));
+        }, 0);
     },
 
     log: function (args) {

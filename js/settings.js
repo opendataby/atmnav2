@@ -1,3 +1,5 @@
+var app = app || {};
+
 app.settings = {
     debug: true,
 
@@ -29,12 +31,16 @@ app.settings = {
         'type:atm:currency:eur': 'Банкомат (EUR)'
     },
 
+    defaultFilters: ['type:atm:currency:byr'],
+
     objects: {
         'spec:all': 'Показывать все банки',
         //'spec:related': 'Показывать банки-партнеры',
         'belinvest': 'Белинвестбанк',
         'prior': 'Приорбанк'
     },
+
+    defaultObjects: ['spec:all'],
 
     types: {
         'atm': 'банкомат',
