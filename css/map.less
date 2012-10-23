@@ -6,15 +6,15 @@
 
 .nt-map-control-button {
   display: block;
-  width: @map-control-size / 2;
-  height: @map-control-size / 2;
+  width: @map-control-size * @map-control-desktop-mobile-scale;
+  height: @map-control-size * @map-control-desktop-mobile-scale;
   margin: 3px;
   border: 1px solid @map-cpntrol-icon-color;
-  -moz-border-radius: @map-control-radius / 2;
-  -webkit-border-radius: @map-control-radius / 2;
-  border-radius: @map-control-radius / 2;
+  -moz-border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
+  -webkit-border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
+  border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
   background: fade(@map-control-color, 80%) center center no-repeat;
-  background-size: (@map-control-icon-size / 2) (@map-control-icon-size / 2);
+  background-size: (@map-control-icon-size * @map-control-desktop-mobile-scale) (@map-control-icon-size * @map-control-desktop-mobile-scale);
   cursor: pointer;
 }
 
