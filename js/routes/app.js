@@ -9,8 +9,6 @@ var AppRouter = Backbone.Router.extend({
     aboutView: null,
     createView: null,
 
-    baseRoute: 'map',
-
     routes: {
         'map': 'map',
         'banks': 'objects',
@@ -21,9 +19,6 @@ var AppRouter = Backbone.Router.extend({
 
     navigate: function (fragment, options) {
         options = options || {trigger: true, replace: true};
-        if (Backbone.history.getHash() === this.baseRoute) {
-            options.replace = false;
-        }
         Backbone.Router.prototype.navigate.call(this, fragment, options);
         return this;
     },
