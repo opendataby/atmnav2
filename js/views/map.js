@@ -39,6 +39,7 @@ app.MapView = app.PageView.extend({
         var lng = position.coords.longitude;
         var latLng = [lat, lng];
 
+        $('.locate-icon').removeClass('loading-icon');
         this.createOrUpdateCurrentPositionMarker(latLng);
         this.map.panTo(latLng);
         app.utils.saveData('mapLastLocation', latLng);
@@ -49,6 +50,7 @@ app.MapView = app.PageView.extend({
     onGeolocationError: function() {
         app.utils.log('map:onGeolocationError');
 
+        $('.locate-icon').removeClass('loading-icon');
         alert('Невозможно определить текущее местоположение');
     },
 
@@ -57,6 +59,7 @@ app.MapView = app.PageView.extend({
 
         var self = this;
         if (navigator.geolocation) {
+            $('.locate-icon').addClass('loading-icon');
             navigator.geolocation.getCurrentPosition(function(position) {
                 self.onGeolocationSuccess(position);
             }, this.onGeolocationError, app.settings.geolocationOptions);
