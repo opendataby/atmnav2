@@ -9,11 +9,10 @@ app.ObjectsView = app.PageView.extend({
         var selectedObjects = app.utils.loadArrayData('objects');
         var objectTemplate = _.template($('#object-template').html());
 
-        _.each(app.settings.objects, function (title, id) {
+        _.each(app.settings.objects, function (id) {
             objects.push(new app.ObjectView({
                 template: objectTemplate,
                 id: id,
-                title: title,
                 icon: id.indexOf('spec:') !== 0,
                 checked: _.include(selectedObjects, id)
             }).el);

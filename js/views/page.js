@@ -5,7 +5,7 @@ app.PageView = Backbone.View.extend({
         return this;
     },
 
-    detach: function() {
+    detach: function () {
         this.undelegateEvents();
         this.$el.detach();
         return this;

@@ -25,29 +25,29 @@
             <li class="nt-nav-tab"><a href="#map" class="nt-nav-tab-link active">
                 <span class="nt-nav-tab-icon map-icon"></span>
                 <br />
-                <span class="nt-nav-tab-text">Map</span>
+                <span class="nt-nav-tab-text" data-tr="Map">Map</span>
             </a></li>
             <li class="nt-nav-tab"><a href="#banks" class="nt-nav-tab-link">
                 <span class="nt-nav-tab-icon objects-icon"></span>
                 <br />
-                <span class="nt-nav-tab-text">Banks</span>
+                <span class="nt-nav-tab-text" data-tr="Banks">Banks</span>
             </a></li>
             <li class="nt-nav-tab"><a href="#filters" class="nt-nav-tab-link">
                 <span class="nt-nav-tab-icon filters-icon"></span>
                 <br />
-                <span class="nt-nav-tab-text">Filters</span>
+                <span class="nt-nav-tab-text" data-tr="Filters">Filters</span>
             </a></li>
             <li class="nt-nav-tab"><a href="#about" class="nt-nav-tab-link">
                 <span class="nt-nav-tab-icon info-icon"></span>
                 <br />
-                <span class="nt-nav-tab-text">About</span>
+                <span class="nt-nav-tab-text" data-tr="About">About</span>
             </a></li>
         </ul>
     </div>
 
     <script type="text/template" id="filter-template">
         <li class="nt-list-item<% if (checked) { %> checked<% } %>">
-            <span class="nt-list-item-title"><%= title %></span>
+            <span class="nt-list-item-title"><%= tr(id) %></span>
             <span class="nt-list-item-checkbox"></span>
         </li>
     </script>
@@ -55,7 +55,7 @@
     <script type="text/template" id="object-template">
         <li class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (checked) { %> checked<% } %>">
             <% if (icon) { %><img class="nt-list-item-icon" src="img/icons/<%= id %>.png" /><% } %>
-            <span class="nt-list-item-title"><%= title %></span>
+            <span class="nt-list-item-title"><%= tr(id) %></span>
             <span class="nt-list-item-checkbox"></span>
         </li>
     </script>
@@ -64,27 +64,27 @@
         <div class="nt-about-page">
             <div class="nt-about-vindent"></div>
             <div class="nt-about-header">
-                <div class="nt-about-program-name">ATM Навигатор</div>
-                <div class="nt-about-program-version">Версия 2.0</div>
+                <div class="nt-about-program-name"><%= tr("ATM Navigator") %></div>
+                <div class="nt-about-program-version"><%= tr("Version") %> <%= app.settings.version %></div>
             </div>
             <div class="nt-about-main">
-                <div class="nt-about-program-paragraph">Приложение для поиска ближайших банков и банкоматов в городе Минск</div>
-                <div class="nt-about-program-paragraph">Веб версия: <a target="_blank" href="http://atm-by.appspot.com">http://atm-by.appspot.com</a></div>
+                <div class="nt-about-program-paragraph"><%= tr("The application for searching the nearest banks and ATMs in Minsk") %></div>
+                <div class="nt-about-program-paragraph"><%= tr("Web version") %>: <a target="_blank" href="http://atm-by.appspot.com">http://atm-by.appspot.com</a></div>
             </div>
             <div class="nt-about-developers">
                 <div class="nt-about-developers-dev">
-                    <div class="nt-about-program-paragraph">Разработчики:</div>
-                    <div class="nt-about-program-paragraph"><a href="mailto:maxusachev@gmail.com?subject=ATM Navigator">Максим Усачев</a></div>
-                    <div class="nt-about-program-paragraph"><a href="mailto:pavel.tyslyatsky@gmail.com?subject=ATM Navigator">Павел Тысляцкий</a></div>
+                    <div class="nt-about-program-paragraph"><%= tr("Developers") %>:</div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:maxusachev@gmail.com?subject=ATM Navigator"><%= tr("Max Usachev") %></a></div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:pavel.tyslyatsky@gmail.com?subject=ATM Navigator"><%= tr("Pavel Tyslyatsky") %></a></div>
                 </div>
                 <div class="nt-about-developers-sep"></div>
                 <div class="nt-about-developers-design">
-                    <div class="nt-about-program-paragraph">Дизайн:</div>
-                    <div class="nt-about-program-paragraph"><a href="mailto:tatusya.ch@gmail.com?subject=ATM Navigator">Татьяна Чернявская</a></div>
+                    <div class="nt-about-program-paragraph"><%= tr("Design") %>:</div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:tatusya.ch@gmail.com?subject=ATM Navigator"><%= tr("Tatsiana Charniauskaya") %></a></div>
                 </div>
             </div>
             <div class="nt-about-license">
-                <div class="nt-about-program-paragraph">Лицензия: <a target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
+                <div class="nt-about-program-paragraph"><%= tr("License") %>: <a target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
             </div>
         </div>
     </script>
@@ -98,19 +98,19 @@
             </div>
             <div class="nt-info-body">
                 <% if (typeof(currency) != "undefined") {%>
-                    <span class="nt-info-title"><b>Валюта:</b> <%= currency %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
                 <%}%>
                 <% if (typeof(addr) != "undefined") {%>
-                    <span class="nt-info-title"><b>Адрес:</b> <%= addr %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
                 <%}%>
                 <% if (typeof(place) != "undefined" && place != "") {%>
-                    <span class="nt-info-title"><b>Расположение:</b> <%= place %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
                 <%}%>
                 <% if (typeof(time) != "undefined") {%>
-                    <span class="nt-info-title"><b>Время работы:</b> <%= time %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
                 <%}%>
                 <% if (typeof(phone) != "undefined") {%>
-                    <span class="nt-info-title"><b>Телефон:</b> <%= phone %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
                 <%}%>
             </div>
         </div>
@@ -120,34 +120,34 @@
         <div class="nt-info-container">
             <div class="nt-info-caption">
                 <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                <span class="nt-info-title"><%= title %></span>
+                <span class="nt-info-title"><%= tr(prov) %></span>
             </div>
             <div class="nt-info-body">
                 <% if (typeof(type) != "undefined") {%>
-                    <span class="nt-info-title"><b>Тип:</b> <%= type %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Type") %>:</b> <%= tr(type) %></span><br/>
                 <%}%>
                 <% if (typeof(currency) != "undefined") {%>
-                    <span class="nt-info-title"><b>Валюта:</b> <%= currency %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
                 <%}%>
                 <% if (typeof(addr) != "undefined") {%>
-                    <span class="nt-info-title"><b>Адрес:</b> <%= addr %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
                 <%}%>
                 <% if (typeof(place) != "undefined" && place != "") {%>
-                    <span class="nt-info-title"><b>Расположение:</b> <%= place %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
                 <%}%>
                 <% if (typeof(time) != "undefined") {%>
-                    <span class="nt-info-title"><b>Время работы:</b> <%= time %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
                 <%}%>
                 <% if (typeof(phone) != "undefined") {%>
-                    <span class="nt-info-title"><b>Телефон:</b> <%= phone %></span><br/>
+                    <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
                 <%}%>
             </div>
             <div class="nt-info-additional">
                 <% if (typeof(distance) != "undefined") {%>
-                    <span class="nt-info-title"><b>Расстояние:</b> <%= distance %></span>
+                    <span class="nt-info-title"><b><%= tr("Distance") %>:</b> <%= distance %></span>
                 <%}%>
                 <!--
-                <a class="nt-info-more-button" href="#more-info/<%= addr %>">Подробнее</a>
+                <a class="nt-info-more-button" href="#more-info/<%= addr %>"><%= tr("More info") %></a>
                 -->
            </div>
         </div>
@@ -157,7 +157,7 @@
         <div class="nt-info-container">
             <div class="nt-info-caption">
                 <img class="nt-info-icon" src="css/img/marker-location.png" />
-                <span class="nt-info-title">Текущее положение</span>
+                <span class="nt-info-title"><%= tr("Current location") %></span>
             </div>
         </div>
     </script>
@@ -171,6 +171,8 @@
     <script src="js/settings.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/translates/translates.js"></script>
+    <script src="js/translates/ru.js"></script>
     <script src="js/views/page.js"></script>
     <script src="js/views/map.js"></script>
     <script src="js/views/filter.js"></script>
@@ -185,6 +187,7 @@
 
     <script>
         $(document).ready(function() {
+            app.tr.translatePageFromData();
             location.href = '#map';
         });
 

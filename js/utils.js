@@ -30,9 +30,9 @@ app.utils = {
 
     roundDistance: function (distance) {
         if (distance >= 10000) {
-            return Math.round(distance / 1000) + ' км';
+            return Math.round(distance / 1000) + ' ' + tr('km');
         } else {
-            return Math.round(distance) + ' м';
+            return Math.round(distance) + ' ' + tr('m');
         }
     }
 };
