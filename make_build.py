@@ -7,6 +7,7 @@
 import os
 import re
 import sys
+import glob
 import shutil
 import datetime
 
@@ -133,6 +134,15 @@ def compress_css(target_fname):
     os.system('rm -r %s/*.less' % CSS_DIR)
 
 
+def remove_prints(top):
+    """Remove logs statements from source."""
+
+    for root, dirs, files in os.walk(top):
+        for fname in glob.glob("%s/*.js" % root):
+            content = open(fname).read()
+            with open(fname, 'w') as result:
+                result.write(re.sub(r'(app\.utils\.log.*?\);?)', '', content))
+
 def make_zip():
     """Creating ZIP archive with sources."""
 
@@ -152,7 +162,7 @@ def main(args):
     replace_block(start, end, 'index.html', 'js', 'app.js')
     compress_js(files, 'app.js')
 
-    print 'Compressing CSS...'    
+    print 'Compressing CSS...'
     files, start, end = find_files('css', 'index.html', 'css')
     replace_block(start, end, 'index.html', 'css', 'css/styles.css')
     compress_css('css/styles.css')
@@ -165,7 +175,10 @@ def main(args):
 
     print 'Update manifest...'
     update_manifest()
-    
+
+    print 'Removing prints...'
+    remove_prints(BUILD_DIR)
+
     print 'Building archive...'
     make_zip()
 
