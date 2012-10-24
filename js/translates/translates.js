@@ -1,6 +1,6 @@
 app.tr = {
-    default: app.settings.language.default,
-    language: app.settings.language.default,
+    'default': app.settings.language['default'],
+    language: app.settings.language['default'],
 
     translate: function (data) {
         if (!data) {
@@ -8,7 +8,7 @@ app.tr = {
         }
 
         if (typeof data === 'object') {
-            return data && data.hasOwnProperty(this.language) ? data[this.language] : data[this.default];
+            return data && data.hasOwnProperty(this.language) ? data[this.language] : data[this['default']];
         } else {
             var dictionary = app.tr[this.language];
             return dictionary && dictionary.hasOwnProperty(data) ? dictionary[data] : data;

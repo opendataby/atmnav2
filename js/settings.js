@@ -53,6 +53,6 @@ app.settings = {
     serverUrl: 'http://atmnav-server.appspot.com',
 
     language: {
-        default: 'ru'
+        'default': 'ru'
     }
 };
