@@ -9,11 +9,10 @@ app.FiltersView = app.PageView.extend({
         var selectedFilters = app.utils.loadArrayData('filters');
         var filterTemplate = _.template($('#filter-template').html());
 
-        _.each(app.settings.filters, function (title, id) {
+        _.each(app.settings.filters, function (id) {
             filters.push(new app.FilterView({
                 template: filterTemplate,
                 id: id,
-                title: title,
                 checked: _.include(selectedFilters, id)
             }).el);
         });

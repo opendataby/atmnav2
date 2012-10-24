@@ -12,7 +12,7 @@ app.MapView = app.PageView.extend({
 
         var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
         var map = this.map = L.map(this.el, _.extend(app.settings.mapOptions, {center: latLng}));
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer(app.settings.mapTileUrlTemplate).addTo(map);
 
         this.addMapControls();
         this.addMapEvents();
@@ -51,7 +51,7 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:onGeolocationError');
 
         $('.locate-icon').removeClass('loading-icon');
-        alert('Невозможно определить текущее местоположение');
+        alert(tr('Could not determine the current position.'));
     },
 
     moveToLocation: function() {
@@ -93,13 +93,13 @@ app.MapView = app.PageView.extend({
 
         var self = this;
         if (L.Browser.mobile) {
-            this.addMapControl('Locate', 'topright', 'locate-icon', self.moveToLocation, self);
-            this.addMapControl('Zoom Out', 'bottomright', 'zoom-out-icon', this.map.zoomOut);
-            this.addMapControl('Zoom In', 'bottomright', 'zoom-in-icon', this.map.zoomIn);
+            this.addMapControl(tr('Locate'), 'topright', 'locate-icon', self.moveToLocation, self);
+            this.addMapControl(tr('Zoom Out'), 'bottomright', 'zoom-out-icon', this.map.zoomOut);
+            this.addMapControl(tr('Zoom In'), 'bottomright', 'zoom-in-icon', this.map.zoomIn);
         } else {
-            this.addMapControl('Zoom In', 'topleft', 'zoom-in-icon', this.map.zoomIn);
-            this.addMapControl('Zoom Out', 'topleft', 'zoom-out-icon', this.map.zoomOut);
-            this.addMapControl('Locate', 'topleft', 'locate-icon', self.moveToLocation, self);
+            this.addMapControl(tr('Zoom In'), 'topleft', 'zoom-in-icon', this.map.zoomIn);
+            this.addMapControl(tr('Zoom Out'), 'topleft', 'zoom-out-icon', this.map.zoomOut);
+            this.addMapControl(tr('Locate'), 'topleft', 'locate-icon', self.moveToLocation, self);
         }
 
         app.utils.log('map:addMapControls:end');
@@ -161,7 +161,7 @@ app.MapView = app.PageView.extend({
     onFetchError: function() {
         app.utils.log('map:onFetchError');
 
-        alert('Невозможно загрузить данные с сервера. Попробуйте позже.');
+        alert(tr('Could not load data from the server. Please try again later.'));
     },
 
     onFetchSuccess: function(data) {
@@ -199,9 +199,6 @@ app.MapView = app.PageView.extend({
         var markerLatLng = this.getLatLng();
         var markerData = options.markerData;
         var currentPosition = options.instance.currentPositionMarker;
-
-        markerData.type = app.settings.types[markerData.type];
-        markerData.title = app.settings.objects[markerData.prov];
 
         if (currentPosition) {
             markerData.distance = app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));

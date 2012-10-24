@@ -22,7 +22,7 @@
 
 .nt-nav-tab {
   display: inline-block;
-  width: @navigation-bar-height;
+  width: @navigation-bar-tab-width;
   height: 100%;
   overflow: hidden;
   text-align: center;
@@ -31,11 +31,11 @@
 
 .nt-nav-tab-link {
   display: inline-block;
-  width: @navigation-bar-height;
-  height: @navigation-bar-height;
+  width: @navigation-bar-tab-width;
+  height: @navigation-bar-tab-height;
   color: @navigation-bar-inactive-tab-color;
-  font-size: 0.8em;
-  font-weight: bold;
+  font-size: 9px;
+  font-stretch: condensed;
   text-decoration: none;
 }
 
@@ -51,7 +51,7 @@
   display: inline-block;
   width: @navigation-bar-tab-icon-size;
   height: @navigation-bar-tab-icon-size;
-  margin: 4px 0 0;
+  margin: 5px 0 0;
   background-repeat: no-repeat;
   background-size: @navigation-bar-tab-icon-size @navigation-bar-tab-icon-size;
 }
@@ -117,5 +117,4 @@
 }
 
 .nt-nav-tab-text {
-
 }

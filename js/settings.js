@@ -3,6 +3,10 @@ var app = app || {};
 app.settings = {
     debug: true,
 
+    version: '2.0',
+
+    mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
     mapOptions: {
         zoom: 16,
         zoomControl: false,
@@ -21,33 +25,34 @@ app.settings = {
         lng: 27.561640
     },
 
-    filters: {
-        'type:bank': 'Банк',
-        'type:terminal': 'Инфокиоск',
-        'type:exchange': 'Обмен валюты',
-        'type:atm:currency:byr': 'Банкомат (BYR)',
-        'type:atm:currency:rur': 'Банкомат (RUR)',
-        'type:atm:currency:usd': 'Банкомат (USD)',
-        'type:atm:currency:eur': 'Банкомат (EUR)'
-    },
+    filters: [
+        'type:bank',
+        'type:terminal',
+        'type:exchange',
+        'type:atm:currency:byr',
+        'type:atm:currency:rur',
+        'type:atm:currency:usd',
+        'type:atm:currency:eur'
+    ],
 
-    defaultFilters: ['type:atm:currency:byr'],
+    defaultFilters: [
+        'type:atm:currency:byr'
+    ],
 
-    objects: {
-        'spec:all': 'Показывать все банки',
-        //'spec:related': 'Показывать банки-партнеры',
-        'belinvest': 'Белинвестбанк',
-        'prior': 'Приорбанк'
-    },
+    objects: [
+        'spec:all',
+        //'spec:related',
+        'belinvest',
+        'prior'
+    ],
 
-    defaultObjects: ['spec:all'],
+    defaultObjects: [
+        'spec:all'
+    ],
 
-    types: {
-        'atm': 'банкомат',
-        'bank': 'банк',
-        'terminal': 'инфокиоск',
-        'exchange': 'пункт обмена валют'
-    },
+    serverUrl: 'http://atmnav-server.appspot.com',
 
-    serverUrl: 'http://atmnav-server.appspot.com'
+    language: {
+        default: 'ru'
+    }
 };
