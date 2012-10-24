@@ -170,9 +170,11 @@ app.MapView = app.PageView.extend({
         var map = this.map;
         var instance = this;
         var parsedData = JSON.parse(data);
-        var markersArray = this.markersArray;
         var showInfoWindow = this.showInfoWindow;
         var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
+
+        this.deleteMarkers();
+        var markersArray = this.markersArray;
 
         _.each(parsedData, function (markerData) {
             var marker = L.marker([markerData.lat, markerData.lng], {
