@@ -37,6 +37,7 @@ app.tr.ru = {
     "belinvest": "Белинвестбанк",
     "prior": "Приорбанк",
     "belarus": "Беларусбанк",
+    "bps": "БПС-Сбербанк",
 
     // Filters section
     "Atm": "Банкомат",

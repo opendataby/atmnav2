@@ -44,6 +44,7 @@ app.settings = {
         //'spec:related',
         'belarus',
         'belinvest',
+        'bps',
         'prior'
     ],
 
