@@ -5,14 +5,15 @@ app.tr.ru = {
     "Filters": "Фильтры",
     "About": "О программе",
 
-    // Map section
-        // Map buttons
+    // Map buttons
     "Zoom In": "Увеличить",
     "Zoom Out": "Уменьшить",
     "Locate": "Определить положение",
-        // Markers
+
+    // Markers
     "Current location": "Текущее положение",
-        // Popup
+
+    // Popup
     "Type": "Тип",
     "Currency": "Валюта",
     "Address": "Адрес",
@@ -23,7 +24,8 @@ app.tr.ru = {
     "More info": "Подробнее",
     "km": "км",
     "m": "м",
-        // Warnings
+
+    // Warnings
     "Could not determine the current position.": "Не удалось определить текущее положение.",
     "Could not load data from the server. Please try again later.": "Не удалось загрузить данные с сервера. Попробуйте позже.",
 
@@ -59,9 +61,7 @@ app.tr.ru = {
     "The application for searching the nearest banks and ATMs in Minsk": "Приложение для поиска ближайших банков и банкоматов в городе Минск",
     "Web version": "Веб версия",
     "Developers": "Разработчики",
-    "Design": "Дизайн",
     "License": "Лицензия",
     "Max Usachev": "Максим Усачев",
-    "Pavel Tyslyatsky": "Павел Тысляцкий",
-    "Tatsiana Charniauskaya": "Татьяна Чернявская"
+    "Pavel Tyslyatsky": "Павел Тысляцкий"
 };
