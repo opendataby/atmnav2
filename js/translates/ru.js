@@ -34,6 +34,7 @@ app.tr.ru = {
     "spec:related": "Банки партнеры",
     "belinvest": "Белинвестбанк",
     "prior": "Приорбанк",
+    "belarus": "Беларусбанк",
 
     // Filters section
     "Atm": "Банкомат",
