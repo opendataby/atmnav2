@@ -42,6 +42,7 @@ app.settings = {
     objects: [
         'spec:all',
         //'spec:related',
+        'alfa',
         'belarus',
         'belinvest',
         'bps',
