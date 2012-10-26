@@ -48,6 +48,7 @@ app.settings = {
         'belinvest',
         'belswiss',
         'bps',
+        'mm',
         'mtb',
         'prior'
     ],
