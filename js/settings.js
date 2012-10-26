@@ -43,6 +43,7 @@ app.settings = {
         'spec:all',
         //'spec:related',
         'alfa',
+        'belagroprom',
         'belarus',
         'belinvest',
         'belswiss',
