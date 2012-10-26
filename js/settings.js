@@ -45,6 +45,7 @@ app.settings = {
         'belarus',
         'belinvest',
         'bps',
+        'mtb',
         'prior'
     ],
 
