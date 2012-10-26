@@ -45,6 +45,7 @@ app.settings = {
         'alfa',
         'belarus',
         'belinvest',
+        'belswiss',
         'bps',
         'mtb',
         'prior'
