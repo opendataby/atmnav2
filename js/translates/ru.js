@@ -43,6 +43,7 @@ app.tr.ru = {
     "belswiss": "БелСвиссБанк",
     "belagroprom": "Белагропромбанк",
     "mm": "Москва-Минск Банк",
+    "absolut": "Абсолютбанк",
 
     // Filters section
     "Atm": "Банкомат",
