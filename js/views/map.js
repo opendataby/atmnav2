@@ -259,7 +259,10 @@ app.MapView = app.PageView.extend({
     updateMarkers: function() {
         app.utils.log('map:updateMarkers:start');
 
-        this.fetchMarkers(this.map.getCenter());
+        var self = this;
+        setTimeout(function() {
+            self.fetchMarkers(self.map.getCenter());
+        }, 0);
 
         app.utils.log('map:updateMarkers:end');
     }

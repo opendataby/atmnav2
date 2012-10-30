@@ -8,3 +8,7 @@ if (!localStorage.getItem('filters')) {
     app.utils.log('setting default settings for filters');
     app.utils.saveData('filters', app.settings.defaultFilters);
 }
+
+jQuery.ajaxSetup({
+    timeout: app.settings.ajaxTimeout
+});
