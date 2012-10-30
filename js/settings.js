@@ -5,6 +5,8 @@ app.settings = {
 
     version: '2.0',
 
+    vibrateMilliseconds: 40,
+
     mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
     mapOptions: {

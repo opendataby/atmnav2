@@ -44,6 +44,8 @@ app.MapView = app.PageView.extend({
         this.map.panTo(latLng);
         app.utils.saveData('mapLastLocation', latLng);
 
+        window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
+
         app.utils.log('map:onGeolocationSuccess:end');
     },
 
@@ -190,6 +192,8 @@ app.MapView = app.PageView.extend({
             }).on('click', showInfoWindow).addTo(map);
             markersArray.push(marker);
         });
+
+        window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
 
         app.utils.log('map:onFetchSuccess:end');
     },
