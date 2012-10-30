@@ -195,10 +195,6 @@ app.MapView = app.PageView.extend({
             markersArray.push(marker);
         });
 
-        if (window.navigator.notification) {
-            window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
-        }
-
         app.utils.log('map:onFetchSuccess:end');
     },
 
