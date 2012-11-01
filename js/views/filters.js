@@ -19,6 +19,8 @@ app.FiltersView = app.PageView.extend({
 
         this.$el.append(filters);
 
+        new FastClick(this.el);
+
         app.utils.log('filters:initialize:end');
     }
 });

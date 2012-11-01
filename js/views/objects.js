@@ -20,6 +20,8 @@ app.ObjectsView = app.PageView.extend({
 
         this.$el.append(objects);
 
+        new FastClick(this.el);
+
         app.utils.log('objects:initialize:end');
     }
 });

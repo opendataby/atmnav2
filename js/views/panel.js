@@ -6,6 +6,10 @@ app.PanelView = Backbone.View.extend({
         'click': 'onClick'
     },
 
+    initialize: function() {
+        new FastClick(this.el);
+    },
+
     onClick: function (event) {
         app.utils.log('panel:onClick:start');
 
