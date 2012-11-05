@@ -66,7 +66,7 @@ app.tr.ru = {
     "ATM Navigator": "АТМ Навигатор",
     "Version": "Версия",
     "The application for searching the nearest banks and ATMs in Minsk": "Приложение для поиска ближайших банков и банкоматов в городе Минск",
-    "Web version": "Веб версия",
+    "Feedback": "Написать отзыв",
     "Developers": "Разработчики",
     "License": "Лицензия",
     "Max Usachev": "Максим Усачев",
