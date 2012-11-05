@@ -1,5 +1,7 @@
-app.repository = {
-    fetchMarkers: function (options) {
+var app = app || {};
+
+app.remote = {
+    fetchMarkers: function(options) {
         var params = {
             'filters[]': options.objects,
             'objects[]': options.filters
