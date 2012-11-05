@@ -1,6 +1,8 @@
 app.FiltersView = app.PageView.extend({
-    tagName: 'ul',
+    tagName: 'div',
     className: 'nt-list-page',
+    _fastClick: null,
+    _iScroll: null,
 
     initialize: function (args) {
         app.utils.log('filters:initialize:start');
@@ -17,9 +19,12 @@ app.FiltersView = app.PageView.extend({
             }).el);
         });
 
-        this.$el.append(filters);
+        var scroller = $('<ul class="nt-list-scroller"></ul>');
+        scroller.append(filters);
+        this.$el.append(scroller);
 
-        new FastClick(this.el);
+        this._fastClick = new FastClick(this.el);
+        this._scroll = new app.utils.Scroll(this.el);
 
         app.utils.log('filters:initialize:end');
     }

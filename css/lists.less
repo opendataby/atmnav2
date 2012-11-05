@@ -6,18 +6,22 @@
   padding: 0;
   overflow-x: hidden;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nt-list-scroller {
+  width: 100%;
+  margin: 0;
+  padding: 0;
   list-style-type: none;
 }
 
 .nt-list-item {
   display: block;
   position: relative;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  height: @list-item-height;
+  height: @list-item-height - @list-item-border-height;
   padding: 0 @list-item-height 0 @list-item-left-padding;
-  border-bottom: 1px solid @list-item-border-color;
+  border-bottom: @list-item-border-height solid @list-item-border-color;
   font-size: large;
   white-space: nowrap;
   cursor: pointer;
@@ -34,16 +38,16 @@
 .nt-list-item-icon {
   display: inline-block;
   position: absolute;
+  left: 0;
   width: @list-item-icon-height;
   height: @list-item-icon-height;
   margin: ((@list-item-height - @list-item-icon-height) / 2) @list-item-left-padding ((@list-item-height - @list-item-icon-height) / 2);
-  left: 0;
 }
 
 .nt-list-item-title {
   display: inline-block;
-  max-width: 100%;
   float: left;
+  max-width: 100%;
   overflow: hidden;
   line-height: @list-item-height;
   text-overflow: ellipsis;
@@ -51,10 +55,10 @@
 
 .nt-list-item-checkbox {
   position: absolute;
+  right: 0;
   width: @list-item-checkbox-size;
   height: @list-item-checkbox-size;
   margin: (@list-item-height - @list-item-checkbox-size) / 2;
-  right: 0;
   background-repeat: no-repeat;
   background-size: @list-item-checkbox-size @list-item-checkbox-size;
 }

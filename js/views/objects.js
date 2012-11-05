@@ -1,6 +1,8 @@
 app.ObjectsView = app.PageView.extend({
-    tagName: 'ul',
+    tagName: 'div',
     className: 'nt-list-page',
+    _fastClick: null,
+    _iScroll: null,
 
     initialize: function (args) {
         app.utils.log('objects:initialize:start');
@@ -18,9 +20,12 @@ app.ObjectsView = app.PageView.extend({
             }).el);
         });
 
-        this.$el.append(objects);
+        var scroller = $('<ul class="nt-list-scroller"></ul>');
+        scroller.append(objects);
+        this.$el.append(scroller);
 
-        new FastClick(this.el);
+        this._fastClick = new FastClick(this.el);
+        this._scroll = new app.utils.Scroll(this.el);
 
         app.utils.log('objects:initialize:end');
     }

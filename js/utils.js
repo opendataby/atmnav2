@@ -34,5 +34,34 @@ app.utils = {
         } else {
             return Math.round(distance) + ' ' + tr('m');
         }
+    },
+
+    isTouchMovePreventDefault: false,
+
+    Scroll: function (element) {
+        var self = this;
+        self.iScroll = null;
+
+        setTimeout(function () {
+            var computedStyle;
+            if (window.getComputedStyle) {
+                computedStyle = getComputedStyle(element, null);
+            } else {
+                computedStyle = element.currentStyle;
+            }
+
+            if ((computedStyle.overflow !== 'auto') &&
+                (computedStyle.overflow !== 'scroll') &&
+                (computedStyle.overflowY !== 'auto') &&
+                (computedStyle.overflowY !== 'scroll')) {
+                if (!app.utils.isTouchMovePreventDefault) {
+                    app.utils.isTouchMovePreventDefault = true;
+                    document.addEventListener('touchmove', function (e) {
+                        e.preventDefault();
+                    }, false);
+                }
+                self.iScroll = new iScroll(element);
+            }
+        }, 200);
     }
 };
