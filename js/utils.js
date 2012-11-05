@@ -50,10 +50,11 @@ app.utils = {
                 computedStyle = element.currentStyle;
             }
 
-            if ((computedStyle.overflow !== 'auto') &&
-                (computedStyle.overflow !== 'scroll') &&
-                (computedStyle.overflowY !== 'auto') &&
-                (computedStyle.overflowY !== 'scroll')) {
+            if (('ontouchstart' in window) &&
+                !computedStyle['overflow-scrolling'] &&
+                !computedStyle['-webkit-overflow-scrolling'] &&
+                !computedStyle['-moz-overflow-scrolling'] &&
+                !computedStyle['-o-overflow-scrolling']) {
                 if (!app.utils.isTouchMovePreventDefault) {
                     app.utils.isTouchMovePreventDefault = true;
                     document.addEventListener('touchmove', function (e) {
