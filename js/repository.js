@@ -1,8 +1,8 @@
 app.repository = {
     fetchMarkers: function (options) {
         var params = {
-            'filters[]': options.objects,
-            'objects[]': options.filters
+            'objects[]': options.objects,
+            'filters[]': options.filters
         };
 
         if (options.center && options.center.lat && options.center.lng) {
