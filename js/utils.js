@@ -61,7 +61,7 @@ app.utils = {
                         e.preventDefault();
                     }, false);
                 }
-                self.iScroll = new iScroll(element);
+                self.iScroll = new iScroll(element, {bounce: false});
             }
         }, 200);
     }
