@@ -30,11 +30,11 @@ app.ObjectView = Backbone.View.extend({
         }
 
         if (this.options.id == 'spec:all') {
-            var elements = $('.nt-list-item:gt(0)', element.parent());
+            var elements = $('.nt-list-item:gt(0)', object.parent());
             if (checked) {
-                elements.addClass('disabled');
+                elements.addClass('disabled').children().addClass('disabled');
             } else {
-                elements.removeClass('disabled');
+                elements.removeClass('disabled').children().removeClass('disabled');
             }
         }
 
