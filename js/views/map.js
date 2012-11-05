@@ -233,21 +233,14 @@ app.MapView = app.PageView.extend({
             return;
         }
 
-        var params = {
-            'filters[]': selectedFilters,
-            'objects[]': selectedObjects
-        };
-
-        if (args && args.lat && args.lng) {
-            params.lat = args.lat;
-            params.lng = args.lng;
-        }
-
-        var self = this;
-        var jqxhr = jQuery.get(app.settings.serverUrl, params, function (data) {
-            self.onFetchSuccess(data);
+        app.repository.fetchMarkers({
+            objects: selectedObjects,
+            filters: selectedFilters,
+            center: args,
+            success: this.onFetchSuccess,
+            error: this.onFetchError,
+            context: this
         });
-        jqxhr.error(this.onFetchError);
 
         app.utils.log('map:fetchMarkers:end');
     },
