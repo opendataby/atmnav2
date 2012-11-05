@@ -232,7 +232,7 @@ app.MapView = app.PageView.extend({
             return;
         }
 
-        app.repository.fetchMarkers({
+        app.remote.fetchMarkers({
             objects: selectedObjects,
             filters: selectedFilters,
             center: args,
