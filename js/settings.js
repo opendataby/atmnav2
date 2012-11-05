@@ -6,7 +6,7 @@ app.settings = {
     version: '2.0',
 
     vibrateMilliseconds: 40,
-    ajaxTimeout: 7000, // 7 sec
+    ajaxTimeout: 10000, // 10 sec
 
     mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
