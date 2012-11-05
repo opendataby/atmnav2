@@ -10,13 +10,15 @@ app.ObjectsView = app.PageView.extend({
         var scroller = $('<ul class="nt-list-scroller"></ul>');
         var selectedObjects = app.utils.loadArrayData('objects');
         var objectTemplate = _.template($('#object-template').html());
+        var disabled = _.include(selectedObjects, 'spec:all');
 
         _.each(app.settings.objects, function (id) {
             scroller.append(new app.ObjectView({
                 id: id,
                 template: objectTemplate,
                 icon: id.indexOf('spec:') !== 0,
-                checked: _.include(selectedObjects, id)
+                checked: _.include(selectedObjects, id),
+                disabled: disabled && (id != 'spec:all')
             }).el);
         });
 

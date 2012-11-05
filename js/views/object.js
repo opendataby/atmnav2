@@ -12,16 +12,30 @@ app.ObjectView = Backbone.View.extend({
     onChange: function (event) {
         app.utils.log('object:onChange:start');
 
-        var storageKey = 'objects';
-        var element = event.target;
-        var checked = $(element).closest('.nt-list-item').toggleClass('checked').hasClass('checked');
+        var element = $(event.target);
+        var object = element.closest('li.nt-list-item');
 
+        if (object.hasClass('disabled')) {
+            return; // do not process events from disabled element
+        }
+
+        var storageKey = 'objects';
+        var checked = element.closest('.nt-list-item').toggleClass('checked').hasClass('checked');
         var selectedObjects = app.utils.loadArrayData(storageKey);
 
         if (checked) {
             selectedObjects.push(this.options.id);
         } else {
             selectedObjects = _.without(selectedObjects, this.options.id);
+        }
+
+        if (this.options.id == 'spec:all') {
+            var elements = $('.nt-list-item:gt(0)', element.parent());
+            if (checked) {
+                elements.addClass('disabled');
+            } else {
+                elements.removeClass('disabled');
+            }
         }
 
         app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));

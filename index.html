@@ -53,7 +53,7 @@
     </script>
 
     <script type="text/template" id="object-template">
-        <li class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (checked) { %> checked<% } %>">
+        <li class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (checked) { %> checked<% } %><% if (disabled) { %> disabled<% } %>">
             <% if (icon) { %><img class="nt-list-item-icon" src="img/icons/<%= id %>.png" /><% } %>
             <span class="nt-list-item-title"><%= tr(id) %></span>
             <span class="nt-list-item-checkbox"></span>
