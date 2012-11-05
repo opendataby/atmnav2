@@ -15,7 +15,7 @@ app.ObjectView = Backbone.View.extend({
         var element = $(event.target);
         var object = element.closest('li.nt-list-item');
 
-        if (object.hasClass('disabled')) {
+        if (object.hasClass('nt-disabled')) {
             return; // do not process events from disabled element
         }
 
@@ -32,9 +32,9 @@ app.ObjectView = Backbone.View.extend({
         if (this.options.id == 'spec:all') {
             var elements = $('.nt-list-item:gt(0)', object.parent());
             if (checked) {
-                elements.addClass('disabled').children().addClass('disabled');
+                elements.addClass('nt-disabled').children().addClass('nt-disabled');
             } else {
-                elements.removeClass('disabled').children().removeClass('disabled');
+                elements.removeClass('nt-disabled').children().removeClass('nt-disabled');
             }
         }
 
