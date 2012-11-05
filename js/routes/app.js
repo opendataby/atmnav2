@@ -10,11 +10,13 @@ var AppRouter = Backbone.Router.extend({
     createView: null,
 
     routes: {
+        '': 'base',
         'map': 'map',
         'banks': 'objects',
         'filters': 'filters',
         'about': 'about',
-        'more-info/:id': 'moreInfo'
+        'more-info/:id': 'moreInfo',
+        '*other': 'base'
     },
 
     navigate: function (fragment, options) {
@@ -30,6 +32,10 @@ var AppRouter = Backbone.Router.extend({
             }
             this.activeView = view.attach(this.container);
         }
+    },
+
+    base: function () {
+        this.navigate('map');
     },
 
     map: function () {
