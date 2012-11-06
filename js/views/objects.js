@@ -18,7 +18,7 @@ app.ObjectsView = app.PageView.extend({
                 template: objectTemplate,
                 icon: id.indexOf('spec:') !== 0,
                 checked: _.include(selectedObjects, id),
-                disabled: disabled && (id != 'spec:all')
+                disabled: disabled && (id !== 'spec:all')
             }).el);
         });
 

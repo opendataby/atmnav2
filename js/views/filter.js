@@ -12,9 +12,10 @@ app.FilterView = Backbone.View.extend({
     onChange: function (event) {
         app.utils.log('filter:onChange:start');
 
+        var element = $(event.target).closest('.nt-list-item');
+        var checked = element.toggleClass('checked').hasClass('checked');
+
         var storageKey = 'filters';
-        var element = event.target;
-        var checked = $(element).closest('.nt-list-item').toggleClass('checked').hasClass('checked');
         var selectedFilters = app.utils.loadArrayData(storageKey);
 
         if (checked) {

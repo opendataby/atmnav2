@@ -28,7 +28,15 @@
 }
 
 .nt-list-item:nth-child(odd) {
-  background: #EFEFEF;
+  background: @list-item-color-odd;
+}
+
+.nt-list-item.disabled {
+  color: @list-item-text-color-disabled;
+}
+
+.nt-list-item.disabled * {
+  opacity: 0.5;
 }
 
 .nt-list-item-with-icon {
