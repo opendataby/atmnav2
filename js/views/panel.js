@@ -10,7 +10,7 @@ app.PanelView = Backbone.View.extend({
         new FastClick(this.el);
     },
 
-    onClick: function (event) {
+    onClick: function(event) {
         app.utils.log('panel:onClick:start');
 
         var link = $(event.target).closest('.nt-nav-tab-link');

@@ -3,13 +3,13 @@ app.ObjectView = Backbone.View.extend({
         'click': 'onChange'
     },
 
-    make: function () {
+    make: function() {
         app.utils.log('object:make');
 
         return this.options.template(this.options);
     },
 
-    onChange: function (event) {
+    onChange: function(event) {
         app.utils.log('object:onChange:start');
 
         var element = $(event.target).closest('.nt-list-item');

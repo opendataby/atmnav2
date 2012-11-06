@@ -3,13 +3,13 @@ app.FilterView = Backbone.View.extend({
         'click': 'onChange'
     },
 
-    make: function () {
+    make: function() {
         app.utils.log('filter:make');
 
         return this.options.template(this.options);
     },
 
-    onChange: function (event) {
+    onChange: function(event) {
         app.utils.log('filter:onChange:start');
 
         var element = $(event.target).closest('.nt-list-item');

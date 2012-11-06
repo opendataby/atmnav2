@@ -1,5 +1,5 @@
 app.MoreInfoView = app.PageView.extend({
-    make: function () {
+    make: function() {
         app.utils.log('more-info:make');
 
         var item = {};
