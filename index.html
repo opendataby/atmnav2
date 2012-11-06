@@ -195,6 +195,9 @@
     <script>
         $(document).ready(function() {
             app.tr.translatePageFromData();
+
+            Backbone.history.start();
+            app.router.navigate('map');
         });
 
         window.onload = function () {

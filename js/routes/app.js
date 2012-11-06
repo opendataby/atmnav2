@@ -10,7 +10,6 @@ var AppRouter = Backbone.Router.extend({
     createView: null,
 
     routes: {
-        '': 'base',
         'map': 'map',
         'banks': 'objects',
         'filters': 'filters',
@@ -66,4 +65,3 @@ var AppRouter = Backbone.Router.extend({
 });
 
 app.router = new AppRouter();
-Backbone.history.start();
