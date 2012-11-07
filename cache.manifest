@@ -1,9 +1,9 @@
 CACHE MANIFEST
 
 CACHE:
-app.js
-cordova.js
-css/styles.css
+http://a.tile.openstreetmap.org/16/
+http://b.tile.openstreetmap.org/16/
+http://c.tile.openstreetmap.org/16/
 
 FALLBACK:
 
