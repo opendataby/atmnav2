@@ -51,6 +51,7 @@ app.settings = {
         'belarus',
         'belgazprom',
         'belinvest',
+        'bnb',
         'belros',
         'belswiss',
         'bps',
