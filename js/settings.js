@@ -49,6 +49,7 @@ app.settings = {
         'alfa',
         'belagroprom',
         'belarus',
+        'belgazprom',
         'belinvest',
         'belswiss',
         'bps',
