@@ -250,7 +250,7 @@ app.MapView = app.PageView.extend({
         var self = this;
         setTimeout(function() {
             self.fetchMarkers(self.map.getCenter());
-        }, 0);
+        }, 10);
 
         app.utils.log('map:updateMarkers:end');
     }
