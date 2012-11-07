@@ -56,7 +56,8 @@ app.settings = {
         'bta',
         'mm',
         'mtb',
-        'prior'
+        'prior',
+        'techno'
     ],
 
     defaultObjects: [
