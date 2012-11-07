@@ -170,8 +170,8 @@ def main(args):
     print 'Removing debug blocks...'
     remove_debug_blocks()
 
-    print 'Adding manifest...'
-    add_manifest()
+    #print 'Adding manifest...'
+    #add_manifest()
 
     print 'Update manifest...'
     update_manifest()
