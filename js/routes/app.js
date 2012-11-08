@@ -1,5 +1,6 @@
 var AppRouter = Backbone.Router.extend({
     container: $('.nt-content'),
+    tabs: $('.nt-nav-tab-link'),
 
     activeView: null,
 
@@ -25,8 +26,9 @@ var AppRouter = Backbone.Router.extend({
         return this;
     },
 
-    switchToView: function(view) {
+    switchToView: function(view, tabSelector) {
         if (this.activeView !== view) {
+            this.tabs.removeClass('active').filter(tabSelector).addClass('active');
             if (this.activeView) {
                 this.activeView.detach();
             }
@@ -40,27 +42,26 @@ var AppRouter = Backbone.Router.extend({
 
     map: function() {
         app.utils.log('#map link clicked');
-        this.switchToView(this.mapView || (this.mapView = new app.MapView()));
+        this.switchToView(this.mapView || (this.mapView = new app.MapView()), '[href="#map"]');
     },
 
     objects: function() {
         app.utils.log('#banks link clicked');
-        this.switchToView(this.objectsView || (this.objectsView = new app.ObjectsView()));
+        this.switchToView(this.objectsView || (this.objectsView = new app.ObjectsView()), '[href="#banks"]');
     },
 
     filters: function() {
         app.utils.log('#filters link clicked');
-        this.switchToView(this.filtersView || (this.filtersView = new app.FiltersView()));
+        this.switchToView(this.filtersView || (this.filtersView = new app.FiltersView()), '[href="#filters"]');
     },
 
     about: function() {
         app.utils.log('#about link clicked');
-        this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()));
+        this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()), '[href="#about"]');
     },
 
     moreInfo: function(id) {
         app.utils.log('#more-info link clicked');
-        $('.nt-nav-tab-link').removeClass('active');
         this.switchToView(new app.MoreInfoView({id: id}));
     }
 });
