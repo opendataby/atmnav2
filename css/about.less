@@ -22,15 +22,16 @@
 }
 
 .nt-about-developers {
-  height: 30%;
-}
-
-.nt-about-feedback {
-  height: 10%;
+  height: 23%;
 }
 
 .nt-about-developers-sep {
   height: 8%;
+}
+
+.nt-about-feedback {
+  height: 22%;
+  text-align: center;
 }
 
 .nt-about-license {
@@ -50,4 +51,32 @@
 
 .nt-about-program-paragraph {
   text-align: center;
+}
+
+.nt-about-program-button {
+  display: inline-block;
+  min-width: 150px;
+  min-height: 40px;
+  margin: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: @navigation-bar-color-bottom;
+  background: -moz-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Firefox 3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom,
+  color-stop(0%, @navigation-bar-color-top),
+  color-stop(100%, @navigation-bar-color-bottom)); /* Chrome 1-9, Safari 4-5 */
+  background: -webkit-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Chrome 10+, Safari 5.1+ */
+  background: -o-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* IE10 */
+  background: linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* CSS3 */
+  -moz-box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
+  -webkit-box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
+  box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-stretch: condensed;
+  line-height: 40px;
+  color: @navigation-bar-inactive-tab-color;
 }
