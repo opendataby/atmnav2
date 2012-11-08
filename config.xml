@@ -3,9 +3,9 @@
 <widget
     xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
-    id = "com.appspot.atm-by"
+    id = "by.navteam.atms"
     versionCode="200"
-    version = "2.0 alpha">
+    version = "2.0">
 
     <name>ATM Навигатор</name>
 
@@ -21,7 +21,7 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>
 
     <preference name="phonegap-version" value="2.1.0" />
-    <preference name="orientation" value="portrait" />
+    <preference name="orientation" value="default" />
     <preference name="android-minSdkVersion" value="8" />
     <preference name="android-installLocation" value="auto" />
     <preference name="stay-in-webview" value="false" />
