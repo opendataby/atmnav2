@@ -12,7 +12,7 @@ app.remote = {
             params.lng = options.center.lng;
         }
 
-        $.ajax({
+        app.xhr = $.ajax({
             url: app.settings.serverUrl,
             data: params,
             dataType: 'json',
