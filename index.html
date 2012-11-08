@@ -72,7 +72,7 @@
                     <%= tr("The application for searching the nearest banks and ATMs in Minsk") %>
                 </div>
                 <div class="nt-about-program-paragraph">
-                    <%= tr("Site") %>: <a target="_blank" href="http://navteam.by">navteam.by</a>
+                    <%= tr("Site") %>: <a id="site" target="_blank" href="http://navteam.by">navteam.by</a>
                 </div>
             </div>
 
@@ -88,7 +88,7 @@
             </div>
 
             <div class="nt-about-license">
-                <div class="nt-about-program-paragraph"><%= tr("License") %>: <a target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
+                <div class="nt-about-program-paragraph"><%= tr("License") %>: <a id="licence" target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
             </div>
         </div>
     </script>
@@ -199,11 +199,13 @@
             Backbone.history.start();
         });
 
-        window.onload = function () {
+        window.onload = function() {
             document.addEventListener("deviceready", function() {
                 document.addEventListener("backbutton", function() {
                     navigator.app.exitApp();
                 }, false);
+
+                app.utils.loadExternalScripts(['childbrowser.js']);
             }, false);
         };
     </script>

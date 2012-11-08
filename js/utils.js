@@ -59,5 +59,23 @@ app.utils = {
                 self.iScroll = new iScroll(element, {bounce: false});
             }
         }, 200);
+    },
+
+    loadExternalScripts: function(scripts) {
+        var scriptElement;
+        var head = document.getElementsByTagName('head').item(0);
+
+        _.each(scripts, function(scriptName) {
+            scriptElement = document.createElement("script");
+            scriptElement.type = "text/javascript";
+            scriptElement.src = scriptName;
+            scriptElement.async = true;
+            head.appendChild(scriptElement);
+        });
+    },
+
+    openExternalUrl: function(url) {
+        window.plugins.childBrowser.openExternal(url);
+        return false;
     }
 };

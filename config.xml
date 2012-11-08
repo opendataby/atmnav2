@@ -24,11 +24,10 @@
     <preference name="orientation" value="default" />
     <preference name="android-minSdkVersion" value="8" />
     <preference name="android-installLocation" value="auto" />
-    <preference name="stay-in-webview" value="false" />
+
+    <gap:plugin name="ChildBrowser" />
 
     <icon src="icon_ldpi.png" width="36" height="36"/>
     <icon src="icon_mdpi.png" width="48" height="48"/>
     <icon src="icon_hdpi.png" width="72" height="72"/>
-
-    <access origin="*" />
 </widget>

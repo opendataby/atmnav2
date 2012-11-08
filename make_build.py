@@ -143,6 +143,14 @@ def remove_prints(top):
             with open(fname, 'w') as result:
                 result.write(re.sub(r'(app\.utils\.log.*?\);?)', '', content))
 
+
+def copy_external_scripts(scripts):
+    """Copy external libs to build folder."""
+
+    for script in scripts:
+        os.system('cp %s %s' % (script, BUILD_DIR))
+
+
 def make_zip():
     """Creating ZIP archive with sources."""
 
@@ -178,6 +186,9 @@ def main(args):
 
     print 'Removing prints...'
     remove_prints(BUILD_DIR)
+
+    print 'Copying external scripts...'
+    copy_external_scripts(['js/libs/childbrowser.js'])
 
     print 'Building archive...'
     make_zip()
