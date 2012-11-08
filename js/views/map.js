@@ -32,17 +32,14 @@ app.MapView = app.PageView.extend({
         return this;
     },
 
-    onGeolocationSuccess: function(position) {
+    onGeolocationSuccess: function(latLng) {
         app.utils.log('map:onGeolocationSuccess:start');
-
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-        var latLng = [lat, lng];
 
         $('.locate-icon', this.$el).removeClass('loading-icon');
         this.createOrUpdateCurrentPositionMarker(latLng);
         this.map.panTo(latLng);
         app.utils.saveData('mapLastLocation', latLng);
+        this.updateMarkers();
 
         if (window.navigator.notification) {
             window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
@@ -65,7 +62,9 @@ app.MapView = app.PageView.extend({
         if (navigator.geolocation) {
             $('.locate-icon', this.$el).addClass('loading-icon');
             navigator.geolocation.getCurrentPosition(function(position) {
-                self.onGeolocationSuccess(position);
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                self.onGeolocationSuccess([lat, lng]);
             }, this.onGeolocationError, app.settings.geolocationOptions);
         }
 
@@ -127,6 +126,7 @@ app.MapView = app.PageView.extend({
     createOrUpdateCurrentPositionMarker: function(latLng) {
         app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
+        var self = this;
         if (!this.currentPositionMarker) {
             var map = this.map;
             var currentLocationTemplate = _.template($('#current-location-template').html());
@@ -135,7 +135,8 @@ app.MapView = app.PageView.extend({
                     iconUrl: 'css/img/marker-location.png',
                     iconSize: [31, 42],
                     iconAnchor: [16, 40]
-                })
+                }),
+                draggable: true
             }).on('click', function () {
                 L.popup({
                     marker: this,
@@ -143,6 +144,8 @@ app.MapView = app.PageView.extend({
                     maxWidth: 260,
                     minWidth: 260
                 }).setLatLng(this.getLatLng()).setContent(currentLocationTemplate()).openOn(map);
+            }).on('dragend', function () {
+                self.onGeolocationSuccess(this.getLatLng());
             }).addTo(map);
         }
         this.currentPositionMarker.setLatLng(latLng);
