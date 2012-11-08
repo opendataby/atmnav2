@@ -61,22 +61,22 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  background: @navigation-bar-color-bottom;
-  background: -moz-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Firefox 3.6+ */
+  background: @button-color-bottom;
+  background: -moz-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Firefox 3.6+ */
   background: -webkit-gradient(linear, left top, left bottom,
-  color-stop(0%, @navigation-bar-color-top),
-  color-stop(100%, @navigation-bar-color-bottom)); /* Chrome 1-9, Safari 4-5 */
-  background: -webkit-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Chrome 10+, Safari 5.1+ */
-  background: -o-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* IE10 */
-  background: linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* CSS3 */
-  -moz-box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
-  -webkit-box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
-  box-shadow: 0 0 3px 1px @navigation-bar-color-bottom;
+              color-stop(0%, @button-color-top),
+              color-stop(100%, @button-color-bottom)); /* Chrome 1-9, Safari 4-5 */
+  background: -webkit-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Chrome 10+, Safari 5.1+ */
+  background: -o-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Opera 11.10+ */
+  background: -ms-linear-gradient(center top, @button-color-top, @button-color-bottom); /* IE10 */
+  background: linear-gradient(center top, @button-color-top, @button-color-bottom); /* CSS3 */
+  -moz-box-shadow: 0 0 3px 1px @button-shadow-color;
+  -webkit-box-shadow: 0 0 3px 1px @button-shadow-color;
+  box-shadow: 0 0 3px 1px @button-shadow-color;
   text-align: center;
   text-decoration: none;
   font-weight: bold;
   font-stretch: condensed;
   line-height: 40px;
-  color: @navigation-bar-inactive-tab-color;
+  color: #FFFFFF;
 }
