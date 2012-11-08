@@ -69,22 +69,20 @@
   margin: (@list-item-height - @list-item-checkbox-size) / 2;
   background-repeat: no-repeat;
   background-size: @list-item-checkbox-size @list-item-checkbox-size;
+  font-size: 30px;
+  line-height: @list-item-checkbox-size;
+  font-family: @icon-font-family;
+  color: @list-item-checkbox-unchecked-color;
 }
 
-.nt-list-item .nt-list-item-checkbox {
-  /** base64:start "img/check-inactive.png" */
-  background-image: url("img/check-inactive.png");
-  /** base64:end */
+.nt-list-item .nt-list-item-checkbox:before {
+  content: "v";
 }
 
 .nt-list-item.related .nt-list-item-checkbox {
-  /** base64:start "img/check-related.png" */
-  background-image: url("img/check-related.png");
-  /** base64:end */
+  color: @list-item-checkbox-related-color;
 }
 
 .nt-list-item.checked .nt-list-item-checkbox {
-  /** base64:start "img/check-active.png" */
-  background-image: url("img/check-active.png");
-  /** base64:end */
+  color: @list-item-checkbox-checked-color;
 }

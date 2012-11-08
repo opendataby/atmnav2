@@ -1,0 +1,46 @@
+font:
+  version: "1.0"
+
+  fontname: anfont
+
+  fullname: Atm Navigator Font
+  familyname: anfont
+
+  ascent: 800
+  descent: 200
+  weight: Regular
+
+
+glyphs:
+
+  - file: earth
+    code: 0x65 # e
+    css: map
+
+  - file: bank
+    code: 0x62 # b
+    css: map
+
+  - file: filter
+    code: 0x66 # f
+    css: map
+
+  - file: info
+    code: 0x69 # i
+    css: info
+
+  - file: plus
+    code: 0x2b # +
+    css: map
+
+  - file: minus
+    code: 0x2d # -
+    css: info
+
+  - file: location
+    code: 0x6c # l
+    css: map
+
+  - file: check
+    code: 0x76 # v
+    css: info

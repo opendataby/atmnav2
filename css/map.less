@@ -6,15 +6,20 @@
 
 .nt-map-control-button {
   display: block;
-  width: @map-control-size * @map-control-desktop-mobile-scale;
-  height: @map-control-size * @map-control-desktop-mobile-scale;
+  width: @map-control-desktop-size;
+  height: @map-control-desktop-size;
   margin: 3px;
   border: 1px solid @map-cpntrol-icon-color;
-  -moz-border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
-  -webkit-border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
-  border-radius: @map-control-radius * @map-control-desktop-mobile-scale;
+  -moz-border-radius: @map-control-desktop-radius;
+  -webkit-border-radius: @map-control-desktop-radius;
+  border-radius: @map-control-desktop-radius;
   background: fade(@map-control-color, 80%) center center no-repeat;
-  background-size: (@map-control-icon-size * @map-control-desktop-mobile-scale) (@map-control-icon-size * @map-control-desktop-mobile-scale);
+  background-size: @map-control-desktop-icon-size @map-control-desktop-icon-size;
+  color: @map-cpntrol-icon-color;
+  font-size: @map-control-desktop-icon-size;
+  line-height: @map-control-desktop-size;
+  font-family: @icon-font-family;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -25,35 +30,32 @@
 
 .nt-map-control-button.mobile {
   display: block;
-  width: @map-control-size;
-  height: @map-control-size;
+  width: @map-control-mobile-size;
+  height: @map-control-mobile-size;
   margin: 6px;
-  -moz-border-radius: @map-control-radius;
-  -webkit-border-radius: @map-control-radius;
-  border-radius: @map-control-radius;
-  background-size: @map-control-icon-size @map-control-icon-size;
+  -moz-border-radius: @map-control-mobile-radius;
+  -webkit-border-radius: @map-control-mobile-radius;
+  border-radius: @map-control-mobile-radius;
+  background-size: @map-control-mobile-icon-size @map-control-mobile-icon-size;
+  font-size: @map-control-mobile-icon-size;
+  line-height: @map-control-mobile-size;
 }
 
-.zoom-in-icon {
-/** base64:start "img/zoom-in.png" */
-  background-image: url("img/zoom-in.png");
-/** base64:end */
+.zoom-in-icon:before {
+  content: "+";
 }
 
-.zoom-out-icon {
-/** base64:start "img/zoom-out.png" */
-  background-image: url("img/zoom-out.png");
-/** base64:end */
+.zoom-out-icon:before {
+  content: "-";
 }
 
-.locate-icon {
-  /** base64:start "img/locate.png" */
-  background-image: url("img/locate.png");
-  /** base64:end */
+.locate-icon:after {
+  content: "l";
 }
 
 .loading-icon {
-/** base64:start "img/loading.gif" */
+  /** base64:start "img/loading.gif" */
   background-image: url("img/loading.gif");
-/** base64:end */
+  /** base64:end */
+  color: transparent;
 }

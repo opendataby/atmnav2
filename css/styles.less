@@ -8,6 +8,21 @@
  * * iPhone (4+)
  */
 
+@font-face {
+  font-family: 'anfont';
+  /** base64:start "font/anfont.woff" */
+  src: url('font/anfont.woff') format('woff'), /* FF 3.6, Chrome 5, IE9 */
+  /** base64:end */
+  /** base64:start "font/anfont.ttf" */
+       url('font/anfont.ttf') format('truetype'), /* Opera, Safari */
+  /** base64:end */
+  /** base64:start "font/anfont.svg" */
+       url('font/anfont.svg') format('svg'); /* iOS */
+  /** base64:end */
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import "normalize.less";
 
 /* Predefine */
@@ -32,11 +47,16 @@ body {
   overflow: hidden;
 }
 
+@icon-font-family: anfont;
+
 @navigation-bar-height: 53px;
+@navigation-bar-color-top: #797979;
+@navigation-bar-color-bottom: #424242;
 @navigation-bar-border-height: 1px;
 @navigation-bar-border-color: #424242;
 @navigation-bar-tab-width: 60px;
 @navigation-bar-tab-height: @navigation-bar-height;
+@navigation-bar-tab-icon-top: 4px;
 @navigation-bar-tab-icon-size: 30px;
 @navigation-bar-active-tab-color: #C9FFAF;
 @navigation-bar-inactive-tab-color: #DDDDDD;
@@ -53,12 +73,14 @@ body {
 @list-item-checkbox-related-color: #94C7AA;
 @list-item-checkbox-unchecked-color: #B3B3B3;
 
-@map-control-size: 40px;
-@map-control-radius: 8px;
-@map-control-icon-size: 32px;
+@map-control-desktop-size: 26px;
+@map-control-mobile-size: 40px;
+@map-control-desktop-radius: 5px;
+@map-control-mobile-radius: 8px;
+@map-control-desktop-icon-size: 21px;
+@map-control-mobile-icon-size: 32px;
 @map-control-color: #DDDDDD;
 @map-cpntrol-icon-color: #7F7F7F;
-@map-control-desktop-mobile-scale: 0.66;
 
 @leaflet-popup-content-border-radius: 5px;
 @leaflet-popup-content-margin: 10px;

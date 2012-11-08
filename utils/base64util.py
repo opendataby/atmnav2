@@ -16,6 +16,11 @@ DATA_MIMITYPES = {
     '.jpeg': 'image/jpeg',
     '.gif': 'image/gif',
     '.ico': 'image/x-icon',
+    '.svg': 'image/svg+xml',
+    '.otf': 'application/x-font-opentype',
+    '.ttf': 'application/x-font-truetype',
+    '.woff': 'application/x-font-woff',
+    '.eot': 'application/vnd.ms-fontobject',
 }
 
 DATA_TEMPLATE = 'data:%s;base64,%s'

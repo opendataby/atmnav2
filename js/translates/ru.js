@@ -3,7 +3,7 @@ app.tr.ru = {
     "Map": "Карта",
     "Banks": "Банки",
     "Filters": "Фильтры",
-    "About": "О программе",
+    "Info": "Инфо",
 
     // Map buttons
     "Zoom In": "Увеличить",

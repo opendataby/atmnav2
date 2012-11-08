@@ -8,9 +8,15 @@
   padding: 0;
   border-top: @navigation-bar-border-height solid @navigation-bar-border-color;
   overflow: hidden;
-  /** base64:start "img/gradient.png" */
-  background: url("img/gradient.png") repeat-x;
-  /** base64:end */
+  background: @navigation-bar-color-bottom;
+  background: -moz-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Firefox 3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom,
+              color-stop(0%, @navigation-bar-color-top),
+              color-stop(100%, @navigation-bar-color-bottom)); /* Chrome 1-9, Safari 4-5 */
+  background: -webkit-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Chrome 10+, Safari 5.1+ */
+  background: -o-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* IE10 */
+  background: linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* CSS3 */
   text-align: center;
 }
 
@@ -34,7 +40,8 @@
   width: @navigation-bar-tab-width;
   height: @navigation-bar-tab-height;
   color: @navigation-bar-inactive-tab-color;
-  font-size: 9px;
+  font-size: 12px;
+  font-weight: bold;
   font-stretch: condensed;
   text-decoration: none;
 }
@@ -49,72 +56,34 @@
 
 .nt-nav-tab-icon {
   display: inline-block;
-  width: @navigation-bar-tab-icon-size;
-  height: @navigation-bar-tab-icon-size;
-  margin: 5px 0 0;
-  background-repeat: no-repeat;
-  background-size: @navigation-bar-tab-icon-size @navigation-bar-tab-icon-size;
+  margin: @navigation-bar-tab-icon-top 0 0;
+  font-family: @icon-font-family;
+  font-size: @navigation-bar-tab-icon-size;
+  line-height: @navigation-bar-tab-icon-size;
+  font-weight: normal;
+  font-style: normal;
 }
 
-.nt-nav-tab-link .map-icon {
-  /** base64:start "img/map-inactive.png" */
-  background-image: url("img/map-inactive.png");
-  /** base64:end */
+.nt-nav-tab-link .map-icon:before {
+  content: "e";
 }
 
-.nt-nav-tab-link.active .map-icon {
-  /** base64:start "img/map-active.png" */
-  background-image: url("img/map-active.png");
-  /** base64:end */
+.nt-nav-tab-link .objects-icon:before {
+  content: "b";
 }
 
-.nt-nav-tab-link .objects-icon {
-  /** base64:start "img/objects-inactive.png" */
-  background-image: url("img/objects-inactive.png");
-  /** base64:end */
+.nt-nav-tab-link .filters-icon:before {
+  content: "f";
 }
 
-.nt-nav-tab-link.active .objects-icon {
-  /** base64:start "img/objects-active.png" */
-  background-image: url("img/objects-active.png");
-  /** base64:end */
+.nt-nav-tab-link .settings-icon:before {
+  content: "s";
 }
 
-.nt-nav-tab-link .filters-icon {
-  /** base64:start "img/filters-inactive.png" */
-  background-image: url("img/filters-inactive.png");
-  /** base64:end */
-}
-
-.nt-nav-tab-link.active .filters-icon {
-  /** base64:start "img/filters-active.png" */
-  background-image: url("img/filters-active.png");
-  /** base64:end */
-}
-
-.nt-nav-tab-link .settings-icon {
-  /** base64:start "img/settings-inactive.png" */
-  background-image: url("img/settings-inactive.png");
-  /** base64:end */
-}
-
-.nt-nav-tab-link.active .settings-icon {
-  /** base64:start "img/settings-active.png" */
-  background-image: url("img/settings-active.png");
-  /** base64:end */
-}
-
-.nt-nav-tab-link .info-icon {
-  /** base64:start "img/info-inactive.png" */
-  background-image: url("img/info-inactive.png");
-  /** base64:end */
-}
-
-.nt-nav-tab-link.active .info-icon {
-  /** base64:start "img/info-active.png" */
-  background-image: url("img/info-active.png");
-  /** base64:end */
+.nt-nav-tab-link .info-icon:before {
+  content: "i";
 }
 
 .nt-nav-tab-text {
+  line-height: @navigation-bar-tab-height - @navigation-bar-tab-icon-size - @navigation-bar-tab-icon-top;
 }

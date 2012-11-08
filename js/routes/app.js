@@ -10,6 +10,7 @@ var AppRouter = Backbone.Router.extend({
     createView: null,
 
     routes: {
+        '': 'base',
         'map': 'map',
         'banks': 'objects',
         'filters': 'filters',
