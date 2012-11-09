@@ -225,7 +225,7 @@ def main(options):
     clear()
 
     print 'Copying sources...'
-    copy(['css', 'img', 'js', '*.png', 'index.html', 'config.xml', 'cache.manifest'], SRC_DIR, BUILD_DIR)
+    copy(['css', 'img', 'js', '*.png', 'index.html', 'config.xml'], SRC_DIR, BUILD_DIR)
 
     print 'Removing prints...'
     remove_prints(BUILD_DIR)
