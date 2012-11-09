@@ -13,17 +13,17 @@ font:
 
 glyphs:
 
-  - file: earth
+  - file: map
     code: 0x65 # e
     css: map
 
   - file: bank
     code: 0x62 # b
-    css: map
+    css: bank
 
   - file: filter
     code: 0x66 # f
-    css: map
+    css: filter
 
   - file: info
     code: 0x69 # i
@@ -31,16 +31,16 @@ glyphs:
 
   - file: plus
     code: 0x2b # +
-    css: map
+    css: plus
 
   - file: minus
     code: 0x2d # -
-    css: info
+    css: minus
 
   - file: location
     code: 0x6c # l
-    css: map
+    css: location
 
   - file: check
     code: 0x76 # v
-    css: info
+    css: check
