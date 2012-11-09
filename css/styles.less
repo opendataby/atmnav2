@@ -10,15 +10,33 @@
 
 @font-face {
   font-family: 'anfont';
+  src:
+  /** phonegap-non-ios:start *//** phonegap-non-android:start */
   /** base64:start "font/anfont.woff" */
-  src: url('font/anfont.woff') format('woff'), /* FF 3.6, Chrome 5, IE9 */
+      url('font/anfont.woff') format('woff') /* FF 3.6, Chrome 5, IE9 */
   /** base64:end */
+  /** phonegap-non-android:end *//** phonegap-non-ios:end */
+
+  /** phonegap-non-ios:start *//** phonegap-non-android:start */
+  ,
+  /** phonegap-non-android:end *//** phonegap-non-ios:end */
+
+  /** phonegap-non-ios:start */
   /** base64:start "font/anfont.ttf" */
-       url('font/anfont.ttf') format('truetype'), /* Opera, Safari */
+       url('font/anfont.ttf') format('truetype') /* Opera, Safari, Android */
   /** base64:end */
+  /** phonegap-non-ios:end */
+
+  /** phonegap-non-ios:start *//** phonegap-non-android:start */
+  ,
+  /** phonegap-non-android:end *//** phonegap-non-ios:end */
+
+  /** phonegap-non-android:start */
   /** base64:start "font/anfont.svg" */
-       url('font/anfont.svg') format('svg'); /* iOS */
+       url('font/anfont.svg') format('svg') /* iOS */
   /** base64:end */
+  /** phonegap-non-android:end */
+  ;
   font-weight: normal;
   font-style: normal;
 }

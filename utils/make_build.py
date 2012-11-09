@@ -128,6 +128,14 @@ def remove_unused_blocks():
     remove_blocks(BUILD_DIR, 'unused')
 
 
+def remove_non_android_blocks():
+    remove_blocks(BUILD_DIR, 'phonegap-non-android')
+
+
+def remove_non_ios_blocks():
+    remove_blocks(BUILD_DIR, 'phonegap-non-ios')
+
+
 def remove_phonegap_blocks():
     remove_blocks(BUILD_DIR, 'phonegap')
 
@@ -215,7 +223,7 @@ def make_zip():
     os.system('mv %s %s' % ('build.zip', BUILD_DIR))
 
 
-def main(args, phonegap=True):
+def main(args, phonegap=True, phone='android'):
     print 'Clearing build dir...'
     clear()
 
@@ -235,9 +243,15 @@ def main(args, phonegap=True):
     copy_external_scripts(['js/libs/childbrowser.js'])
 
     if not phonegap:
-        print 'Removing phonegap logic...'
+        print 'Removing phonegap blocks...'
         remove_phonegap_blocks()
         remove_phonegap_files()
+    elif phone == 'android':
+        print 'Removing non android blocks...'
+        remove_non_android_blocks()
+    elif phone == 'ios':
+        print 'Removing non ios blocks...'
+        remove_non_ios_blocks()
 
     print 'Compressing JavaScript...'
     files, start, end = find_files('js', 'index.html', 'js')
