@@ -203,14 +203,6 @@ def remove_prints(top):
                 result.write(re.sub(r'(app\.utils\.log.*?\);?)', '', content))
 
 
-def copy_external_scripts(scripts):
-    """Copy external libs to build folder."""
-
-    for script in scripts:
-        os.system('cp %s %s' % (bpath(script), BUILD_DIR))
-        os.system('rm %s' % bpath(script))
-
-
 def remove_empty_dirs(path):
     for root, dirs, files in os.walk(path):
         if not dirs and not files:
@@ -238,9 +230,6 @@ def main(args, phonegap=True, phone='android'):
 
     print 'Removing unused blocks...'
     remove_unused_blocks()
-
-    print 'Copying external scripts...'
-    copy_external_scripts(['js/libs/childbrowser.js'])
 
     if not phonegap:
         print 'Removing phonegap blocks...'
