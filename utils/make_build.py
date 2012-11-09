@@ -77,44 +77,65 @@ def replace_block(start_pos, end_pos, source_fname, type, destination_fname):
         result.write(content)
 
 
-def remove_debug_blocks():
-    """Remove debug blocks from sources."""
+def compress_html():
+    markers = (
+        ('<!--', '-->'),
+        ('/*', '*/'),
+    )
 
-    start_marker = '<!--debug:start-->'
-    end_marker = '<!--debug:end-->'
+    source = open(bpath('index.html')).read()
+    for start_marker, end_marker in markers:
+        while True:
+            start = source.find(start_marker)
+            if start == -1:
+                break
+            end = source.find(end_marker, start + 1) + len(end_marker)
+            source = source.replace(source[start:end], '')
 
-    index_source = open(bpath('index.html')).read()
-    start = index_source.find(start_marker)
-    end = index_source.find(end_marker) + len(end_marker)
-    index_source = index_source.replace(index_source[start:end], '')
-    
-    with open(bpath('index.html'), 'w') as result:
-        result.write(index_source)
+        with open(bpath('index.html'), 'w') as result:
+            for line in source.splitlines():
+                line = line.strip()
+                result.write(line)
 
 
-def remove_phonegap_blocks(path):
-    start_marker = '/** phonegap:start */'
-    end_marker = '/** phonegap:end */'
+def remove_blocks(path, block):
+    """Remove blocks from sources
+       which starts with: /** <block>:start */
+               ends with: /** <block>:end */
+    """
+    start_marker = '/** %s:start */' % block
+    end_marker = '/** %s:end */' % block
 
     for root, dirs, files in os.walk(path):
         for file in map(lambda file: os.path.join(root, file), files):
-            index_source = open(file).read()
-            index = 0
+            source = open(file).read()
             while True:
-                start = index_source.find(start_marker, index)
+                start = source.find(start_marker)
                 if start == -1:
                     break
-                end = index_source.find(end_marker, start + 1) + len(end_marker)
-                index_source = index_source.replace(index_source[start:end], '')
+                end = source.find(end_marker, start + 1) + len(end_marker)
+                source = source.replace(source[start:end], '')
 
             with open(file, 'w') as result:
-                result.write(index_source)
+                result.write(source)
 
 
-def remove_phonegap_files(path):
-    os.system('rm %s' % os.path.join(path, 'config.xml'))
-    os.system('rm %s' % os.path.join(path, 'childbrowser.js'))
-    os.system('rm %s' % os.path.join(path, '*.png'))
+def remove_debug_blocks():
+    remove_blocks(BUILD_DIR, 'debug')
+
+
+def remove_unused_blocks():
+    remove_blocks(BUILD_DIR, 'unused')
+
+
+def remove_phonegap_blocks():
+    remove_blocks(BUILD_DIR, 'phonegap')
+
+
+def remove_phonegap_files():
+    os.system('rm %s' % bpath('config.xml'))
+    os.system('rm %s' % bpath('childbrowser.js'))
+    os.system('rm %s' % bpath('*.png'))
 
 
 def add_manifest():
@@ -204,13 +225,19 @@ def main(args, phonegap=True):
     print 'Removing prints...'
     remove_prints(BUILD_DIR)
 
+    print 'Removing debug blocks...'
+    remove_debug_blocks()
+
+    print 'Removing unused blocks...'
+    remove_unused_blocks()
+
     print 'Copying external scripts...'
     copy_external_scripts(['js/libs/childbrowser.js'])
 
     if not phonegap:
         print 'Removing phonegap logic...'
-        remove_phonegap_blocks(BUILD_DIR)
-        remove_phonegap_files(BUILD_DIR)
+        remove_phonegap_blocks()
+        remove_phonegap_files()
 
     print 'Compressing JavaScript...'
     files, start, end = find_files('js', 'index.html', 'js')
@@ -222,8 +249,8 @@ def main(args, phonegap=True):
     replace_block(start, end, 'index.html', 'css', 'css/styles.css')
     compress_css('css/styles.css')
 
-    print 'Removing debug blocks...'
-    remove_debug_blocks()
+    print 'Compressing HTML...'
+    compress_html()
 
     #print 'Adding manifest...'
     #add_manifest()

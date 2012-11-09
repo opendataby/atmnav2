@@ -16,7 +16,9 @@ var AppRouter = Backbone.Router.extend({
         'banks': 'objects',
         'filters': 'filters',
         'about': 'about',
+        /** unused:start */
         'more-info/:id': 'moreInfo',
+        /** unused:end */
         '*other': 'base'
     },
 
@@ -58,12 +60,13 @@ var AppRouter = Backbone.Router.extend({
     about: function() {
         app.utils.log('#about link clicked');
         this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()), '[href="#about"]');
-    },
+    }/** unused:start */,
 
     moreInfo: function(id) {
         app.utils.log('#more-info link clicked');
         this.switchToView(new app.MoreInfoView({id: id}));
     }
+    /** unused:end */
 });
 
 app.router = new AppRouter();
