@@ -105,7 +105,7 @@ app.settings = {
         'tb': ['belarus', 'belgazprom', 'belinvest', 'bps', 'bveb', 'prior'], // ['nbrb']
 //        'tc': ['belarus', 'belgazprom', 'belinvest', 'bps', 'bveb', 'prior'], // ['nbrb']
         'trust': ['belapb', 'belarus', 'belgazprom', 'belinvest', 'bnb', 'bps', 'bsb', 'bveb', 'fransa', 'mm', 'mt', 'paritet', 'prior'], // ['nbrb']
-        'vtb': [],
+        'vtb': []
 //!!!        'zepter': [],
     },
 
