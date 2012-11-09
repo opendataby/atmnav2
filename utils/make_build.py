@@ -317,9 +317,10 @@ def get_parser():
 
 
 if __name__ == "__main__":
-    options, args = get_parser().parse_args()
+    parser = get_parser()
+    options, args = parser.parse_args()
 
     if options.platform not in SUPPORTED_PLATFORMS:
-        options.error('Unsupported platform type: %s' % options.platform)
+        parser.error('Unsupported platform type: %s' % options.platform)
 
     sys.exit(main(options))
