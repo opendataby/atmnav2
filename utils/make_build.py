@@ -154,11 +154,6 @@ def remove_phonegap_blocks():
     remove_blocks(BUILD_DIR, 'phonegap')
 
 
-def remove_phonegap_files():
-    os.system('rm %s' % bpath('config.xml'))
-    os.system('rm %s' % bpath('childbrowser.js'))
-    os.system('rm %s' % bpath('*.png'))
-
 def remove_unused_vendor_css_prefixes(prefix):
     css_vendor_prefixes = (
         '-webkit-',
@@ -260,7 +255,11 @@ def main(options):
     clear()
 
     print 'Copying sources...'
-    copy(['css', 'img', 'js', '*.png', 'index.html', 'config.xml'], SRC_DIR, BUILD_DIR)
+    copy(['css', 'img', 'js', 'index.html'], SRC_DIR, BUILD_DIR)
+    if options.platform == 'desktop':
+        copy(['app.yaml', 'humans.txt', 'robots.txt'], SRC_DIR, BUILD_DIR)
+    else:
+        copy(['*.png', 'config.xml'], SRC_DIR, BUILD_DIR)
 
     print 'Removing prints...'
     remove_prints(BUILD_DIR)
@@ -274,7 +273,6 @@ def main(options):
     if options.platform == 'desktop':
         print 'Removing phonegap blocks...'
         remove_phonegap_blocks()
-        remove_phonegap_files()
     elif options.platform == 'android':
         print 'Removing non android blocks...'
         remove_non_android_blocks()

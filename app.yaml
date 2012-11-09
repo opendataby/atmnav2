@@ -1,5 +1,5 @@
 application: atm-by
-version: 20120928
+version: 20121110
 runtime: python27
 api_version: 1
 threadsafe: true
