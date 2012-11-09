@@ -22,6 +22,13 @@ BUILD_DIR = os.path.abspath('../build')
 JS_DIR = os.path.join(BUILD_DIR, 'js')
 CSS_DIR = os.path.join(BUILD_DIR, 'css')
 
+SOURCES_TYPES = (
+    '.js',
+    '.css',
+    '.less',
+    '.html',
+)
+
 
 def bpath(fname):
     """Make absolute path for fname inside BUILD_DIR."""
@@ -113,6 +120,8 @@ def remove_blocks(path, block):
 
     for root, dirs, files in os.walk(path):
         for file in map(lambda file: os.path.join(root, file), files):
+            if not file.endswith(SOURCES_TYPES):
+                continue
             source = open(file).read()
             while True:
                 start = source.find(start_marker)
@@ -149,6 +158,32 @@ def remove_phonegap_files():
     os.system('rm %s' % bpath('config.xml'))
     os.system('rm %s' % bpath('childbrowser.js'))
     os.system('rm %s' % bpath('*.png'))
+
+def remove_unused_vendor_css_prefixes(prefix):
+    css_vendor_prefixes = (
+        '-webkit-',
+        '-khtml-',
+        '-moz-',
+        '-ms-',
+        '-o-',
+    )
+
+    for root, dirs, files in os.walk(CSS_DIR):
+        for file in map(lambda file: os.path.join(root, file), files):
+            if not file.endswith(SOURCES_TYPES):
+                continue
+            source = open(file).read()
+            with open(file, 'w') as result:
+                for line in source.splitlines():
+                    has_prefix = False
+                    for vendor_prefix in css_vendor_prefixes:
+                        if vendor_prefix in line:
+                            has_prefix = True
+                            break
+                    if has_prefix and prefix not in line:
+                        continue
+                    result.write(line)
+                    result.write('\n')
 
 
 def add_manifest():
@@ -243,9 +278,11 @@ def main(options):
     elif options.platform == 'android':
         print 'Removing non android blocks...'
         remove_non_android_blocks()
+        remove_unused_vendor_css_prefixes('-webkit-')
     elif options.platform == 'ios':
         print 'Removing non ios blocks...'
         remove_non_ios_blocks()
+        remove_unused_vendor_css_prefixes('-webkit-')
 
     print 'Compressing JavaScript...'
     files, start, end = find_files('js', 'index.html', 'js')
@@ -285,6 +322,6 @@ if __name__ == "__main__":
     options, args = get_parser().parse_args()
 
     if options.platform not in SUPPORTED_PLATFORMS:
-        parser.error('Unsupported platform type: %s' % options.platform)
+        options.error('Unsupported platform type: %s' % options.platform)
 
     sys.exit(main(options))
