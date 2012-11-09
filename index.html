@@ -15,7 +15,9 @@
     <!--debug:start-->
     <script src="js/libs/less-1.3.0.min.js"></script>
     <!--debug:end-->
+    <!--/** phonegap:start */-->
     <script src="cordova.js" async="async"></script>
+    <!--/** phonegap:end */-->
 </head>
 
 <body class="nt-application">
@@ -160,7 +162,7 @@
     <script type="text/template" id="current-location-template">
         <div class="nt-info-container">
             <div class="nt-info-caption">
-                <img class="nt-info-icon" src="css/img/marker-location.png" />
+                <img class="nt-info-icon" src="img/marker-location.png" />
                 <span class="nt-info-title"><%= tr("Current location") %></span>
             </div>
         </div>
@@ -199,6 +201,7 @@
             Backbone.history.start();
         });
 
+        /** phonegap:start */
         window.onload = function() {
             document.addEventListener("deviceready", function() {
                 document.addEventListener("backbutton", function() {
@@ -211,6 +214,7 @@
                 app.utils.loadExternalScripts(['childbrowser.js']);
             }, false);
         };
+        /** phonegap:end */
     </script>
 </body>
 </html>

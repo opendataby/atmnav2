@@ -43,12 +43,7 @@ def get_data_uri(file_name):
         encoded_data = resource_file.read().encode('base64').replace('\n', '')
         return DATA_TEMPLATE % (data_mimitype, encoded_data)
 
-
-if __name__ == '__main__':
-    path = '.'
-    if len(sys.argv) > 1:
-        path = sys.argv[1]
-
+def replace_urls_to_base64(path, delete_resources=False):
     for root, dir_names, file_names in os.walk(path):
         for file_name in filter(check_file, file_names):
             full_file_name = os.path.join(root, file_name)
@@ -64,6 +59,8 @@ if __name__ == '__main__':
                         resource_path = match.string[match.regs[1][0]:match.regs[1][1]]
                         resource_full_path = os.path.join(root, resource_path)
                         resource_data_uri = get_data_uri(resource_full_path)
+                        if delete_resources:
+                            os.remove(resource_full_path)
                         continue
                     if processing:
                         match = END_PATTERN.search(line)
@@ -76,3 +73,9 @@ if __name__ == '__main__':
 
             with open(full_file_name, 'wb') as file:
                 file.writelines(result)
+
+if __name__ == '__main__':
+    path = '.'
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+    replace_urls_to_base64(path)

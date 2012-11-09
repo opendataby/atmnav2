@@ -132,7 +132,7 @@ app.MapView = app.PageView.extend({
             var currentLocationTemplate = _.template($('#current-location-template').html());
             this.currentPositionMarker = L.marker(latLng, {
                 icon: L.icon({
-                    iconUrl: 'css/img/marker-location.png',
+                    iconUrl: 'img/marker-location.png',
                     iconSize: [31, 42],
                     iconAnchor: [16, 40]
                 }),

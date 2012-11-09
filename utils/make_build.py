@@ -10,8 +10,10 @@ import sys
 import glob
 import shutil
 import datetime
+from base64util import replace_urls_to_base64
 
-BUILD_DIR = os.path.abspath('./build')
+SRC_DIR = os.path.abspath('..')
+BUILD_DIR = os.path.abspath('../build')
 JS_DIR = os.path.join(BUILD_DIR, 'js')
 CSS_DIR = os.path.join(BUILD_DIR, 'css')
 
@@ -28,11 +30,14 @@ def clear():
     os.system('rm -r %s/*' % BUILD_DIR)
 
 
-def copy(sources, destination):
+def copy(sources, sources_dir,  destination_dir):
     """Copy sources objects to destination directory."""
 
+    if not os.path.exists(destination_dir):
+        os.makedirs(destination_dir)
+
     for source in sources:
-        os.system('cp -r %s %s' % (source, destination))
+        os.system('cp -r %s %s' % (os.path.join(sources_dir, source), destination_dir))
 
 
 def find_files(block_name, fname, type):
@@ -87,6 +92,31 @@ def remove_debug_blocks():
         result.write(index_source)
 
 
+def remove_phonegap_blocks(path):
+    start_marker = '/** phonegap:start */'
+    end_marker = '/** phonegap:end */'
+
+    for root, dirs, files in os.walk(path):
+        for file in map(lambda file: os.path.join(root, file), files):
+            index_source = open(file).read()
+            index = 0
+            while True:
+                start = index_source.find(start_marker, index)
+                if start == -1:
+                    break
+                end = index_source.find(end_marker, start + 1) + len(end_marker)
+                index_source = index_source.replace(index_source[start:end], '')
+
+            with open(file, 'w') as result:
+                result.write(index_source)
+
+
+def remove_phonegap_files(path):
+    os.system('rm %s' % os.path.join(path, 'config.xml'))
+    os.system('rm %s' % os.path.join(path, 'childbrowser.js'))
+    os.system('rm %s' % os.path.join(path, '*.png'))
+
+
 def add_manifest():
     """Adds cache.manifest file."""
 
@@ -115,7 +145,7 @@ def compress_js(files_to_compress, target_fname):
 
     target = open(compress_to, 'w')
     for fname in files_to_compress:
-        target.write(open(os.path.abspath(fname)).read())
+        target.write(open(bpath(fname)).read())
     target.close()
 
     os.system('java -jar yuicompressor.jar --type=js %s -o %s' % (compress_to, compress_to))
@@ -127,8 +157,8 @@ def compress_css(target_fname):
     """Concatenate CSS files into one file and compress it."""
 
     compress_to = bpath(target_fname)
-
-    os.system('lessc %s > %s' % ('css/styles.less', compress_to))
+    replace_urls_to_base64(bpath('css'), True)
+    os.system('lessc %s > %s' % (bpath('css/styles.less'), compress_to))
     os.system('java -jar yuicompressor.jar --type=css %s -o %s' % (compress_to, compress_to))
 
     os.system('rm -r %s/*.less' % CSS_DIR)
@@ -148,8 +178,14 @@ def copy_external_scripts(scripts):
     """Copy external libs to build folder."""
 
     for script in scripts:
-        os.system('cp %s %s' % (script, BUILD_DIR))
+        os.system('cp %s %s' % (bpath(script), BUILD_DIR))
+        os.system('rm %s' % bpath(script))
 
+
+def remove_empty_dirs(path):
+    for root, dirs, files in os.walk(path):
+        if not dirs and not files:
+            os.removedirs(root)
 
 def make_zip():
     """Creating ZIP archive with sources."""
@@ -158,12 +194,23 @@ def make_zip():
     os.system('mv %s %s' % ('build.zip', BUILD_DIR))
 
 
-def main(args):
+def main(args, phonegap=True):
     print 'Clearing build dir...'
     clear()
 
     print 'Copying sources...'
-    copy(['css', 'img', 'js', '*.png', 'index.html', 'config.xml', 'cache.manifest'], BUILD_DIR)
+    copy(['css', 'img', 'js', '*.png', 'index.html', 'config.xml', 'cache.manifest'], SRC_DIR, BUILD_DIR)
+
+    print 'Removing prints...'
+    remove_prints(BUILD_DIR)
+
+    print 'Copying external scripts...'
+    copy_external_scripts(['js/libs/childbrowser.js'])
+
+    if not phonegap:
+        print 'Removing phonegap logic...'
+        remove_phonegap_blocks(BUILD_DIR)
+        remove_phonegap_files(BUILD_DIR)
 
     print 'Compressing JavaScript...'
     files, start, end = find_files('js', 'index.html', 'js')
@@ -181,14 +228,11 @@ def main(args):
     #print 'Adding manifest...'
     #add_manifest()
 
-    print 'Update manifest...'
-    update_manifest()
+    #print 'Update manifest...'
+    #update_manifest()
 
-    print 'Removing prints...'
-    remove_prints(BUILD_DIR)
-
-    print 'Copying external scripts...'
-    copy_external_scripts(['js/libs/childbrowser.js'])
+    print 'Remove empty dirs...'
+    remove_empty_dirs(BUILD_DIR)
 
     print 'Building archive...'
     make_zip()
