@@ -32,6 +32,8 @@ app.ObjectView = Backbone.View.extend({
             selectedObjects = _.without(selectedObjects, this.options.id);
         }
 
+        app.remote.selectRelatedObjects(selectedObjects, element.siblings().add(element));
+
         app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));
 
         app.utils.log('object:onChange:end');

@@ -27,6 +27,8 @@ app.ObjectsView = app.PageView.extend({
             }).el);
         });
 
+        app.remote.selectRelatedObjects(selectedObjects, scroller.children());
+
         this.$el.append(scroller);
         this._scroll = new app.utils.Scroll(this.el);
 

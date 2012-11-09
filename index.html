@@ -48,14 +48,14 @@
     </div>
 
     <script type="text/template" id="filter-template">
-        <li class="nt-list-item<% if (checked) { %> checked<% } %>">
+        <li data-id="<%= id %>" class="nt-list-item<% if (checked) { %> checked<% } %>">
             <span class="nt-list-item-title"><%= tr(id) %></span>
             <span class="nt-list-item-checkbox"></span>
         </li>
     </script>
 
     <script type="text/template" id="object-template">
-        <li class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (className) { %> <%= className %><% } %><% if (checked) { %> checked<% } %><% if (disabled) { %> disabled<% } %>">
+        <li data-id="<%= id %>" class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (className) { %> <%= className %><% } %><% if (checked) { %> checked<% } %><% if (disabled) { %> disabled<% } %>">
             <% if (icon) { %><img class="nt-list-item-icon" src="img/icons/<%= id %>.png" /><% } %>
             <span class="nt-list-item-title"><%= tr(id) %></span>
             <span class="nt-list-item-checkbox"></span>
