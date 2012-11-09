@@ -10,7 +10,12 @@ import sys
 import glob
 import shutil
 import datetime
+
+from optparse import OptionParser
 from base64util import replace_urls_to_base64
+
+VERSION = '0.1'
+SUPPORTED_PLATFORMS = ('android', 'ios', 'desktop')
 
 SRC_DIR = os.path.abspath('..')
 BUILD_DIR = os.path.abspath('../build')
@@ -215,7 +220,7 @@ def make_zip():
     os.system('mv %s %s' % ('build.zip', BUILD_DIR))
 
 
-def main(args, phonegap=True, phone='android'):
+def main(options):
     print 'Clearing build dir...'
     clear()
 
@@ -231,14 +236,14 @@ def main(args, phonegap=True, phone='android'):
     print 'Removing unused blocks...'
     remove_unused_blocks()
 
-    if not phonegap:
+    if options.platform == 'desktop':
         print 'Removing phonegap blocks...'
         remove_phonegap_blocks()
         remove_phonegap_files()
-    elif phone == 'android':
+    elif options.platform == 'android':
         print 'Removing non android blocks...'
         remove_non_android_blocks()
-    elif phone == 'ios':
+    elif options.platform == 'ios':
         print 'Removing non ios blocks...'
         remove_non_ios_blocks()
 
@@ -268,5 +273,18 @@ def main(args, phonegap=True, phone='android'):
     make_zip()
 
 
+def get_parser():
+    parser = OptionParser(usage='usage: %prog [options]', version=VERSION)
+    parser.add_option('-p', '--platform', action='store', type='string',
+                        default='android', help='platform to make build for: android, ios or desktop')
+
+    return parser
+
+
 if __name__ == "__main__":
-    sys.exit(main(sys.argv))
+    options, args = get_parser().parse_args()
+
+    if options.platform not in SUPPORTED_PLATFORMS:
+        parser.error('Unsupported platform type: %s' % options.platform)
+
+    sys.exit(main(options))
