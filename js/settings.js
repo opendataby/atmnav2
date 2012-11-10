@@ -56,10 +56,13 @@ app.settings = {
         'belswiss',
         'bps',
         'bta',
+        'delta',
         'mm',
         'mtb',
         'prior',
-        'techno'
+        'sbb',
+        'techno',
+        'zepter'
     ],
 
     defaultObjects: [
