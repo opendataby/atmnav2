@@ -16,6 +16,7 @@ app.ObjectsView = app.PageView.extend({
         var objectTemplate = _.template($('#object-template').html());
         var disabled = _.include(selectedObjects, 'spec:all');
         var specilaClasses = this.specialClasses;
+
         _.each(app.settings.objects, function (id) {
             scroller.append(new app.ObjectView({
                 id: id,
@@ -27,9 +28,24 @@ app.ObjectsView = app.PageView.extend({
             }).el);
         });
 
+        this.selectRelatedObjects(selectedObjects, scroller.children());
         this.$el.append(scroller);
         this._scroll = new app.utils.Scroll(this.el);
 
         app.utils.log('objects:initialize:end');
-    }
+    },
+
+    selectRelatedObjects: function(objects, items) {
+        var related = app.utils.getRelatedObjects(objects);
+
+        relatedSelection = $();
+        items.each(function() {
+            if (related.indexOf($(this).data('id')) !== -1) {
+                relatedSelection = relatedSelection.add($(this));
+            }
+        });
+
+        relatedSelection.addClass('related');
+        items.not(relatedSelection).removeClass('related');
+    },
 });
