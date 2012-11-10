@@ -77,5 +77,25 @@ app.utils = {
     openExternalUrl: function(url) {
         window.plugins.childBrowser.openExternal(url);
         return false;
+    },
+
+    getRelatedObjects: function(relatedForObjects) {
+        app.utils.log('utils:getRelatedObjects:start');
+        app.utils.log('utils:getRelatedObjects:relatedForObjects=' + relatedForObjects);
+
+        if (relatedForObjects.indexOf('spec:related') == -1) {
+            return [];
+        }
+        
+        var related = [];
+        _.each(relatedForObjects, function(object) {
+            related = related.concat(app.settings.related[object] || []);
+        });
+
+        related = _.uniq(_.difference(related, relatedForObjects));
+
+        app.utils.log('utils:getRelatedObjects:end');
+
+        return related;
     }
 };

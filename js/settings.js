@@ -44,7 +44,7 @@ app.settings = {
 
     objects: [
         'spec:all',
-        //'spec:related',
+        'spec:related',
         'absolut',
         'alfa',
         'belagroprom',
@@ -76,6 +76,39 @@ app.settings = {
     defaultObjects: [
         'spec:all'
     ],
+
+    related: {
+        // verified
+        'alfa': ['mm', 'belswiss', 'rrb', 'techno'],
+        'belagroprom': ['belarus', 'prior', 'belinvest'],
+        'belinvest': ['belarus', 'belagroprom'],
+        'belgazprom': [],
+        'belros': [],
+        'belswiss': ['alfa', 'bve', 'mm', 'techno', 'rrb'],
+        'bps': ['belarus', 'prior'],
+        'bta': ['prior'],
+        'bve': ['mm', 'techno', 'alfa', 'rrb', 'belswiss', 'sbb'],
+        'delta': [],
+        'homecredit': [],
+        'prior': ['belagroprom', 'mtb', 'bta', 'bps'],
+        'mm': ['alfa', 'rrb', 'techno', 'bve', 'belswiss'],
+        'mtb': ['prior'],
+        'rrb': ['bve', 'mm', 'techno', 'belswiss', 'alfa'],
+        'techno': ['bve', 'mm', 'alfa', 'belswiss', 'rrb'],
+
+        // not verified
+        'absolut': [],
+        'belarus': ['belinvest', 'bps', 'belagroprom'],
+        'bnb': [],
+        'delta': [],
+        'fransa': [],
+        'paritet': [],
+        'sbb': [],
+        'true': [],
+        'vtb': [],
+        'credex': [],
+        'zepter': []
+    },
 
     serverUrl: 'http://atmnav-server.appspot.com',
 

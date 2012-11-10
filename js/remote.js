@@ -3,7 +3,7 @@ var app = app || {};
 app.remote = {
     fetchMarkers: function(options) {
         var params = {
-            'objects[]': options.objects,
+            'objects[]': options.objects.concat(app.utils.getRelatedObjects(options.objects)),
             'filters[]': options.filters
         };
 
