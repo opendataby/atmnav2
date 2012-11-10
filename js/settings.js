@@ -92,7 +92,7 @@ app.settings = {
         'homecredit': [],
         'prior': ['belagroprom', 'mtb', 'bta', 'bps'],
         'mm': ['alfa', 'rrb', 'techno', 'bve', 'belswiss'],
-        'mtb': ['prior'],
+        'mtb': ['prior', 'bta'],
         'rrb': ['bve', 'mm', 'techno', 'belswiss', 'alfa'],
         'techno': ['bve', 'mm', 'alfa', 'belswiss', 'rrb'],
 
