@@ -6,7 +6,7 @@ app.settings = {
     version: '2.0',
 
     vibrateMilliseconds: 40,
-    ajaxTimeout: 10000, // 10 sec
+    ajaxTimeout: 15000, // 15 sec
 
     mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
@@ -20,7 +20,7 @@ app.settings = {
     },
 
     geolocationOptions: {
-        timeout: 5000,
+        timeout: 10000, // 10 sec
         enableHighAccuracy: true
     },
 
