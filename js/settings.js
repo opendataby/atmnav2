@@ -20,6 +20,7 @@ app.settings = {
     },
 
     geolocationOptions: {
+        timeout: 5000,
         enableHighAccuracy: true
     },
 
