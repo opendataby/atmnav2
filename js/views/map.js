@@ -26,7 +26,6 @@ app.MapView = app.PageView.extend({
 
         app.PageView.prototype.attach.call(this, container);
         this.map.invalidateSize();
-        this.updateMarkers();
 
         app.utils.log('map:attach:end');
         return this;
@@ -38,8 +37,8 @@ app.MapView = app.PageView.extend({
         $('.locate-icon', this.$el).removeClass('loading-icon');
         this.createOrUpdateCurrentPositionMarker(latLng);
         this.map.panTo(latLng);
-        app.utils.saveData('mapLastLocation', latLng);
         this.updateMarkers();
+        app.utils.saveData('mapLastLocation', latLng);
 
         if (window.navigator.notification) {
             window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
@@ -51,6 +50,7 @@ app.MapView = app.PageView.extend({
     onGeolocationError: function() {
         app.utils.log('map:onGeolocationError');
 
+        app.router.mapView.updateMarkers();
         $('.locate-icon', this.$el).removeClass('loading-icon');
         alert(tr('Could not determine the current position.'));
     },
