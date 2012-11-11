@@ -4,6 +4,7 @@ app.MapView = app.PageView.extend({
     markersArray: [],
 
     map: null,
+    firstStart: true,
     infoWindow: null,
     currentPositionMarker: null,
 
@@ -26,6 +27,13 @@ app.MapView = app.PageView.extend({
 
         app.PageView.prototype.attach.call(this, container);
         this.map.invalidateSize();
+
+        if (this.firstStart) {
+            app.utils.log('map:firstStart true, skip update markers');
+            this.firstStart = false;
+        } else {
+            this.updateMarkers();
+        }
 
         app.utils.log('map:attach:end');
         return this;
