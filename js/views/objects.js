@@ -48,4 +48,33 @@ app.ObjectsView = app.PageView.extend({
         relatedSelection.addClass('related');
         items.not(relatedSelection).removeClass('related');
     },
+
+    attach: function(container) {
+        app.utils.log('objects:attach:start');
+
+        app.PageView.prototype.attach.call(this, container);
+        this.initialObjects = app.utils.loadArrayData('objects');
+        console.log(this.initialObjects);
+
+        app.utils.log('objects:attach:end');
+        return this;
+    },
+
+    detach: function() {
+        app.utils.log('objects:detach:start');
+
+        app.PageView.prototype.detach.call(this);
+        var selectedObjects = $('li.nt-list-item.checked', this.$el).map(function() {
+            return $(this).attr('data-id');
+        }).get();
+        console.log(selectedObjects);
+
+        if (_.difference(this.initialObjects, selectedObjects).length ||
+            _.difference(selectedObjects, this.initialObjects).length) {
+            app.router.mapView.updateMarkers();
+        }
+
+        app.utils.log('objects:detach:end');
+        return this;
+    }
 });

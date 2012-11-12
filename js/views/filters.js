@@ -25,5 +25,32 @@ app.FiltersView = app.PageView.extend({
         this._scroll = new app.utils.Scroll(this.el);
 
         app.utils.log('filters:initialize:end');
+    },
+
+    attach: function(container) {
+        app.utils.log('filters:attach:start');
+
+        app.PageView.prototype.attach.call(this, container);
+        this.initialFilters = app.utils.loadArrayData('filters');
+
+        app.utils.log('filters:attach:end');
+        return this;
+    },
+
+    detach: function() {
+        app.utils.log('flters:detach:start');
+
+        app.PageView.prototype.detach.call(this);
+        var selectedFilters = $('li.nt-list-item.checked', this.$el).map(function() {
+            return $(this).attr('data-id');
+        }).get();
+
+        if (_.difference(this.initialFilters, selectedFilters).length ||
+            _.difference(selectedFilters, this.initialFilters).length) {
+            app.router.mapView.updateMarkers();
+        }
+
+        app.utils.log('flters:detach:end');
+        return this;
     }
 });
