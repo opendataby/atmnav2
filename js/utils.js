@@ -118,5 +118,21 @@ app.utils = {
         } else {
             alert(message);
         }
+    },
+
+    setDefaults: function() {
+        app.utils.log('utils:setDefaults:start');
+
+        if (localStorage.getItem('theFirstStart') === undefined ||
+            app.utils.loadData('theFirstStart')) {
+
+            alert('reset');
+
+            app.utils.saveData('theFirstStart', false);
+            app.utils.saveData('objects', app.settings.defaultObjects);
+            app.utils.saveData('filters', app.settings.defaultFilters);
+        }
+
+        app.utils.log('utils:setDefaults:end');
     }
 };

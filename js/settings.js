@@ -75,7 +75,8 @@ app.settings = {
     ],
 
     defaultObjects: [
-        'spec:all'
+        'spec:related',
+        'belinvest'
     ],
 
     related: {
