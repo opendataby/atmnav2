@@ -54,7 +54,6 @@ app.ObjectsView = app.PageView.extend({
 
         app.PageView.prototype.attach.call(this, container);
         this.initialObjects = app.utils.loadArrayData('objects');
-        console.log(this.initialObjects);
 
         app.utils.log('objects:attach:end');
         return this;
@@ -67,7 +66,6 @@ app.ObjectsView = app.PageView.extend({
         var selectedObjects = $('li.nt-list-item.checked', this.$el).map(function() {
             return $(this).attr('data-id');
         }).get();
-        console.log(selectedObjects);
 
         if (_.difference(this.initialObjects, selectedObjects).length ||
             _.difference(selectedObjects, this.initialObjects).length) {
