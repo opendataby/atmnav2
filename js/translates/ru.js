@@ -81,7 +81,7 @@ app.tr.ru = {
     // About section
     "ATM Navigator": "АТМ Навигатор",
     "Version": "Версия",
-    "The application for searching the nearest banks and ATMs in Minsk": "Приложение для поиска ближайших банков и банкоматов в городе Минск",
+    "The application for searching nearest banks and ATMs in Belarus": "Приложение для поиска ближайших банков и банкоматов в Беларуси",
     "Site": "Сайт",
     "Feedback": "Написать отзыв",
     "Developers": "Разработчики",
