@@ -31,6 +31,12 @@ app.MapView = app.PageView.extend({
         return this;
     },
 
+    detach: function() {
+        app.PageView.prototype.detach.call(this);
+        this.map.closePopup();
+        return this;
+    },
+
     onGeolocationSuccess: function(latLng) {
         app.utils.log('map:onGeolocationSuccess:start');
 
@@ -160,6 +166,8 @@ app.MapView = app.PageView.extend({
         _.each(this.markersArray, function(marker) {
             map.removeLayer(marker);
         });
+
+        this.map.closePopup();
         this.markersArray = [];
 
         app.utils.log('map:deleteMarkers:end');
