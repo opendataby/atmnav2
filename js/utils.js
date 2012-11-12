@@ -97,5 +97,26 @@ app.utils = {
         app.utils.log('utils:getRelatedObjects:end');
 
         return related;
+    },
+
+    getMessageNoSelection: function(selectedObjects, selectedFilters) {
+        selectedObjects = _.without(selectedObjects, 'spec:related');
+
+        if (!selectedObjects.length && !selectedFilters.length) {
+            return tr('No banks and filters selected!');
+        } 
+        else if (!selectedObjects.length) {
+            return tr('No banks selected!');
+        } else if (!selectedFilters.length) {
+            return tr('No filters selected!');
+        }
+    },
+
+    alert: function(message, title) {
+        if (navigator.notification) {
+            navigator.notification.alert(message, null, title);
+        } else {
+            alert(message);
+        }
     }
 };

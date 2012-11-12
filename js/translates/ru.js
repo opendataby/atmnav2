@@ -26,8 +26,12 @@ app.tr.ru = {
     "m": "м",
 
     // Warnings
+    "Alert": "Предупреждение",
     "Could not determine the current position.": "Не удалось определить текущее положение.",
     "Could not load data from the server. Please try again later.": "Не удалось загрузить данные с сервера. Попробуйте позже.",
+    "No banks selected!": "Не выбрано ни одного банка!",
+    "No filters selected!": "Не выбрано ни одного фильтра!",
+    "No banks and filters selected!": "Не выбрано ни одного банка и фильтра!",
 
     // Objects section
     "All banks": "Все банки",

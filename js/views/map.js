@@ -229,9 +229,12 @@ app.MapView = app.PageView.extend({
         var selectedObjects = app.utils.loadArrayData('objects');
         var selectedFilters = app.utils.loadArrayData('filters');
 
-        if (!selectedObjects.length || !selectedFilters.length) {
-            console.log('no selected filters or selected objects, abort fetching');
+        if (!selectedObjects.length || !selectedFilters.length ||
+            !_.without(selectedObjects, 'spec:related').length) {
+
             this.deleteMarkers();
+            var message = app.utils.getMessageNoSelection(selectedObjects, selectedFilters);
+            app.utils.alert(message, tr('Alert'));
             return;
         }
 
