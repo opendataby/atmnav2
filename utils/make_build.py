@@ -10,12 +10,14 @@ import sys
 import glob
 import shutil
 import datetime
+import commands
 
 from optparse import OptionParser
 from base64util import replace_urls_to_base64
 
 VERSION = '0.1'
 SUPPORTED_PLATFORMS = ('android', 'ios', 'desktop')
+PHONEGAP_API_URL = 'https://build.phonegap.com/api/v1/apps/79182'
 
 SRC_DIR = os.path.abspath('..')
 BUILD_DIR = os.path.abspath('../build')
@@ -250,6 +252,24 @@ def make_zip():
     os.system('mv %s %s' % ('build.zip', BUILD_DIR))
 
 
+def upload_build():
+    """Upload build to PhoneGap build service."""
+
+    if not os.path.exists('./auth'):
+        print ('WARNING: Unable to upload build. auth file not found. '
+               'Set your credentials in auth file (username,password)')
+        return
+
+    fname = bpath('build.zip')
+    user, password = open('./auth').read().strip().split(',')
+    result = commands.getoutput('curl -u %s:%s -X PUT -F file=@%s %s' % (user, password, fname, PHONEGAP_API_URL))
+
+    if not '"error":{}' in result:
+        print result
+    else:
+        print 'Build uploaded'
+
+
 def main(options):
     print 'Clearing build dir...'
     clear()
@@ -307,11 +327,16 @@ def main(options):
     print 'Building archive...'
     make_zip()
 
+    if options.upload:
+        print 'Uploading build to PhoneGap build service...'
+        upload_build()
+
 
 def get_parser():
     parser = OptionParser(usage='usage: %prog [options]', version=VERSION)
     parser.add_option('-p', '--platform', action='store', type='string',
                         default='android', help='platform to make build for: android, ios or desktop')
+    parser.add_option('--upload', action='store_true', help='upload file to PhoneGap build service')
 
     return parser
 
