@@ -124,11 +124,26 @@ app.utils = {
         app.utils.log('utils:setDefaults:start');
 
         if (localStorage.getItem('theFirstStart') === undefined ||
+            localStorage.getItem('theFirstStart') === null ||
             app.utils.loadData('theFirstStart')) {
 
             app.utils.saveData('theFirstStart', false);
-            app.utils.saveData('objects', app.settings.defaultObjects);
-            app.utils.saveData('filters', app.settings.defaultFilters);
+
+            var currentObjects = app.utils.loadArrayData('objects');
+            if (currentObjects.length) {
+                var deprecatedObjects = _.difference(currentObjects, app.settings.objects);
+                app.utils.saveData('objects', _.difference(currentObjects, deprecatedObjects));
+            } else {
+                app.utils.saveData('objects', app.settings.defaultObjects);
+            }
+
+            var currentFilters = app.utils.loadArrayData('filters');
+            if (currentFilters.length) {
+                var deprecatedFilters = _.difference(currentFilters, app.settings.filters);
+                app.utils.saveData('filters', _.difference(currentFilters, deprecatedFilters));
+            } else {
+                app.utils.saveData('filters', app.settings.defaultFilters);
+            }
         }
 
         app.utils.log('utils:setDefaults:end');
