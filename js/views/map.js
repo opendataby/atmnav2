@@ -64,6 +64,8 @@ app.MapView = app.PageView.extend({
     moveToLocation: function() {
         app.utils.log('map:moveToLocation:start');
 
+        this.map.closePopup();
+
         var self = this;
         if (navigator.geolocation) {
             $('.locate-icon', this.$el).addClass('loading-icon');
@@ -167,7 +169,6 @@ app.MapView = app.PageView.extend({
             map.removeLayer(marker);
         });
 
-        this.map.closePopup();
         this.markersArray = [];
 
         app.utils.log('map:deleteMarkers:end');
