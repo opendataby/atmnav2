@@ -1,235 +1,256 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="apple-touch-icon" href="icon_hdpi.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon" href="icon_hdpi.png" />
 
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="format-detection" content="email=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="email=no" />
 
-    <title>ATM Navigator</title>
-    <meta name="application-name" content="ATM Navigator" />
-    <meta name="description" content="АТМ Навигатор: поиск ближайших банков, пунктов обмена валют, банкоматов и инфокиосков в Беларуси" />
-    <meta name="description" content="ATM Navigator: searching nearest banks, exchanges, atms, terminals in Belarus" />
-    <meta name="keywords" content="банк,обмен валют,банкомат,валюта,инфокиоск,поиск,ближайщий,наивигатор,атм,атмнав,Беларусь,bank,exchange,atm,terminal,search,nearest,atmnav,Belarus" />
-    <meta name="author" content="Максим Усачев (Max Usachev), Павел Тысляцкий (Pavel Tyslytsky)" />
+        <title>ATM Navigator</title>
+        <meta name="application-name" content="ATM Navigator" />
+        <meta name="description" content="АТМ Навигатор: поиск ближайших банков, пунктов обмена валют, банкоматов и инфокиосков в Беларуси" />
+        <meta name="description" content="ATM Navigator: searching nearest banks, exchanges, atms, terminals in Belarus" />
+        <meta name="keywords" content="банк,обмен валют,банкомат,валюта,инфокиоск,поиск,ближайщий,наивигатор,атм,атмнав,Беларусь,bank,exchange,atm,terminal,search,nearest,atmnav,Belarus" />
+        <meta name="author" content="Максим Усачев (Max Usachev), Павел Тысляцкий (Pavel Tyslytsky)" />
 
-    <!--compress:css:start-->
-    <link href="css/styles.less" rel="stylesheet/less" media="all" />
-    <!--compress:css:end-->
+        <!--compress:css:start-->
+        <link href="css/styles.less" rel="stylesheet/less" media="all" />
+        <!--compress:css:end-->
 
-    <!--/** debug:start */-->
-    <script src="js/libs/less-1.3.0.min.js"></script>
-    <!--/** debug:end */-->
-    <!--/** phonegap:start */-->
-    <script src="cordova.js" async="async"></script>
-    <!--/** phonegap:end */-->
-</head>
+        <!--/** debug:start */-->
+        <script src="js/libs/less-1.3.0.min.js"></script>
+        <!--/** debug:end */-->
+        <!--/** phonegap:start */-->
+        <script src="cordova.js" async="async"></script>
+        <!--/** phonegap:end */-->
+    </head>
 
-<body class="nt-application">
-    <div class="nt-content"></div>
-    <div class="nt-nav">
-        <ul class="nt-nav-tab-container">
-            <li class="nt-nav-tab"><a href="#map" class="nt-nav-tab-link">
-                <span class="nt-nav-tab-icon map-icon"></span>
-                <br />
-                <span class="nt-nav-tab-text" data-tr="Map">Map</span>
-            </a></li>
-            <li class="nt-nav-tab"><a href="#banks" class="nt-nav-tab-link">
-                <span class="nt-nav-tab-icon objects-icon"></span>
-                <br />
-                <span class="nt-nav-tab-text" data-tr="Banks">Banks</span>
-            </a></li>
-            <li class="nt-nav-tab"><a href="#filters" class="nt-nav-tab-link">
-                <span class="nt-nav-tab-icon filters-icon"></span>
-                <br />
-                <span class="nt-nav-tab-text" data-tr="Filters">Filters</span>
-            </a></li>
-            <li class="nt-nav-tab"><a href="#about" class="nt-nav-tab-link">
-                <span class="nt-nav-tab-icon info-icon"></span>
-                <br />
-                <span class="nt-nav-tab-text" data-tr="Info">Info</span>
-            </a></li>
-        </ul>
-    </div>
-
-    <script type="text/template" id="filter-template">
-        <li data-id="<%= id %>" class="nt-list-item<% if (checked) { %> checked<% } %>">
-            <span class="nt-list-item-title"><%= tr(id) %></span>
-            <span class="nt-list-item-checkbox"></span>
-        </li>
-    </script>
-
-    <script type="text/template" id="object-template">
-        <li data-id="<%= id %>" class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (className) { %> <%= className %><% } %><% if (checked) { %> checked<% } %><% if (disabled) { %> disabled<% } %>">
-            <% if (icon) { %><img class="nt-list-item-icon" src="img/icons/<%= id %>.png" /><% } %>
-            <span class="nt-list-item-title"><%= tr(id) %></span>
-            <span class="nt-list-item-checkbox"></span>
-        </li>
-    </script>
-
-    <script type="text/template" id="about-template">
-        <div class="nt-about-page">
-            <div class="nt-about-vindent"></div>
-            <div class="nt-about-header">
-                <div class="nt-about-program-name"><%= tr("ATM Navigator") %></div>
-                <div class="nt-about-program-version"><%= tr("Version") %> <%= app.settings.version %></div>
-            </div>
-            <div class="nt-about-main">
-                <div class="nt-about-program-paragraph">
-                    <%= tr("The application for searching nearest banks and ATMs in Belarus") %>
-                </div>
-                <div class="nt-about-program-paragraph">
-                    <%= tr("Site") %>: <a id="site" target="_blank" href="http://navteam.by">navteam.by</a>
-                </div>
-            </div>
-
-            <div class="nt-about-developers">
-                <div class="nt-about-program-paragraph"><%= tr("Developers") %>:</div>
-                <div class="nt-about-program-paragraph"><a href="mailto:maxusachev@gmail.com?subject=ATM Navigator"><%= tr("Max Usachev") %></a></div>
-                <div class="nt-about-program-paragraph"><a href="mailto:pavel.tyslyatsky@gmail.com?subject=ATM Navigator"><%= tr("Pavel Tyslyatsky") %></a></div>
-                <div class="nt-about-developers-sep"></div>
-            </div>
-
-            <div class="nt-about-feedback">
-                <a class="nt-about-program-button" href="mailto:maxusachev@gmail.com?subject=ATM%20Navigator&cc=pavel.tyslyatsky@gmail.com"><%= tr("Feedback") %></a>
-            </div>
-
-            <div class="nt-about-license">
-                <div class="nt-about-program-paragraph"><%= tr("License") %>: <a id="licence" target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
-            </div>
+    <body class="nt-application">
+        <div class="nt-content"></div>
+        <div class="nt-nav">
+            <ul class="nt-nav-tab-container">
+                <li class="nt-nav-tab"><a href="#map" class="nt-nav-tab-link">
+                    <span class="nt-nav-tab-icon map-icon"></span>
+                    <br />
+                    <span class="nt-nav-tab-text" data-tr="Map">Map</span>
+                </a></li>
+                <li class="nt-nav-tab"><a href="#banks" class="nt-nav-tab-link">
+                    <span class="nt-nav-tab-icon objects-icon"></span>
+                    <br />
+                    <span class="nt-nav-tab-text" data-tr="Banks">Banks</span>
+                </a></li>
+                <li class="nt-nav-tab"><a href="#filters" class="nt-nav-tab-link">
+                    <span class="nt-nav-tab-icon filters-icon"></span>
+                    <br />
+                    <span class="nt-nav-tab-text" data-tr="Filters">Filters</span>
+                </a></li>
+                <li class="nt-nav-tab"><a href="#about" class="nt-nav-tab-link">
+                    <span class="nt-nav-tab-icon info-icon"></span>
+                    <br />
+                    <span class="nt-nav-tab-text" data-tr="Info">Info</span>
+                </a></li>
+            </ul>
         </div>
-    </script>
 
-    <!--/** unused:start */-->
-    <script type="text/template" id="more-info-template">
-        <div class="nt-info-container">
-            <div class="nt-info-caption">
-                <% if (typeof(prov) != "undefined") {%>
+        <script type="text/template" id="filter-template">
+            <li data-id="<%= id %>" class="nt-list-item<% if (checked) { %> checked<% } %>">
+                <span class="nt-list-item-title"><%= tr(id) %></span>
+                <span class="nt-list-item-checkbox"></span>
+            </li>
+        </script>
+
+        <script type="text/template" id="object-template">
+            <li data-id="<%= id %>" class="nt-list-item<% if (icon) { %> nt-list-item-with-icon<% } %><% if (className) { %> <%= className %><% } %><% if (checked) { %> checked<% } %><% if (disabled) { %> disabled<% } %>">
+                <% if (icon) { %><img class="nt-list-item-icon" src="img/icons/<%= id %>.png" /><% } %>
+                <span class="nt-list-item-title"><%= tr(id) %></span>
+                <span class="nt-list-item-checkbox"></span>
+            </li>
+        </script>
+
+        <script type="text/template" id="about-template">
+            <div class="nt-about-page">
+                <div class="nt-about-vindent"></div>
+                <div class="nt-about-header">
+                    <div class="nt-about-program-name"><%= tr("ATM Navigator") %></div>
+                    <div class="nt-about-program-version"><%= tr("Version") %> <%= app.settings.version %></div>
+                </div>
+                <div class="nt-about-main">
+                    <div class="nt-about-program-paragraph">
+                        <%= tr("The application for searching nearest banks and ATMs in Belarus") %>
+                    </div>
+                    <div class="nt-about-program-paragraph">
+                        <%= tr("Site") %>: <a id="site" target="_blank" href="http://navteam.by">navteam.by</a>
+                    </div>
+                </div>
+
+                <div class="nt-about-developers">
+                    <div class="nt-about-program-paragraph"><%= tr("Developers") %>:</div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:maxusachev@gmail.com?subject=ATM Navigator"><%= tr("Max Usachev") %></a></div>
+                    <div class="nt-about-program-paragraph"><a href="mailto:pavel.tyslyatsky@gmail.com?subject=ATM Navigator"><%= tr("Pavel Tyslyatsky") %></a></div>
+                    <div class="nt-about-developers-sep"></div>
+                </div>
+
+                <div class="nt-about-feedback">
+                    <a class="nt-about-program-button" href="mailto:maxusachev@gmail.com?subject=ATM%20Navigator&cc=pavel.tyslyatsky@gmail.com"><%= tr("Feedback") %></a>
+                </div>
+
+                <div class="nt-about-license">
+                    <div class="nt-about-program-paragraph"><%= tr("License") %>: <a id="licence" target="_blank" href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a></div>
+                </div>
+            </div>
+        </script>
+
+        <!--/** unused:start */-->
+        <script type="text/template" id="more-info-template">
+            <div class="nt-info-container">
+                <div class="nt-info-caption">
+                    <% if (typeof(prov) != "undefined") {%>
+                        <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
+                    <%}%>
+                </div>
+                <div class="nt-info-body">
+                    <% if (typeof(currency) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
+                    <%}%>
+                    <% if (typeof(addr) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
+                    <%}%>
+                    <% if (typeof(place) != "undefined" && place != "") {%>
+                        <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
+                    <%}%>
+                    <% if (typeof(time) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
+                    <%}%>
+                    <% if (typeof(phone) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
+                    <%}%>
+                </div>
+            </div>
+        </script>
+        <!--/** unused:end */-->
+
+        <script type="text/template" id="info-window-template">
+            <div class="nt-info-container">
+                <div class="nt-info-caption">
                     <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                <%}%>
+                    <span class="nt-info-title"><%= tr(prov) %></span>
+                </div>
+                <div class="nt-info-body">
+                    <% if (typeof(type) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Type") %>:</b> <%= tr(type) %></span><br/>
+                    <%}%>
+                    <% if (typeof(currency) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
+                    <%}%>
+                    <% if (typeof(addr) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
+                    <%}%>
+                    <% if (typeof(place) != "undefined" && place != "") {%>
+                        <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
+                    <%}%>
+                    <% if (typeof(time) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
+                    <%}%>
+                    <% if (typeof(phone) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
+                    <%}%>
+                </div>
+                <div class="nt-info-additional">
+                    <% if (typeof(distance) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Distance") %>:</b> <%= distance %></span>
+                    <%}%>
+                    <!--
+                    <a class="nt-info-more-button" href="#more-info/<%= addr %>"><%= tr("More info") %></a>
+                    -->
+               </div>
             </div>
-            <div class="nt-info-body">
-                <% if (typeof(currency) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
-                <%}%>
-                <% if (typeof(addr) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
-                <%}%>
-                <% if (typeof(place) != "undefined" && place != "") {%>
-                    <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
-                <%}%>
-                <% if (typeof(time) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
-                <%}%>
-                <% if (typeof(phone) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
-                <%}%>
+        </script>
+
+        <script type="text/template" id="current-location-template">
+            <div class="nt-info-container">
+                <div class="nt-info-caption">
+                    <img class="nt-info-icon" src="img/marker-location.png" />
+                    <span class="nt-info-title"><%= tr("Current location") %></span>
+                </div>
             </div>
-        </div>
-    </script>
-    <!--/** unused:end */-->
+        </script>
 
-    <script type="text/template" id="info-window-template">
-        <div class="nt-info-container">
-            <div class="nt-info-caption">
-                <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                <span class="nt-info-title"><%= tr(prov) %></span>
-            </div>
-            <div class="nt-info-body">
-                <% if (typeof(type) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Type") %>:</b> <%= tr(type) %></span><br/>
-                <%}%>
-                <% if (typeof(currency) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
-                <%}%>
-                <% if (typeof(addr) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
-                <%}%>
-                <% if (typeof(place) != "undefined" && place != "") {%>
-                    <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
-                <%}%>
-                <% if (typeof(time) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
-                <%}%>
-                <% if (typeof(phone) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
-                <%}%>
-            </div>
-            <div class="nt-info-additional">
-                <% if (typeof(distance) != "undefined") {%>
-                    <span class="nt-info-title"><b><%= tr("Distance") %>:</b> <%= distance %></span>
-                <%}%>
-                <!--
-                <a class="nt-info-more-button" href="#more-info/<%= addr %>"><%= tr("More info") %></a>
-                -->
-           </div>
-        </div>
-    </script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-32540763-1']);
+            _gaq.push(['_trackPageview']);
 
-    <script type="text/template" id="current-location-template">
-        <div class="nt-info-container">
-            <div class="nt-info-caption">
-                <img class="nt-info-icon" src="img/marker-location.png" />
-                <span class="nt-info-title"><%= tr("Current location") %></span>
-            </div>
-        </div>
-    </script>
+            window.onerror = function(msg, url, line) {
+                _gaq.push(['_trackEvent', 'JS Error', msg, navigator.userAgent + ' -> ' + url + " : " + line, 0, true]);
+                return true;
+            };
 
-    <!--compress:js:start-->
-    <script src="js/libs/jquery.js"></script>
-    <script src="js/libs/underscore.js"></script>
-    <script src="js/libs/backbone.js"></script>
-    <script src="js/libs/leaflet.js"></script>
-    <script src="js/libs/fastclick.js"></script>
-    <script src="js/libs/iscroll-lite.js"></script>
+            (function() {
+                var scriptEl = document.createElement('script');
+                scriptEl.async = true;
+                scriptEl.type = 'text/javascript';
+                scriptEl.src = 'http://www.google-analytics.com/ga.js';
 
-    <script src="js/settings.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/translates/translates.js"></script>
-    <script src="js/translates/ru.js"></script>
-    <script src="js/remote.js"></script>
-    <script src="js/views/page.js"></script>
-    <script src="js/views/map.js"></script>
-    <script src="js/views/filter.js"></script>
-    <script src="js/views/filters.js"></script>
-    <script src="js/views/object.js"></script>
-    <script src="js/views/objects.js"></script>
-    <script src="js/views/about.js"></script>
-    <!--/** unused:start */-->
-    <script src="js/views/more-info.js"></script>
-    <!--/** unused:end */-->
-    <script src="js/views/panel.js"></script>
-    <script src="js/routes/app.js"></script>
-    <!--compress:js:end-->
+                var firstScriptEl = document.getElementsByTagName('script')[0];
+                firstScriptEl.parentNode.insertBefore(scriptEl, firstScriptEl);
+            })();
+        </script>
 
-    <script>
-        $(document).ready(function() {
-            app.tr.translatePageFromData();
+        <!--compress:js:start-->
+        <script src="js/libs/jquery.js"></script>
+        <script src="js/libs/underscore.js"></script>
+        <script src="js/libs/backbone.js"></script>
+        <script src="js/libs/leaflet.js"></script>
+        <script src="js/libs/fastclick.js"></script>
+        <script src="js/libs/iscroll-lite.js"></script>
 
-            Backbone.history.start();
-        });
+        <script src="js/settings.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/translates/translates.js"></script>
+        <script src="js/translates/ru.js"></script>
+        <script src="js/remote.js"></script>
+        <script src="js/views/page.js"></script>
+        <script src="js/views/map.js"></script>
+        <script src="js/views/filter.js"></script>
+        <script src="js/views/filters.js"></script>
+        <script src="js/views/object.js"></script>
+        <script src="js/views/objects.js"></script>
+        <script src="js/views/about.js"></script>
+        <!--/** unused:start */-->
+        <script src="js/views/more-info.js"></script>
+        <!--/** unused:end */-->
+        <script src="js/views/panel.js"></script>
+        <script src="js/routes/app.js"></script>
+        <!--compress:js:end-->
 
-        /** phonegap:start */
-        window.onload = function() {
-            document.addEventListener("deviceready", function() {
-                document.addEventListener("backbutton", function() {
-                    if (app.xhr) {
-                        app.xhr.abort();
-                    }
-                    navigator.app.exitApp();
+        <script>
+            $(document).ready(function() {
+                app.tr.translatePageFromData();
+
+                Backbone.history.start();
+            });
+
+            /** phonegap:start */
+            window.onload = function() {
+                document.addEventListener("deviceready", function() {
+                    document.addEventListener("backbutton", function() {
+                        if (app.xhr) {
+                            app.xhr.abort();
+                        }
+                        navigator.app.exitApp();
+                    }, false);
+
+                    app.utils.loadExternalScripts(['childbrowser.js']);
                 }, false);
-
-                app.utils.loadExternalScripts(['childbrowser.js']);
-            }, false);
-        };
-        /** phonegap:end */
-    </script>
-</body>
+            };
+            /** phonegap:end */
+        </script>
+    </body>
 </html>
