@@ -10,7 +10,13 @@ app.utils = {
     },
 
     loadData: function(keyName) {
-        return JSON.parse(localStorage.getItem(keyName));
+        try {
+            app.utils.log('Loading data from localStorage for keyName: ' + keyName);
+            return JSON.parse(localStorage.getItem(keyName));
+        } catch (e) {
+            app.utils.log("Can't load data for keyName: " + keyName);
+            return false;
+        }
     },
 
     saveData: function(keyName, data) {
