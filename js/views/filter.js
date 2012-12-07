@@ -21,10 +21,8 @@ app.FilterView = Backbone.View.extend({
 
         if (checked) {
             selectedFilters.push(filterId);
-            app.utils.trackEvent('filters', 'check', filterId);
         } else {
             selectedFilters = _.without(selectedFilters, filterId);
-            app.utils.trackEvent('filters', 'uncheck', filterId);
         }
 
         app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));

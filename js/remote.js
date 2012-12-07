@@ -20,5 +20,7 @@ app.remote = {
             error: options.error,
             context: options.context
         });
+
+        app.utils.trackEvent('ajax', 'get', JSON.stringify(params));
     }
 };
