@@ -45,21 +45,25 @@ var AppRouter = Backbone.Router.extend({
     map: function() {
         app.utils.log('#map link clicked');
         this.switchToView(this.mapView || (this.mapView = new app.MapView()), '[href="#map"]');
+        app.utils.trackPage('map');
     },
 
     objects: function() {
         app.utils.log('#banks link clicked');
         this.switchToView(this.objectsView || (this.objectsView = new app.ObjectsView()), '[href="#banks"]');
+        app.utils.trackPage('objects');
     },
 
     filters: function() {
         app.utils.log('#filters link clicked');
         this.switchToView(this.filtersView || (this.filtersView = new app.FiltersView()), '[href="#filters"]');
+        app.utils.trackPage('filters');
     },
 
     about: function() {
         app.utils.log('#about link clicked');
         this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()), '[href="#about"]');
+        app.utils.trackPage('about');
     }/** unused:start */,
 
     moreInfo: function(id) {
