@@ -12,6 +12,7 @@ app.FilterView = Backbone.View.extend({
     onChange: function(event) {
         app.utils.log('filter:onChange:start');
 
+        var filterId = this.options.id;
         var element = $(event.target).closest('.nt-list-item');
         var checked = element.toggleClass('checked').hasClass('checked');
 
@@ -19,9 +20,11 @@ app.FilterView = Backbone.View.extend({
         var selectedFilters = app.utils.loadArrayData(storageKey);
 
         if (checked) {
-            selectedFilters.push(this.options.id);
+            selectedFilters.push(filterId);
+            app.utils.trackEvent('filters', 'check', filterId);
         } else {
-            selectedFilters = _.without(selectedFilters, this.options.id);
+            selectedFilters = _.without(selectedFilters, filterId);
+            app.utils.trackEvent('filters', 'uncheck', filterId);
         }
 
         app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));

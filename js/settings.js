@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.settings = {
-    debug: true,
+    debug: false,
 
     version: '2.1.1',
 

@@ -55,6 +55,7 @@ app.ObjectsView = app.PageView.extend({
         app.PageView.prototype.attach.call(this, container);
         this.initialObjects = app.utils.loadArrayData('objects');
 
+        app.utils.trackPage('objects');
         app.utils.log('objects:attach:end');
         return this;
     },

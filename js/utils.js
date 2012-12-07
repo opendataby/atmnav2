@@ -92,7 +92,7 @@ app.utils = {
         if (relatedForObjects.indexOf('spec:related') == -1) {
             return [];
         }
-        
+
         var related = [];
         _.each(relatedForObjects, function(object) {
             related = related.concat(app.settings.related[object] || []);
@@ -110,8 +110,7 @@ app.utils = {
 
         if (!selectedObjects.length && !selectedFilters.length) {
             return tr('No banks and filters selected!');
-        } 
-        else if (!selectedObjects.length) {
+        } else if (!selectedObjects.length) {
             return tr('No banks selected!');
         } else if (!selectedFilters.length) {
             return tr('No filters selected!');
@@ -153,5 +152,28 @@ app.utils = {
         }
 
         app.utils.log('utils:setDefaults:end');
-    }
+    },
+
+    trackEvent: function(category, action, opt_label, opt_value, opt_noninteraction) {
+        if (app.settings.debug) {
+            return;
+        }
+
+        var _gaq = _gaq || [];
+        var trackData = ['_trackEvent'];
+
+        _.each(arguments, function(arg) {
+            trackData.push(arg);
+        });
+        _gaq.push(trackData);
+    },
+
+    trackPage: function(page) {
+        if (app.settings.debug) {
+            return;
+        }
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_trackPageview', page]);
+    },
 };

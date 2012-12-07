@@ -33,6 +33,7 @@ app.FiltersView = app.PageView.extend({
         app.PageView.prototype.attach.call(this, container);
         this.initialFilters = app.utils.loadArrayData('filters');
 
+        app.utils.trackPage('filters');
         app.utils.log('filters:attach:end');
         return this;
     },
