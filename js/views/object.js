@@ -18,8 +18,9 @@ app.ObjectView = Backbone.View.extend({
             return;
         }
 
+        var objectId = this.options.id;
         var checked = element.toggleClass('checked').hasClass('checked');
-        if (this.options.id === 'spec:all') {
+        if (objectId === 'spec:all') {
             element.siblings().toggleClass('disabled', checked);
         }
 
@@ -27,9 +28,11 @@ app.ObjectView = Backbone.View.extend({
         var selectedObjects = app.utils.loadArrayData(storageKey);
 
         if (checked) {
-            selectedObjects.push(this.options.id);
+            selectedObjects.push(objectId);
+            app.utils.trackEvent('objects', 'check', objectId);
         } else {
-            selectedObjects = _.without(selectedObjects, this.options.id);
+            selectedObjects = _.without(selectedObjects, objectId);
+            app.utils.trackEvent('objects', 'uncheck', objectId);
         }
 
         app.router.objectsView.selectRelatedObjects.call(this, selectedObjects, element.siblings().add(element));

@@ -27,6 +27,7 @@ app.MapView = app.PageView.extend({
         app.PageView.prototype.attach.call(this, container);
         this.map.invalidateSize();
 
+        app.utils.trackPage('map');
         app.utils.log('map:attach:end');
         return this;
     },
