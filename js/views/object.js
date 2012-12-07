@@ -29,10 +29,8 @@ app.ObjectView = Backbone.View.extend({
 
         if (checked) {
             selectedObjects.push(objectId);
-            app.utils.trackEvent('objects', 'check', objectId);
         } else {
             selectedObjects = _.without(selectedObjects, objectId);
-            app.utils.trackEvent('objects', 'uncheck', objectId);
         }
 
         app.router.objectsView.selectRelatedObjects.call(this, selectedObjects, element.siblings().add(element));

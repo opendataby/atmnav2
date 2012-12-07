@@ -174,10 +174,16 @@ app.MapView = app.PageView.extend({
         app.utils.log('map:deleteMarkers:end');
     },
 
-    onFetchError: function() {
+    onFetchError: function(jqXHR, textStatus, errorThrown) {
         app.utils.log('map:onFetchError');
 
         alert(tr('Could not load data from the server. Please try again later.'));
+
+        var deviceInfo = '';
+        if (window.device) {
+            deviceInfo = [device.platform, device.name, device.version].join(' | ');
+        }
+        app.utils.trackEvent('ajax', 'error', textStatus, deviceInfo);
     },
 
     onFetchSuccess: function(data) {
@@ -206,6 +212,7 @@ app.MapView = app.PageView.extend({
             markersArray.push(marker);
         });
 
+        app.utils.trackEvent('ajax', 'success');
         app.utils.log('map:onFetchSuccess:end');
     },
 
