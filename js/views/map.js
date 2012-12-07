@@ -59,6 +59,7 @@ app.MapView = app.PageView.extend({
         app.router.mapView.updateMarkers();
         $('.locate-icon', this.$el).removeClass('loading-icon');
         alert(tr('Could not determine the current position.'));
+        app.utils.trackEvent('geolocation', 'error', app.utils.getDeviceInfo());
     },
 
     moveToLocation: function() {
@@ -179,11 +180,7 @@ app.MapView = app.PageView.extend({
 
         alert(tr('Could not load data from the server. Please try again later.'));
 
-        var deviceInfo = '';
-        if (window.device) {
-            deviceInfo = [device.platform, device.name, device.version].join(' | ');
-        }
-        app.utils.trackEvent('ajax', 'error', textStatus, deviceInfo);
+        app.utils.trackEvent('ajax', 'error', textStatus, app.utils.getDeviceInfo());
     },
 
     onFetchSuccess: function(data) {
@@ -212,7 +209,6 @@ app.MapView = app.PageView.extend({
             markersArray.push(marker);
         });
 
-        app.utils.trackEvent('ajax', 'success');
         app.utils.log('map:onFetchSuccess:end');
     },
 

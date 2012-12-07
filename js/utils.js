@@ -176,4 +176,25 @@ app.utils = {
         var _gaq = _gaq || [];
         _gaq.push(['_trackPageview', page]);
     },
+
+    getDeviceInfo: function() {
+        if (!window.device) {
+            return 'unknown';
+        }
+
+        var connectionType = 'Unknown connection';
+        if (window.navigator.connection && window.Connection) {
+            var states = {};
+            states[window.Connection.UNKNOWN] = 'Unknown connection';
+            states[window.Connection.ETHERNET] = 'Ethernet connection';
+            states[window.Connection.WIFI] = 'WiFi connection';
+            states[window.Connection.CELL_2G] = 'Cell 2G connection';
+            states[window.Connection.CELL_3G] = 'Cell 3G connection';
+            states[window.Connection.CELL_4G] = 'Cell 4G connection';
+            states[window.Connection.NONE] = 'No network connection';
+            var connectionType = states[window.navigator.connection.type];
+        }
+
+        return [device.platform, device.name, device.version, connectionType].join(' | ');
+    }
 };
