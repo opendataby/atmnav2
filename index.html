@@ -187,8 +187,13 @@
             _gaq.push(['_trackPageview']);
 
             window.onerror = function(msg, url, line) {
-                _gaq.push(['_trackEvent', 'JS Error', msg, navigator.userAgent + ' -> ' + url + " : " + line, 0, true]);
-                return true;
+                if (window.device) {
+                    _gaq.push(['_trackEvent', 'JS Error', msg, 
+                               navigator.userAgent + ' -> ' + url + " : " + line, 0, true]);
+                    return true;
+                } else {
+                    return false;
+                }
             };
 
             (function() {
