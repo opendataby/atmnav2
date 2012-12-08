@@ -5,16 +5,16 @@ app.utils = {
         try {
             return JSON.parse(localStorage.getItem(keyName)) || [];
         } catch (e) {
+            app.utils.trackEvent('localStorage', 'loadArrayData', 'error', keyName);
             return [];
         }
     },
 
     loadData: function(keyName) {
         try {
-            app.utils.log('Loading data from localStorage for keyName: ' + keyName);
             return JSON.parse(localStorage.getItem(keyName));
         } catch (e) {
-            app.utils.log("Can't load data for keyName: " + keyName);
+            app.utils.trackEvent('localStorage', 'loadData', 'error', keyName);
             return false;
         }
     },
