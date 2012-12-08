@@ -3,7 +3,7 @@ var app = app || {};
 app.settings = {
     debug: false,
 
-    version: '2.1.1',
+    version: '2.1.2',
 
     vibrateMilliseconds: 40,
     ajaxTimeout: 15000, // 15 sec
