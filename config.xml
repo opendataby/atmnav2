@@ -4,8 +4,8 @@
     xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id = "com.appspot.atmnavigator_minsk"
-    versionCode = "211"
-    version = "2.1.1">
+    versionCode = "212"
+    version = "2.1.2">
 
     <name>ATM Навигатор</name>
 
