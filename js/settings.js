@@ -20,7 +20,7 @@ app.settings = {
     },
 
     geolocationOptions: {
-        timeout: 10000, // 10 sec
+        timeout: 15000, // 15 sec
         enableHighAccuracy: true
     },
 
