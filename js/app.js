@@ -1,5 +1,5 @@
-app.utils.setDefaults();
+window.app.utils.setDefaults();
 
 jQuery.ajaxSetup({
-    timeout: app.settings.ajaxTimeout
+    timeout: window.app.settings.ajaxTimeout
 });
