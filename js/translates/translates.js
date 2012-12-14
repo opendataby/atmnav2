@@ -1,7 +1,7 @@
-(function($, window) {
-    window.app.tr = {
-        'default': window.app.settings.language['default'],
-        language: window.app.settings.language['default'],
+(function($, app) {
+    app.tr = {
+        'default': app.settings.language['default'],
+        language: app.settings.language['default'],
 
         translate: function(data) {
             if (!data) {
@@ -11,7 +11,7 @@
             if (typeof data === 'object') {
                 return data && data.hasOwnProperty(this.language) ? data[this.language] : data[this['default']];
             } else {
-                var dictionary = window.app.tr[this.language];
+                var dictionary = app.tr[this.language];
                 return dictionary && dictionary.hasOwnProperty(data) ? dictionary[data] : data;
             }
         },
@@ -24,6 +24,6 @@
     };
 
     window.tr = function(data) {
-        return window.app.tr.translate(data);
+        return app.tr.translate(data);
     };
-})(jQuery, window);
+})(jQuery, window.app);

@@ -1,10 +1,10 @@
-(function(_, window) {
-    window.app.utils = {
+(function(_, app) {
+    app.utils = {
         loadArrayData: function(keyName) {
             try {
                 return JSON.parse(localStorage.getItem(keyName)) || [];
             } catch (e) {
-                window.app.utils.trackEvent('localStorage', 'loadArrayData', 'error', keyName);
+                app.utils.trackEvent('localStorage', 'loadArrayData', 'error', keyName);
                 return [];
             }
         },
@@ -13,7 +13,7 @@
             try {
                 return JSON.parse(localStorage.getItem(keyName));
             } catch (e) {
-                window.app.utils.trackEvent('localStorage', 'loadData', 'error', keyName);
+                app.utils.trackEvent('localStorage', 'loadData', 'error', keyName);
                 return false;
             }
         },
@@ -25,7 +25,7 @@
         },
 
         log: function(args) {
-            if (!window.app.settings.debug) {
+            if (!app.settings.debug) {
                 return;
             }
 
@@ -55,8 +55,8 @@
                     !computedStyle['-webkit-overflow-scrolling'] &&
                     !computedStyle['-moz-overflow-scrolling'] &&
                     !computedStyle['-o-overflow-scrolling']) {
-                    if (!window.app.utils.isTouchMovePreventDefault) {
-                        window.app.utils.isTouchMovePreventDefault = true;
+                    if (!app.utils.isTouchMovePreventDefault) {
+                        app.utils.isTouchMovePreventDefault = true;
                         document.addEventListener('touchmove', function(e) {
                             e.preventDefault();
                         }, false);
@@ -85,8 +85,8 @@
         },
 
         getRelatedObjects: function(relatedForObjects) {
-            window.app.utils.log('utils:getRelatedObjects:start');
-            window.app.utils.log('utils:getRelatedObjects:relatedForObjects=' + relatedForObjects);
+            app.utils.log('utils:getRelatedObjects:start');
+            app.utils.log('utils:getRelatedObjects:relatedForObjects=' + relatedForObjects);
 
             if (relatedForObjects.indexOf('spec:related') == -1) {
                 return [];
@@ -94,12 +94,12 @@
 
             var related = [];
             _.each(relatedForObjects, function(object) {
-                related = related.concat(window.app.settings.related[object] || []);
+                related = related.concat(app.settings.related[object] || []);
             });
 
             related = _.uniq(_.difference(related, relatedForObjects));
 
-            window.app.utils.log('utils:getRelatedObjects:end');
+            app.utils.log('utils:getRelatedObjects:end');
 
             return related;
         },
@@ -125,36 +125,36 @@
         },
 
         setDefaults: function() {
-            window.app.utils.log('utils:setDefaults:start');
+            app.utils.log('utils:setDefaults:start');
 
             if (localStorage.getItem('theFirstStart') === undefined ||
                 localStorage.getItem('theFirstStart') === null ||
-                window.app.utils.loadData('theFirstStart')) {
+                app.utils.loadData('theFirstStart')) {
 
-                window.app.utils.saveData('theFirstStart', false);
+                app.utils.saveData('theFirstStart', false);
 
-                var currentObjects = window.app.utils.loadArrayData('objects');
+                var currentObjects = app.utils.loadArrayData('objects');
                 if (currentObjects.length) {
-                    var deprecatedObjects = _.difference(currentObjects, window.app.settings.objects);
-                    window.app.utils.saveData('objects', _.difference(currentObjects, deprecatedObjects));
+                    var deprecatedObjects = _.difference(currentObjects, app.settings.objects);
+                    app.utils.saveData('objects', _.difference(currentObjects, deprecatedObjects));
                 } else {
-                    window.app.utils.saveData('objects', window.app.settings.defaultObjects);
+                    app.utils.saveData('objects', app.settings.defaultObjects);
                 }
 
-                var currentFilters = window.app.utils.loadArrayData('filters');
+                var currentFilters = app.utils.loadArrayData('filters');
                 if (currentFilters.length) {
-                    var deprecatedFilters = _.difference(currentFilters, window.app.settings.filters);
-                    window.app.utils.saveData('filters', _.difference(currentFilters, deprecatedFilters));
+                    var deprecatedFilters = _.difference(currentFilters, app.settings.filters);
+                    app.utils.saveData('filters', _.difference(currentFilters, deprecatedFilters));
                 } else {
-                    window.app.utils.saveData('filters', window.app.settings.defaultFilters);
+                    app.utils.saveData('filters', app.settings.defaultFilters);
                 }
             }
 
-            window.app.utils.log('utils:setDefaults:end');
+            app.utils.log('utils:setDefaults:end');
         },
 
         trackEvent: function(category, action, opt_label, opt_value, opt_noninteraction) {
-            if (window.app.settings.debug) {
+            if (app.settings.debug) {
                 return;
             }
 
@@ -168,7 +168,7 @@
         },
 
         trackPage: function(page) {
-            if (window.app.settings.debug) {
+            if (app.settings.debug) {
                 return;
             }
 
@@ -197,4 +197,4 @@
             return [device.platform, device.name, device.version, connectionType].join(' | ');
         }
     };
-})(_, window);
+})(_, window.app);

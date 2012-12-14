@@ -1,4 +1,4 @@
-(function($, Backbone, window) {
+(function($, Backbone, app) {
     var AppRouter = Backbone.Router.extend({
         container: $('.nt-content'),
         tabs: $('.nt-nav-tab-link'),
@@ -44,35 +44,35 @@
         },
 
         map: function() {
-            window.app.utils.log('#map link clicked');
-            this.switchToView(this.mapView || (this.mapView = new window.app.MapView()), '[href="#map"]');
-            window.app.utils.trackPage('map');
+            app.utils.log('#map link clicked');
+            this.switchToView(this.mapView || (this.mapView = new app.MapView()), '[href="#map"]');
+            app.utils.trackPage('map');
         },
 
         objects: function() {
-            window.app.utils.log('#banks link clicked');
-            this.switchToView(this.objectsView || (this.objectsView = new window.app.ObjectsView()), '[href="#banks"]');
-            window.app.utils.trackPage('objects');
+            app.utils.log('#banks link clicked');
+            this.switchToView(this.objectsView || (this.objectsView = new app.ObjectsView()), '[href="#banks"]');
+            app.utils.trackPage('objects');
         },
 
         filters: function() {
-            window.app.utils.log('#filters link clicked');
-            this.switchToView(this.filtersView || (this.filtersView = new window.app.FiltersView()), '[href="#filters"]');
-            window.app.utils.trackPage('filters');
+            app.utils.log('#filters link clicked');
+            this.switchToView(this.filtersView || (this.filtersView = new app.FiltersView()), '[href="#filters"]');
+            app.utils.trackPage('filters');
         },
 
         about: function() {
-            window.app.utils.log('#about link clicked');
-            this.switchToView(this.aboutView || (this.aboutView = new window.app.AboutView()), '[href="#about"]');
-            window.app.utils.trackPage('about');
+            app.utils.log('#about link clicked');
+            this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()), '[href="#about"]');
+            app.utils.trackPage('about');
         }/** unused:start */,
 
         moreInfo: function(id) {
-            window.app.utils.log('#more-info link clicked');
-            this.switchToView(new window.app.MoreInfoView({id: id}));
+            app.utils.log('#more-info link clicked');
+            this.switchToView(new app.MoreInfoView({id: id}));
         }
         /** unused:end */
     });
 
-    window.app.router = new AppRouter();
-})(jQuery, Backbone, window);
+    app.router = new AppRouter();
+})(jQuery, Backbone, window.app);

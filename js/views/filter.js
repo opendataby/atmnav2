@@ -1,17 +1,17 @@
-(function($, _, Backbone, window) {
-    window.app.FilterView = Backbone.View.extend({
+(function($, _, Backbone, app) {
+    app.FilterView = Backbone.View.extend({
         events: {
             'click': 'onChange'
         },
 
         make: function() {
-            window.app.utils.log('filter:make');
+            app.utils.log('filter:make');
 
             return this.options.template(this.options);
         },
 
         onChange: function(event) {
-            window.app.utils.log('filter:onChange:start');
+            app.utils.log('filter:onChange:start');
 
             var filterId = this.options.id;
             var element = $(event.target).closest('.nt-list-item');
@@ -26,9 +26,9 @@
                 selectedFilters = _.without(selectedFilters, filterId);
             }
 
-            window.app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedFilters)));
 
-            window.app.utils.log('filter:onChange:end');
+            app.utils.log('filter:onChange:end');
         }
     });
-})(jQuery, _, Backbone, window);
+})(jQuery, _, Backbone, window.app);
