@@ -1,5 +1,5 @@
-(function(window) {
-    window.app.tr.ru = {
+(function(app) {
+    app.tr.ru = {
         // Navigation section
         "Map": "Карта",
         "Banks": "Банки",
@@ -96,4 +96,4 @@
         "Max Usachev": "Максим Усачев",
         "Pavel Tyslyatsky": "Павел Тысляцкий"
     };
-})(window);
+})(window.app);

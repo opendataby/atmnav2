@@ -1,17 +1,17 @@
-(function($, _, Backbone, window) {
-    window.app.ObjectView = Backbone.View.extend({
+(function($, _, Backbone, app) {
+    app.ObjectView = Backbone.View.extend({
         events: {
             'click': 'onChange'
         },
 
         make: function() {
-            window.app.utils.log('object:make');
+            app.utils.log('object:make');
 
             return this.options.template(this.options);
         },
 
         onChange: function(event) {
-            window.app.utils.log('object:onChange:start');
+            app.utils.log('object:onChange:start');
 
             var element = $(event.target).closest('.nt-list-item');
 
@@ -26,7 +26,7 @@
             }
 
             var storageKey = 'objects';
-            var selectedObjects = window.app.utils.loadArrayData(storageKey);
+            var selectedObjects = app.utils.loadArrayData(storageKey);
 
             if (checked) {
                 selectedObjects.push(objectId);
@@ -34,11 +34,11 @@
                 selectedObjects = _.without(selectedObjects, objectId);
             }
 
-            window.app.router.objectsView.selectRelatedObjects.call(this, selectedObjects, element.siblings().add(element));
+            app.router.objectsView.selectRelatedObjects.call(this, selectedObjects, element.siblings().add(element));
 
-            window.app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));
+            app.utils.saveData(storageKey, _.compact(_.uniq(selectedObjects)));
 
-            window.app.utils.log('object:onChange:end');
+            app.utils.log('object:onChange:end');
         }
     });
-})(jQuery, _, Backbone, window);
+})(jQuery, _, Backbone, window.app);

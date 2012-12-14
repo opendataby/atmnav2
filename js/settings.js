@@ -1,5 +1,5 @@
-(function(window) {
-    window.app.settings = {
+(function(app) {
+    app.settings = {
         debug: false,
 
         version: '2.1.2',
@@ -119,4 +119,4 @@
             'default': 'ru'
         }
     };
-})(window);
+})(window.app);

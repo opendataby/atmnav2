@@ -1,5 +1,5 @@
-(function(Backbone, window) {
-    window.app.PageView = Backbone.View.extend({
+(function(Backbone, app) {
+    app.PageView = Backbone.View.extend({
         attach: function(container) {
             this.$el.appendTo(container);
             this.delegateEvents();
@@ -12,4 +12,4 @@
             return this;
         }
     });
-})(Backbone, window);
+})(Backbone, window.app);

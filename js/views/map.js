@@ -1,5 +1,5 @@
-(function($, _, window) {
-    window.window.app.MapView = window.window.app.PageView.extend({
+(function($, _, app) {
+    window.app.MapView = window.app.PageView.extend({
         className: 'nt-map-page',
 
         markersArray: [],
@@ -9,62 +9,62 @@
         currentPositionMarker: null,
 
         initialize: function() {
-            window.app.utils.log('map:initialize:start');
+            app.utils.log('map:initialize:start');
 
-            var latLng = window.app.utils.loadData('mapLastLocation') || window.app.settings.defaultLatLng;
-            var map = this.map = L.map(this.el, _.extend(window.app.settings.mapOptions, {center: latLng}));
-            L.tileLayer(window.app.settings.mapTileUrlTemplate).addTo(map);
+            var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
+            var map = this.map = L.map(this.el, _.extend(app.settings.mapOptions, {center: latLng}));
+            L.tileLayer(app.settings.mapTileUrlTemplate).addTo(map);
 
             this.addMapControls();
             this.addMapEvents();
             this.moveToLocation();
 
-            window.app.utils.log('map:initialize:end');
+            app.utils.log('map:initialize:end');
         },
 
         attach: function(container) {
-            window.app.utils.log('map:attach:start');
+            app.utils.log('map:attach:start');
 
-            window.app.PageView.prototype.attach.call(this, container);
+            app.PageView.prototype.attach.call(this, container);
             this.map.invalidateSize();
 
-            window.app.utils.log('map:attach:end');
+            app.utils.log('map:attach:end');
             return this;
         },
 
         detach: function() {
-            window.app.PageView.prototype.detach.call(this);
+            app.PageView.prototype.detach.call(this);
             this.map.closePopup();
             return this;
         },
 
         onGeolocationSuccess: function(latLng) {
-            window.app.utils.log('map:onGeolocationSuccess:start');
+            app.utils.log('map:onGeolocationSuccess:start');
 
             $('.locate-icon', this.$el).removeClass('loading-icon');
             this.createOrUpdateCurrentPositionMarker(latLng);
             this.map.panTo(latLng);
             this.updateMarkers();
-            window.app.utils.saveData('mapLastLocation', latLng);
+            app.utils.saveData('mapLastLocation', latLng);
 
             if (window.navigator.notification) {
-                window.navigator.notification.vibrate(window.app.settings.vibrateMilliseconds);
+                window.navigator.notification.vibrate(app.settings.vibrateMilliseconds);
             }
 
-            window.app.utils.log('map:onGeolocationSuccess:end');
+            app.utils.log('map:onGeolocationSuccess:end');
         },
 
         onGeolocationError: function() {
-            window.app.utils.log('map:onGeolocationError');
+            app.utils.log('map:onGeolocationError');
 
-            window.app.router.mapView.updateMarkers();
+            app.router.mapView.updateMarkers();
             $('.locate-icon', this.$el).removeClass('loading-icon');
             alert(tr('Could not determine the current position.'));
-            window.app.utils.trackEvent('geolocation', 'error', window.app.utils.getDeviceInfo());
+            app.utils.trackEvent('geolocation', 'error', app.utils.getDeviceInfo());
         },
 
         moveToLocation: function() {
-            window.app.utils.log('map:moveToLocation:start');
+            app.utils.log('map:moveToLocation:start');
 
             this.map.closePopup();
 
@@ -75,10 +75,10 @@
                     var lat = position.coords.latitude;
                     var lng = position.coords.longitude;
                     self.onGeolocationSuccess([lat, lng]);
-                }, this.onGeolocationError, window.app.settings.geolocationOptions);
+                }, this.onGeolocationError, app.settings.geolocationOptions);
             }
 
-            window.app.utils.log('map:moveToLocation:end');
+            app.utils.log('map:moveToLocation:end');
         },
 
         addMapControl: function(title, position, className, handler, context) {
@@ -102,7 +102,7 @@
         },
 
         addMapControls: function() {
-            window.app.utils.log('map:addMapControls:start');
+            app.utils.log('map:addMapControls:start');
 
             var self = this;
             if (L.Browser.mobile) {
@@ -115,11 +115,11 @@
                 this.addMapControl(tr('Locate'), 'topleft', 'locate-icon', self.moveToLocation, self);
             }
 
-            window.app.utils.log('map:addMapControls:end');
+            app.utils.log('map:addMapControls:end');
         },
 
         addMapEvents: function() {
-            window.app.utils.log('map:addMapEvents:start');
+            app.utils.log('map:addMapEvents:start');
 
             var map = this.map;
             map.on('popupclose', function(event) {
@@ -130,11 +130,11 @@
                 }
             });
 
-            window.app.utils.log('map:addMapEvents:end');
+            app.utils.log('map:addMapEvents:end');
         },
 
         createOrUpdateCurrentPositionMarker: function(latLng) {
-            window.app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
+            app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
             var self = this;
             if (!this.currentPositionMarker) {
@@ -160,11 +160,11 @@
             }
             this.currentPositionMarker.setLatLng(latLng);
 
-            window.app.utils.log('map:createOrUpdateCurrentPositionMarker:end');
+            app.utils.log('map:createOrUpdateCurrentPositionMarker:end');
         },
 
         deleteMarkers: function() {
-            window.app.utils.log('map:deleteMarkers:start');
+            app.utils.log('map:deleteMarkers:start');
 
             var map = this.map;
             _.each(this.markersArray, function(marker) {
@@ -173,19 +173,19 @@
 
             this.markersArray = [];
 
-            window.app.utils.log('map:deleteMarkers:end');
+            app.utils.log('map:deleteMarkers:end');
         },
 
         onFetchError: function(jqXHR, textStatus, errorThrown) {
-            window.app.utils.log('map:onFetchError');
+            app.utils.log('map:onFetchError');
 
             alert(tr('Could not load data from the server. Please try again later.'));
 
-            window.app.utils.trackEvent('ajax', 'error', textStatus, window.app.utils.getDeviceInfo());
+            app.utils.trackEvent('ajax', 'error', textStatus, app.utils.getDeviceInfo());
         },
 
         onFetchSuccess: function(data) {
-            window.app.utils.log('map:onFetchSuccess:start');
+            app.utils.log('map:onFetchSuccess:start');
 
             var map = this.map;
             var instance = this;
@@ -210,11 +210,11 @@
                 markersArray.push(marker);
             });
 
-            window.app.utils.log('map:onFetchSuccess:end');
+            app.utils.log('map:onFetchSuccess:end');
         },
 
         showInfoWindow: function() {
-            window.app.utils.log('map:showInfoWindow:start');
+            app.utils.log('map:showInfoWindow:start');
 
             var options = this.options;
             var markerLatLng = this.getLatLng();
@@ -222,7 +222,7 @@
             var currentPosition = options.instance.currentPositionMarker;
 
             if (currentPosition) {
-                markerData.distance = window.app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));
+                markerData.distance = app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));
             }
 
             this.setOpacity(0);
@@ -233,25 +233,25 @@
                 minWidth: 260
             }).setLatLng(markerLatLng).setContent(options.infoWindowTemplate(markerData)).openOn(options.map);
 
-            window.app.utils.log('map:showInfoWindow:end');
+            app.utils.log('map:showInfoWindow:end');
         },
 
         fetchMarkers: function(args) {
-            window.app.utils.log('map:fetchMarkers:start');
+            app.utils.log('map:fetchMarkers:start');
 
-            var selectedObjects = window.app.utils.loadArrayData('objects');
-            var selectedFilters = window.app.utils.loadArrayData('filters');
+            var selectedObjects = app.utils.loadArrayData('objects');
+            var selectedFilters = app.utils.loadArrayData('filters');
 
             if (!selectedObjects.length || !selectedFilters.length ||
                 !_.without(selectedObjects, 'spec:related').length) {
 
                 this.deleteMarkers();
-                var message = window.app.utils.getMessageNoSelection(selectedObjects, selectedFilters);
-                window.app.utils.alert(message, tr('Alert'));
+                var message = app.utils.getMessageNoSelection(selectedObjects, selectedFilters);
+                app.utils.alert(message, tr('Alert'));
                 return;
             }
 
-            window.app.remote.fetchMarkers({
+            app.remote.fetchMarkers({
                 objects: selectedObjects,
                 filters: selectedFilters,
                 center: args,
@@ -260,18 +260,18 @@
                 context: this
             });
 
-            window.app.utils.log('map:fetchMarkers:end');
+            app.utils.log('map:fetchMarkers:end');
         },
 
         updateMarkers: function() {
-            window.app.utils.log('map:updateMarkers:start');
+            app.utils.log('map:updateMarkers:start');
 
             var self = this;
             setTimeout(function() {
                 self.fetchMarkers(self.map.getCenter());
             }, 10);
 
-            window.app.utils.log('map:updateMarkers:end');
+            app.utils.log('map:updateMarkers:end');
         }
     });
-})(jQuery, _, window);
+})(jQuery, _, window.app);
