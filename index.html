@@ -106,6 +106,22 @@
             </div>
         </script>
 
+        <script type="text/template" id="create-template">
+            <div class="nt-create-page">
+                <div class="nt-create-description">
+                    <p>Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте.</p>
+                </div>
+                <form>
+                    <label for="provider"><%= tr("Provider") %>:</label><input type="text" name="provider" placeholder="Баларусбанк, Приорбанк, ..." autofocus maxlength="30" required="required"/>
+                    <p><%= tr("Object type") %>:</p><input type="text" name="object_type" placeholder="Банк, банкомат, терминал, ..." maxlength="30" required="required"/>
+                    <p><%= tr("Address") %>:</p><input type="text" name="address" placeholder="ул. Восточная, д.20" maxlength="50"/>
+                    <p><%= tr("Place") %>:</p><input type="text" name="place" placeholder="ст.метро Московская" maxlength="60"/>
+                    <p><%= tr("Comments") %>:</p><input type="text" name="comments" placeholder="дополнительная информация" maxlength="100"/>
+                    <br/><input type="submit" />
+                </form>
+            </div>
+        </script>
+
         <!--/** unused:start */-->
         <script type="text/template" id="more-info-template">
             <div class="nt-info-container">
@@ -230,6 +246,7 @@
         <script src="js/views/object.js"></script>
         <script src="js/views/objects.js"></script>
         <script src="js/views/about.js"></script>
+        <script src="js/views/create.js"></script>
         <!--/** unused:start */-->
         <script src="js/views/more-info.js"></script>
         <!--/** unused:end */-->

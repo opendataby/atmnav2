@@ -107,12 +107,14 @@
             var self = this;
             if (L.Browser.mobile) {
                 this.addMapControl(tr('Locate'), 'topright', 'locate-icon', self.moveToLocation, self);
+                this.addMapControl(tr('Request new point'), 'topright', 'locate-icon', self.toCreateMode, self);
                 this.addMapControl(tr('Zoom Out'), 'bottomright', 'zoom-out-icon', this.map.zoomOut);
                 this.addMapControl(tr('Zoom In'), 'bottomright', 'zoom-in-icon', this.map.zoomIn);
             } else {
                 this.addMapControl(tr('Zoom In'), 'topleft', 'zoom-in-icon', this.map.zoomIn);
                 this.addMapControl(tr('Zoom Out'), 'topleft', 'zoom-out-icon', this.map.zoomOut);
                 this.addMapControl(tr('Locate'), 'topleft', 'locate-icon', self.moveToLocation, self);
+                this.addMapControl(tr('Request new point'), 'topleft', 'locate-icon', self.toCreateMode, self);
             }
 
             app.utils.log('map:addMapControls:end');
@@ -131,6 +133,10 @@
             });
 
             app.utils.log('map:addMapEvents:end');
+        },
+
+        toCreateMode: function() {
+            app.router.navigate('create');
         },
 
         createOrUpdateCurrentPositionMarker: function(latLng) {
