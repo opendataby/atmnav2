@@ -112,12 +112,22 @@
                     <p>Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте.</p>
                 </div>
                 <form>
-                    <label for="provider"><%= tr("Provider") %>:</label><input type="text" name="provider" placeholder="Баларусбанк, Приорбанк, ..." autofocus maxlength="30" required="required"/>
-                    <p><%= tr("Object type") %>:</p><input type="text" name="object_type" placeholder="Банк, банкомат, терминал, ..." maxlength="30" required="required"/>
-                    <p><%= tr("Address") %>:</p><input type="text" name="address" placeholder="ул. Восточная, д.20" maxlength="50"/>
-                    <p><%= tr("Place") %>:</p><input type="text" name="place" placeholder="ст.метро Московская" maxlength="60"/>
-                    <p><%= tr("Comments") %>:</p><input type="text" name="comments" placeholder="дополнительная информация" maxlength="100"/>
-                    <br/><input type="submit" />
+                    <label for="provider"><%= tr("Provider") %>:</label><br/>
+                    <input type="text" name="provider" placeholder="Баларусбанк, Приорбанк, ..." autofocus maxlength="30" required="required"/><br/>
+
+                    <label for="object_type"><%= tr("Object type") %>:</label><br/>
+                    <input type="text" name="object_type" placeholder="Банк, банкомат, терминал, ..." maxlength="30" required="required"/><br/>
+
+                    <label for="address"><%= tr("Address") %>:</label><br/>
+                    <input type="text" name="address" placeholder="ул. Восточная, д.20" maxlength="50"/><br/>
+
+                    <label for="place"><%= tr("Place") %>:</label><br/>
+                    <input type="text" name="place" placeholder="ст.метро Московская" maxlength="60"/><br/>
+
+                    <label for="comments"><%= tr("Comments") %>:</label><br/>
+                    <input type="text" name="comments" placeholder="дополнительная информация" maxlength="100"/><br/>
+
+                    <input type="submit" />
                 </form>
             </div>
         </script>

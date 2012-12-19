@@ -27,6 +27,12 @@
         "km": "км",
         "m": "м",
 
+        // Create mode
+        "Provider": "Банк",
+        "Object type": "Тип объекта",
+        "Place": "Расположение",
+        "Comments": "Доп. информация",
+
         // Warnings
         "Alert": "Предупреждение",
         "Could not determine the current position.": "Не удалось определить текущее положение.",
