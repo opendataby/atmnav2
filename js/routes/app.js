@@ -17,6 +17,7 @@
             'banks': 'objects',
             'filters': 'filters',
             'about': 'about',
+            'create': 'create',
             /** unused:start */
             'more-info/:id': 'moreInfo',
             /** unused:end */
@@ -65,6 +66,12 @@
             app.utils.log('#about link clicked');
             this.switchToView(this.aboutView || (this.aboutView = new app.AboutView()), '[href="#about"]');
             app.utils.trackPage('about');
+        },
+
+        create: function() {
+            app.utils.log('#create link clicked');
+            this.switchToView(this.createView || (this.createView = new app.CreateView()));
+            app.utils.trackPage('create');
         }/** unused:start */,
 
         moreInfo: function(id) {
