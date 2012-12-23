@@ -41,6 +41,10 @@ glyphs:
     code: 0x6c # l
     css: location
 
+  - file: position-add
+    code: 0x61 # a
+    css: position add
+
   - file: check
     code: 0x76 # v
     css: check

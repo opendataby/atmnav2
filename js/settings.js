@@ -91,7 +91,6 @@
             'bps': ['belarus', 'prior'],
             'bta': ['prior'],
             'bve': ['mm', 'techno', 'alfa', 'rrb', 'belswiss', 'sbb'],
-            'delta': [],
             'homecredit': [],
             'prior': ['belagroprom', 'mtb', 'bta', 'bps'],
             'mm': ['alfa', 'rrb', 'techno', 'bve', 'belswiss'],
