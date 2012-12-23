@@ -21,6 +21,11 @@
             });
 
             app.utils.trackEvent('ajax', 'get', JSON.stringify(params));
+        },
+
+        submitPoint: function(form) {
+            // DO NOTHING
+            return true;
         }
     };
 })(jQuery, window.app);

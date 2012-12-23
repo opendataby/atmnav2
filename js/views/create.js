@@ -10,8 +10,15 @@
             return _.template($('#create-template').html())();
         },
 
-        onSubmit: function() {
-            console.log(this.serialize());
+        onSubmit: function(event) {
+            console.log('create:onSubmit');
+
+            event.preventDefault();
+            event.stopPropagation();
+            var form = this.$el.find('.nt-create-form');
+            if (app.remote.submitPoint(form)) {
+                form.find('input').val('');
+            }
             return false;
         }
     });
