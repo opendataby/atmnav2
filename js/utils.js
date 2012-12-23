@@ -88,7 +88,7 @@
             app.utils.log('utils:getRelatedObjects:start');
             app.utils.log('utils:getRelatedObjects:relatedForObjects=' + relatedForObjects);
 
-            if (relatedForObjects.indexOf('spec:related') == -1) {
+            if (relatedForObjects.indexOf('spec:related') === -1) {
                 return [];
             }
 
@@ -191,7 +191,7 @@
                 states[window.Connection.CELL_3G] = 'Cell 3G connection';
                 states[window.Connection.CELL_4G] = 'Cell 4G connection';
                 states[window.Connection.NONE] = 'No network connection';
-                var connectionType = states[window.navigator.connection.type];
+                connectionType = states[window.navigator.connection.type];
             }
 
             return [device.platform, device.name, device.version, connectionType].join(' | ');

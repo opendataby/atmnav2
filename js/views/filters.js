@@ -3,7 +3,7 @@
         tagName: 'div',
         className: 'nt-list-page',
         _fastClick: null,
-        _iScroll: null,
+        _scroll: null,
 
         initialize: function(args) {
             app.utils.log('filters:initialize:start');

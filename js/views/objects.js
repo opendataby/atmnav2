@@ -3,7 +3,7 @@
         tagName: 'div',
         className: 'nt-list-page',
         _fastClick: null,
-        _iScroll: null,
+        _scroll: null,
         specialClasses: {
             'spec:all': 'nt-list-item-spec-all',
             'spec:related': 'nt-list-item-spec-related'
@@ -31,6 +31,7 @@
 
             this.selectRelatedObjects(selectedObjects, scroller.children());
             this.$el.append(scroller);
+            this._fastClick = new FastClick(this.el);
             this._scroll = new app.utils.Scroll(this.el);
 
             app.utils.log('objects:initialize:end');
