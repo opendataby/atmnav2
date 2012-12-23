@@ -1,5 +1,6 @@
 (function($, _, app) {
     app.CreateView = app.PageView.extend({
+        _scroll: null,
         events: {
             'submit': 'onSubmit'
         },
@@ -8,6 +9,10 @@
             app.utils.log('create:make');
 
             return _.template($('#create-template').html())();
+        },
+
+        initialize: function () {
+            this._scroll = new app.utils.Scroll(this.el);
         },
 
         onSubmit: function(event) {
