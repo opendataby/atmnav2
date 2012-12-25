@@ -22,7 +22,7 @@
 
     <preference name="phonegap-version" value="2.2.0" />
     <preference name="orientation" value="default" />
-    <preference name="android-minSdkVersion" value="8" />
+    <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
 
     <gap:plugin name="ChildBrowser" />
