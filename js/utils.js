@@ -1,4 +1,4 @@
-(function(_, app) {
+(function(_, app, global) {
     app.utils = {
         loadArrayData: function(keyName) {
             try {
@@ -158,13 +158,12 @@
                 return;
             }
 
-            var _gaq = _gaq || [];
             var trackData = ['_trackEvent'];
 
             _.each(arguments, function(arg) {
                 trackData.push(arg);
             });
-            _gaq.push(trackData);
+            global._gaq.push(trackData);
         },
 
         trackPage: function(page) {
@@ -172,8 +171,7 @@
                 return;
             }
 
-            var _gaq = _gaq || [];
-            _gaq.push(['_trackPageview', page]);
+            global._gaq.push(['_trackPageview', page]);
         },
 
         getDeviceInfo: function() {
@@ -197,4 +195,4 @@
             return [device.platform, device.name, device.version, connectionType].join(' | ');
         }
     };
-})(_, window.app);
+})(_, window.app, window);
