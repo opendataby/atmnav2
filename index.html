@@ -184,10 +184,10 @@
                     <% if (typeof(place) != "undefined" && place != "") {%>
                         <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
                     <%}%>
-                    <% if (typeof(time) != "undefined") {%>
+                    <% if (typeof(time) != "undefined" && time != "") {%>
                         <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
                     <%}%>
-                    <% if (typeof(phone) != "undefined") {%>
+                    <% if (typeof(phone) != "undefined" && phone != "") {%>
                         <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
                     <%}%>
                 </div>
