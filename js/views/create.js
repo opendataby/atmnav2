@@ -8,7 +8,9 @@
         make: function() {
             app.utils.log('create:make');
 
-            return _.template($('#create-template').html())();
+            return _.template($('#create-template').html())({
+                'items': app.settings.objects.slice(2)
+            });
         },
 
         initialize: function () {

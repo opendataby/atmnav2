@@ -106,28 +106,34 @@
             </div>
         </script>
 
-        <!--/** unused:start */-->
         <script type="text/template" id="create-template">
             <div class="nt-create-page">
                 <div class="nt-create-scroller">
                     <div class="nt-create-description">
                         <%= tr("On this page you can tell us about missing point.") %>
                     </div>
+
                     <form class="nt-create-form">
                         <label class="nt-create-label" for="provider"><%= tr("Provider") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="provider" placeholder="<%= tr("Belarusbank, Priorbank, ...") %>" autofocus maxlength="30" required="required"/><br/>
+                        <select class="nt-create-input" name="provider" size="1">
+                            <% _.each(items, function(item) { %>
+                                <option value="<%= item %>"><%= tr(item) %></option>
+                            <% })%>
+                        </select><br/>
 
                         <label class="nt-create-label" for="object_type"><%= tr("Object type") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="object_type" placeholder="<%= tr("Bank, atm, terminal, ...") %>" maxlength="30" required="required"/><br/>
+                        <select class="nt-create-input" name="object_type" size="1">
+                            <option value="bank"><%= tr("Bank") %></option>
+                            <option value="atm"><%= tr("Atm") %></option>
+                            <option value="terminal"><%= tr("Terminal") %></option>
+                            <option value="exchange"><%= tr("Exchange") %></option>
+                        </select><br/>
 
                         <label class="nt-create-label" for="address"><%= tr("Address") %>:</label><br/>
                         <input class="nt-create-input" type="text" name="address" placeholder="<%= tr("20 Vostochnaya streat") %>" maxlength="50"/><br/>
 
                         <label class="nt-create-label" for="place"><%= tr("Place") %>:</label><br/>
                         <input class="nt-create-input" type="text" name="place" placeholder="<%= tr("Moskowskaya underground") %>" maxlength="60"/><br/>
-
-                        <label class="nt-create-label" for="comments"><%= tr("Comments") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="comments" placeholder="<%= tr("additional information") %>" maxlength="100"/><br/>
 
                         <div class="nt-create-button-wrapper">
                             <button class="button"><%= tr("Submit") %></button>
@@ -136,7 +142,6 @@
                 </div>
             </div>
         </script>
-        <!--/** unused:end */-->
 
         <!--/** unused:start */-->
         <script type="text/template" id="more-info-template">
@@ -253,8 +258,8 @@
         <script src="js/views/object.js"></script>
         <script src="js/views/objects.js"></script>
         <script src="js/views/about.js"></script>
-        <!--/** unused:start */-->
         <script src="js/views/create.js"></script>
+        <!--/** unused:start */-->
         <script src="js/views/more-info.js"></script>
         <!--/** unused:end */-->
         <script src="js/views/panel.js"></script>
