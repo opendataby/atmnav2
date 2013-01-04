@@ -116,18 +116,18 @@
                 <div class="nt-create-scroller">
                     <div class="nt-create-description">
                         <%= tr("On this page you can tell us about missing point.") %>
-                    </div><br/>
+                    </div>
 
                     <form class="nt-create-form">
                         <label class="nt-create-label" for="provider"><%= tr("Provider") %>:</label><br/>
-                        <select class="nt-create-input" name="provider" size="1">
+                        <select class="nt-create-select" name="provider" size="1">
                             <% _.each(items, function(item) { %>
                                 <option value="<%= item %>"><%= tr(item) %></option>
                             <% })%>
                         </select><br/><br/>
 
                         <label class="nt-create-label" for="object_type"><%= tr("Object type") %>:</label><br/>
-                        <select class="nt-create-input" name="object_type" size="1">
+                        <select class="nt-create-select" name="object_type" size="1">
                             <option value="bank"><%= tr("Bank") %></option>
                             <option value="atm"><%= tr("Atm") %></option>
                             <option value="terminal"><%= tr("Terminal") %></option>
@@ -135,7 +135,7 @@
                         </select><br/><br/>
 
                         <label class="nt-create-label" for="address"><%= tr("Address") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="address"/><br/><br/>
+                        <input class="nt-create-input" type="text" name="address"/ placeholder="<%= tr("20 Vostochnaya street") %>"><br/><br/>
 
                         <label class="nt-create-label" for="place"><%= tr("Place") %>:</label><br/>
                         <input class="nt-create-input" type="text" name="place" placeholder="<%= tr("Moskowskaya underground") %>" maxlength="60"/><br/><br/>

@@ -13,10 +13,6 @@
             });
         },
 
-        initialize: function () {
-            this._scroll = new app.utils.Scroll(this.el);
-        },
-
         onSubmit: function(event) {
             console.log('create:onSubmit');
 
