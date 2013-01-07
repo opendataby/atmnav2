@@ -111,72 +111,6 @@
             </div>
         </script>
 
-        <script type="text/template" id="create-template">
-            <div class="nt-create-page">
-                <div class="nt-create-scroller">
-                    <div class="nt-create-description">
-                        <%= tr("On this page you can tell us about missing point.") %>
-                    </div>
-
-                    <form class="nt-create-form">
-                        <label class="nt-create-label" for="provider"><%= tr("Provider") %>:</label><br/>
-                        <select class="nt-create-select" name="provider" size="1">
-                            <% _.each(items, function(item) { %>
-                                <option value="<%= item %>"><%= tr(item) %></option>
-                            <% })%>
-                        </select><br/><br/>
-
-                        <label class="nt-create-label" for="object_type"><%= tr("Object type") %>:</label><br/>
-                        <select class="nt-create-select" name="object_type" size="1">
-                            <option value="bank"><%= tr("Bank") %></option>
-                            <option value="atm"><%= tr("Atm") %></option>
-                            <option value="terminal"><%= tr("Terminal") %></option>
-                            <option value="exchange"><%= tr("Exchange") %></option>
-                        </select><br/><br/>
-
-                        <label class="nt-create-label" for="address"><%= tr("Address") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="address"/ placeholder="<%= tr("20 Vostochnaya street") %>"><br/><br/>
-
-                        <label class="nt-create-label" for="place"><%= tr("Place") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="place" placeholder="<%= tr("Moskowskaya underground") %>" maxlength="60"/><br/><br/>
-
-                        <div class="nt-create-button-wrapper">
-                            <button class="button"><%= tr("Submit") %></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </script>
-
-        <!--/** unused:start */-->
-        <script type="text/template" id="more-info-template">
-            <div class="nt-info-container">
-                <div class="nt-info-caption">
-                    <% if (typeof(prov) != "undefined") {%>
-                        <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                    <%}%>
-                </div>
-                <div class="nt-info-body">
-                    <% if (typeof(currency) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
-                    <%}%>
-                    <% if (typeof(addr) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
-                    <%}%>
-                    <% if (typeof(place) != "undefined" && place != "") {%>
-                        <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
-                    <%}%>
-                    <% if (typeof(time) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
-                    <%}%>
-                    <% if (typeof(phone) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
-                    <%}%>
-                </div>
-            </div>
-        </script>
-        <!--/** unused:end */-->
-
         <script type="text/template" id="info-window-template">
             <div class="nt-info-container">
                 <div class="nt-info-caption">
@@ -263,10 +197,6 @@
         <script src="js/views/object.js"></script>
         <script src="js/views/objects.js"></script>
         <script src="js/views/about.js"></script>
-        <script src="js/views/create.js"></script>
-        <!--/** unused:start */-->
-        <script src="js/views/more-info.js"></script>
-        <!--/** unused:end */-->
         <script src="js/views/panel.js"></script>
         <script src="js/routes/app.js"></script>
         <!--compress:js:end-->
