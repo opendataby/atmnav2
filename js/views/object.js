@@ -26,7 +26,7 @@
             }
 
             var storageKey = 'objects';
-            var selectedObjects = app.utils.loadArrayData(storageKey);
+            var selectedObjects = app.utils.loadData(storageKey, []);
 
             if (checked) {
                 selectedObjects.push(objectId);

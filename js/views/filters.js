@@ -9,7 +9,7 @@
             app.utils.log('filters:initialize:start');
 
             var scroller = $('<ul class="nt-list-scroller"></ul>');
-            var selectedFilters = app.utils.loadArrayData('filters');
+            var selectedFilters = app.utils.loadData('filters', []);
             var filterTemplate = _.template($('#filter-template').html());
 
             _.each(app.settings.filters, function (id) {
@@ -32,7 +32,7 @@
             app.utils.log('filters:attach:start');
 
             app.PageView.prototype.attach.call(this, container);
-            this.initialFilters = app.utils.loadArrayData('filters');
+            this.initialFilters = app.utils.loadData('filters', []);
 
             app.utils.log('filters:attach:end');
             return this;

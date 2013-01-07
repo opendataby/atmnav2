@@ -18,7 +18,7 @@
             var checked = element.toggleClass('checked').hasClass('checked');
 
             var storageKey = 'filters';
-            var selectedFilters = app.utils.loadArrayData(storageKey);
+            var selectedFilters = app.utils.loadData(storageKey, []);
 
             if (checked) {
                 selectedFilters.push(filterId);

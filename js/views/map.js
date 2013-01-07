@@ -246,8 +246,8 @@
         fetchMarkers: function(args) {
             app.utils.log('map:fetchMarkers:start');
 
-            var selectedObjects = app.utils.loadArrayData('objects');
-            var selectedFilters = app.utils.loadArrayData('filters');
+            var selectedObjects = app.utils.loadData('objects', []);
+            var selectedFilters = app.utils.loadData('filters', []);
 
             if (!selectedObjects.length || !selectedFilters.length ||
                 !_.without(selectedObjects, 'spec:related').length) {
