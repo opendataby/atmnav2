@@ -10,9 +10,7 @@
             var data = defaultValue;
             try {
                 var storageData = localStorage.getItem(keyName);
-                if (storageData === null || storageData === undefined) {
-                    throw {};
-                } else {
+                if (storageData) {
                     data = JSON.parse(storageData);
                 }
             } catch (e) {
