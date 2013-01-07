@@ -59,7 +59,7 @@
 
             app.router.mapView.updateMarkers();
             $('.locate-icon', this.$el).removeClass('loading-icon');
-            alert(tr('Could not determine the current position.'));
+            app.utils.alert(tr('Could not determine the current position.'), tr('Alert'));
             app.utils.trackEvent('geolocation', 'error', app.utils.getDeviceInfo());
         },
 
@@ -185,7 +185,8 @@
         onFetchError: function(jqXHR, textStatus, errorThrown) {
             app.utils.log('map:onFetchError');
 
-            alert(tr('Could not load data from the server. Please try again later.'));
+            app.utils.alert(tr('Could not load data from the server. Please try again later.'),
+                            tr('Alert'));
 
             app.utils.trackEvent('ajax', 'error', textStatus, app.utils.getDeviceInfo());
         },
