@@ -14,8 +14,9 @@
         onClick: function(event) {
             app.utils.log('panel:onClick:start');
 
-            var link = $(event.target).closest('.nt-nav-tab-link');
-            var route = link.attr('href');
+            var link = $(event.target).closest('.nt-nav-tab-link'),
+                route = link.attr('href');
+
             if (route) {
                 app.router.navigate(route);
             }
