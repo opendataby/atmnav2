@@ -49,6 +49,10 @@
         isTouchMovePreventDefault: false,
 
         Scroll: function(element) {
+            if (global.device && global.device.version[0] == '4') {
+                return null; // do not create iScroll for Android v4+
+            }
+
             var self = this;
             self.iScroll = null;
 
