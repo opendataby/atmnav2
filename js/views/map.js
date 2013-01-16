@@ -13,6 +13,7 @@
 
             var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
             var map = this.map = L.map(this.el, _.extend(app.settings.mapOptions, {center: latLng}));
+
             L.tileLayer(app.settings.mapTileUrlTemplate).addTo(map);
 
             this.addMapControls();
@@ -72,8 +73,8 @@
             if (navigator.geolocation) {
                 $('.locate-icon', this.$el).addClass('loading-icon');
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
+                    var lat = position.coords.latitude,
+                        lng = position.coords.longitude;
                     self.onGeolocationSuccess([lat, lng]);
                 }, this.onGeolocationError, app.settings.geolocationOptions);
             }
@@ -138,8 +139,9 @@
 
             var self = this;
             if (!this.currentPositionMarker) {
-                var map = this.map;
-                var currentLocationTemplate = _.template($('#current-location-template').html());
+                var map = this.map,
+                    currentLocationTemplate = _.template($('#current-location-template').html());
+
                 this.currentPositionMarker = L.marker(latLng, {
                     icon: L.icon({
                         iconUrl: 'img/marker-location.png',
@@ -188,9 +190,9 @@
         onFetchSuccess: function(data) {
             app.utils.log('map:onFetchSuccess:start');
 
-            var map = this.map;
-            var instance = this;
-            var showInfoWindow = this.showInfoWindow;
+            var map = this.map,
+                instance = this,
+                showInfoWindow = this.showInfoWindow;
             var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
 
             this.deleteMarkers();
@@ -217,10 +219,10 @@
         showInfoWindow: function() {
             app.utils.log('map:showInfoWindow:start');
 
-            var options = this.options;
-            var markerLatLng = this.getLatLng();
-            var markerData = options.markerData;
-            var currentPosition = options.instance.currentPositionMarker;
+            var options = this.options,
+                markerLatLng = this.getLatLng(),
+                markerData = options.markerData,
+                currentPosition = options.instance.currentPositionMarker;
 
             if (currentPosition) {
                 markerData.distance = app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));
@@ -240,8 +242,8 @@
         fetchMarkers: function(args) {
             app.utils.log('map:fetchMarkers:start');
 
-            var selectedObjects = app.utils.loadData('objects', []);
-            var selectedFilters = app.utils.loadData('filters', []);
+            var selectedObjects = app.utils.loadData('objects', []),
+                selectedFilters = app.utils.loadData('filters', []);
 
             if (!selectedObjects.length || !selectedFilters.length ||
                 !_.without(selectedObjects, 'spec:related').length) {

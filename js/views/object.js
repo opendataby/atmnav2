@@ -19,14 +19,14 @@
                 return;
             }
 
-            var objectId = this.options.id;
-            var checked = element.toggleClass('checked').hasClass('checked');
+            var objectId = this.options.id,
+                checked = element.toggleClass('checked').hasClass('checked');
             if (objectId === 'spec:all') {
                 element.siblings().toggleClass('disabled', checked);
             }
 
-            var storageKey = 'objects';
-            var selectedObjects = app.utils.loadData(storageKey, []);
+            var storageKey = 'objects',
+                selectedObjects = app.utils.loadData(storageKey, []);
 
             if (checked) {
                 selectedObjects.push(objectId);
