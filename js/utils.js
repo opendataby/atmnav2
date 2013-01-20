@@ -46,13 +46,16 @@
             }
         },
 
+        // Android 4.1+ doesn't have overflow-scrolling css property
+        // for native scrolling detecting but support it as is.
+        // So there detected android 4 and 5 by userAgent.
+        // We detect android 5 because new devices on android 5 can also miss overflow-scrolling property.
+        isAndroid4: window.navigator.userAgent.toLowerCase().search('android 4') !== -1,
+        isAndroid5: window.navigator.userAgent.toLowerCase().search('android 5') !== -1,
+
         isTouchMovePreventDefault: false,
 
         Scroll: function(element) {
-            if (global.device && global.device.version[0] == '4') {
-                return null; // do not create iScroll for Android v4+
-            }
-
             var self = this;
             self.iScroll = null;
 
@@ -63,7 +66,8 @@
                     !computedStyle['overflow-scrolling'] &&
                     !computedStyle['-webkit-overflow-scrolling'] &&
                     !computedStyle['-moz-overflow-scrolling'] &&
-                    !computedStyle['-o-overflow-scrolling']) {
+                    !computedStyle['-o-overflow-scrolling'] &&
+                    !(app.utils.isAndroid4 || app.utils.isAndroid5)) {
                     if (!app.utils.isTouchMovePreventDefault) {
                         app.utils.isTouchMovePreventDefault = true;
                         document.addEventListener('touchmove', function(e) {
