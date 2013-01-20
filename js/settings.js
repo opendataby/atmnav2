@@ -1,6 +1,6 @@
 (function(app) {
     app.settings = {
-        debug: false,
+        debug: true,
 
         version: '2.1.5',
 

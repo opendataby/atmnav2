@@ -183,6 +183,16 @@ def remove_unused_vendor_css_prefixes(prefix):
                     result.write('\n')
 
 
+def set_debug_false():
+    """Change debug setting to false"""
+
+    settings_source = open(bpath('js/settings.js')).read()
+    settings_source = settings_source.replace('debug: true', 'debug: false')
+
+    with open(bpath('js/settings.js'), 'w') as result:
+        result.write(settings_source)
+
+
 def add_manifest():
     """Adds cache.manifest file."""
 
@@ -301,6 +311,9 @@ def main(options):
         print 'Removing non ios blocks...'
         remove_non_ios_blocks()
         remove_unused_vendor_css_prefixes('-webkit-')
+
+    print 'Set debug false'
+    set_debug_false()
 
     print 'Compressing JavaScript...'
     files, start, end = find_files('js', 'index.html', 'js')
