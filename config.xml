@@ -4,8 +4,8 @@
     xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id = "com.appspot.atmnavigator_minsk"
-    versionCode = "212"
-    version = "2.1.2">
+    versionCode = "215"
+    version = "2.1.5">
 
     <name>ATM Навигатор</name>
 
@@ -22,7 +22,7 @@
 
     <preference name="phonegap-version" value="2.2.0" />
     <preference name="orientation" value="default" />
-    <preference name="android-minSdkVersion" value="8" />
+    <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
 
     <gap:plugin name="ChildBrowser" />

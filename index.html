@@ -24,6 +24,11 @@
         <!--compress:css:end-->
 
         <!--/** debug:start */-->
+        <script>
+            less = {};
+            less.env = 'development';
+        </script>
+
         <script src="js/libs/less-1.3.0.min.js"></script>
         <!--/** debug:end */-->
         <!--/** phonegap:start */-->
@@ -106,65 +111,6 @@
             </div>
         </script>
 
-        <script type="text/template" id="create-template">
-            <div class="nt-create-page">
-                <div class="nt-create-scroller">
-                    <div class="nt-create-description">
-                        <%= tr("On this page you can tell us about missing point.") %>
-                    </div>
-                    <form class="nt-create-form">
-                        <label class="nt-create-label" for="provider"><%= tr("Provider") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="provider" placeholder="<%= tr("Belarusbank, Priorbank, ...") %>" autofocus maxlength="30" required="required"/><br/>
-
-                        <label class="nt-create-label" for="object_type"><%= tr("Object type") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="object_type" placeholder="<%= tr("Bank, atm, terminal, ...") %>" maxlength="30" required="required"/><br/>
-
-                        <label class="nt-create-label" for="address"><%= tr("Address") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="address" placeholder="<%= tr("20 Vostochnaya streat") %>" maxlength="50"/><br/>
-
-                        <label class="nt-create-label" for="place"><%= tr("Place") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="place" placeholder="<%= tr("Moskowskaya underground") %>" maxlength="60"/><br/>
-
-                        <label class="nt-create-label" for="comments"><%= tr("Comments") %>:</label><br/>
-                        <input class="nt-create-input" type="text" name="comments" placeholder="<%= tr("additional information") %>" maxlength="100"/><br/>
-
-                        <div class="nt-create-button-wrapper">
-                            <button class="button"><%= tr("Submit") %></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </script>
-
-        <!--/** unused:start */-->
-        <script type="text/template" id="more-info-template">
-            <div class="nt-info-container">
-                <div class="nt-info-caption">
-                    <% if (typeof(prov) != "undefined") {%>
-                        <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                    <%}%>
-                </div>
-                <div class="nt-info-body">
-                    <% if (typeof(currency) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
-                    <%}%>
-                    <% if (typeof(addr) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
-                    <%}%>
-                    <% if (typeof(place) != "undefined" && place != "") {%>
-                        <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
-                    <%}%>
-                    <% if (typeof(time) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
-                    <%}%>
-                    <% if (typeof(phone) != "undefined") {%>
-                        <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
-                    <%}%>
-                </div>
-            </div>
-        </script>
-        <!--/** unused:end */-->
-
         <script type="text/template" id="info-window-template">
             <div class="nt-info-container">
                 <div class="nt-info-caption">
@@ -184,10 +130,10 @@
                     <% if (typeof(place) != "undefined" && place != "") {%>
                         <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
                     <%}%>
-                    <% if (typeof(time) != "undefined") {%>
+                    <% if (typeof(time) != "undefined" && time != "") {%>
                         <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
                     <%}%>
-                    <% if (typeof(phone) != "undefined") {%>
+                    <% if (typeof(phone) != "undefined" && phone != "") {%>
                         <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
                     <%}%>
                 </div>
@@ -216,27 +162,18 @@
             var _gaq = _gaq || [];
 
             _gaq.push(['_setAccount', 'UA-32540763-1']);
+            _gaq.push(['_setDomainName', 'none']); 
             _gaq.push(['_trackPageview']);
 
             window.onerror = function(msg, url, line) {
                 if (window.device) {
-                    _gaq.push(['_trackEvent', 'JS Error', msg, 
+                    window._gaq.push(['_trackEvent', 'JS Error', msg, 
                                navigator.userAgent + ' -> ' + url + " : " + line, 0, true]);
                     return true;
                 } else {
                     return false;
                 }
             };
-
-            (function() {
-                var scriptEl = document.createElement('script');
-                scriptEl.async = true;
-                scriptEl.type = 'text/javascript';
-                scriptEl.src = 'http://www.google-analytics.com/ga.js';
-
-                var firstScriptEl = document.getElementsByTagName('script')[0];
-                firstScriptEl.parentNode.insertBefore(scriptEl, firstScriptEl);
-            })();
         </script>
 
         <!--compress:js:start-->
@@ -260,10 +197,6 @@
         <script src="js/views/object.js"></script>
         <script src="js/views/objects.js"></script>
         <script src="js/views/about.js"></script>
-        <script src="js/views/create.js"></script>
-        <!--/** unused:start */-->
-        <script src="js/views/more-info.js"></script>
-        <!--/** unused:end */-->
         <script src="js/views/panel.js"></script>
         <script src="js/routes/app.js"></script>
         <!--compress:js:end-->
@@ -273,6 +206,7 @@
                 app.tr.translatePageFromData();
 
                 Backbone.history.start();
+                app.utils.loadExternalScripts(['http://www.google-analytics.com/ga.js']);
             });
 
             /** phonegap:start */

@@ -13,12 +13,12 @@
         onChange: function(event) {
             app.utils.log('filter:onChange:start');
 
-            var filterId = this.options.id;
-            var element = $(event.target).closest('.nt-list-item');
-            var checked = element.toggleClass('checked').hasClass('checked');
+            var filterId = this.options.id,
+                element = $(event.target).closest('.nt-list-item'),
+                checked = element.toggleClass('checked').hasClass('checked'),
 
-            var storageKey = 'filters';
-            var selectedFilters = app.utils.loadArrayData(storageKey);
+                storageKey = 'filters',
+                selectedFilters = app.utils.loadData(storageKey, []);
 
             if (checked) {
                 selectedFilters.push(filterId);

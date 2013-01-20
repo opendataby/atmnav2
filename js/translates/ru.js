@@ -27,19 +27,6 @@
         "km": "км",
         "m": "м",
 
-        // Create mode
-        "Provider": "Банк",
-        "Object type": "Тип объекта",
-        "Place": "Расположение",
-        "Comments": "Доп. информация",
-        "On this page you can tell us about missing point.": "Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте.",
-        "Belarusbank, Priorbank, ...": "Баларусбанк, Приорбанк, ...",
-        "Bank, atm, terminal, ...": "Банк, банкомат, терминал, ...",
-        "20 Vostochnaya streat": "ул. Восточная, д.20",
-        "Moskowskaya underground": "ст.метро Московская",
-        "additional information": "дополнительная информация",
-        "Submit": "Отправить",
-
         // Warnings
         "Alert": "Предупреждение",
         "Could not determine the current position.": "Не удалось определить текущее положение.",

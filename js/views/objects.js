@@ -12,11 +12,11 @@
         initialize: function(args) {
             app.utils.log('objects:initialize:start');
 
-            var scroller = $('<ul class="nt-list-scroller"></ul>');
-            var selectedObjects = app.utils.loadArrayData('objects');
-            var objectTemplate = _.template($('#object-template').html());
-            var disabled = _.include(selectedObjects, 'spec:all');
-            var specilaClasses = this.specialClasses;
+            var scroller = $('<ul class="nt-list-scroller"></ul>'),
+                selectedObjects = app.utils.loadData('objects', []),
+                objectTemplate = _.template($('#object-template').html()),
+                disabled = _.include(selectedObjects, 'spec:all'),
+                specilaClasses = this.specialClasses;
 
             _.each(app.settings.objects, function (id) {
                 scroller.append(new app.ObjectView({
@@ -55,7 +55,7 @@
             app.utils.log('objects:attach:start');
 
             app.PageView.prototype.attach.call(this, container);
-            this.initialObjects = app.utils.loadArrayData('objects');
+            this.initialObjects = app.utils.loadData('objects', []);
 
             app.utils.log('objects:attach:end');
             return this;

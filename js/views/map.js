@@ -13,6 +13,7 @@
 
             var latLng = app.utils.loadData('mapLastLocation') || app.settings.defaultLatLng;
             var map = this.map = L.map(this.el, _.extend(app.settings.mapOptions, {center: latLng}));
+
             L.tileLayer(app.settings.mapTileUrlTemplate).addTo(map);
 
             this.addMapControls();
@@ -59,7 +60,7 @@
 
             app.router.mapView.updateMarkers();
             $('.locate-icon', this.$el).removeClass('loading-icon');
-            alert(tr('Could not determine the current position.'));
+            app.utils.alert(tr('Could not determine the current position.'), tr('Alert'));
             app.utils.trackEvent('geolocation', 'error', app.utils.getDeviceInfo());
         },
 
@@ -72,8 +73,8 @@
             if (navigator.geolocation) {
                 $('.locate-icon', this.$el).addClass('loading-icon');
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
+                    var lat = position.coords.latitude,
+                        lng = position.coords.longitude;
                     self.onGeolocationSuccess([lat, lng]);
                 }, this.onGeolocationError, app.settings.geolocationOptions);
             }
@@ -107,14 +108,12 @@
             var self = this;
             if (L.Browser.mobile) {
                 this.addMapControl(tr('Locate'), 'topright', 'locate-icon', self.moveToLocation, self);
-                this.addMapControl(tr('Request new point'), 'topleft', 'position-add', self.toCreateMode, self);
                 this.addMapControl(tr('Zoom Out'), 'bottomright', 'zoom-out-icon', this.map.zoomOut);
                 this.addMapControl(tr('Zoom In'), 'bottomright', 'zoom-in-icon', this.map.zoomIn);
             } else {
                 this.addMapControl(tr('Zoom In'), 'topleft', 'zoom-in-icon', this.map.zoomIn);
                 this.addMapControl(tr('Zoom Out'), 'topleft', 'zoom-out-icon', this.map.zoomOut);
                 this.addMapControl(tr('Locate'), 'topleft', 'locate-icon', self.moveToLocation, self);
-                this.addMapControl(tr('Request new point'), 'topright', 'position-add', self.toCreateMode, self);
             }
 
             app.utils.log('map:addMapControls:end');
@@ -135,17 +134,14 @@
             app.utils.log('map:addMapEvents:end');
         },
 
-        toCreateMode: function() {
-            app.router.navigate('create');
-        },
-
         createOrUpdateCurrentPositionMarker: function(latLng) {
             app.utils.log('map:createOrUpdateCurrentPositionMarker:start');
 
             var self = this;
             if (!this.currentPositionMarker) {
-                var map = this.map;
-                var currentLocationTemplate = _.template($('#current-location-template').html());
+                var map = this.map,
+                    currentLocationTemplate = _.template($('#current-location-template').html());
+
                 this.currentPositionMarker = L.marker(latLng, {
                     icon: L.icon({
                         iconUrl: 'img/marker-location.png',
@@ -185,7 +181,8 @@
         onFetchError: function(jqXHR, textStatus, errorThrown) {
             app.utils.log('map:onFetchError');
 
-            alert(tr('Could not load data from the server. Please try again later.'));
+            app.utils.alert(tr('Could not load data from the server. Please try again later.'),
+                            tr('Alert'));
 
             app.utils.trackEvent('ajax', 'error', textStatus, app.utils.getDeviceInfo());
         },
@@ -193,9 +190,9 @@
         onFetchSuccess: function(data) {
             app.utils.log('map:onFetchSuccess:start');
 
-            var map = this.map;
-            var instance = this;
-            var showInfoWindow = this.showInfoWindow;
+            var map = this.map,
+                instance = this,
+                showInfoWindow = this.showInfoWindow;
             var infoWindowTemplate = this.infoWindowTemplate = this.infoWindowTemplate || _.template($('#info-window-template').html());
 
             this.deleteMarkers();
@@ -222,10 +219,10 @@
         showInfoWindow: function() {
             app.utils.log('map:showInfoWindow:start');
 
-            var options = this.options;
-            var markerLatLng = this.getLatLng();
-            var markerData = options.markerData;
-            var currentPosition = options.instance.currentPositionMarker;
+            var options = this.options,
+                markerLatLng = this.getLatLng(),
+                markerData = options.markerData,
+                currentPosition = options.instance.currentPositionMarker;
 
             if (currentPosition) {
                 markerData.distance = app.utils.roundDistance(currentPosition.getLatLng().distanceTo(markerLatLng));
@@ -245,8 +242,8 @@
         fetchMarkers: function(args) {
             app.utils.log('map:fetchMarkers:start');
 
-            var selectedObjects = app.utils.loadArrayData('objects');
-            var selectedFilters = app.utils.loadArrayData('filters');
+            var selectedObjects = app.utils.loadData('objects', []),
+                selectedFilters = app.utils.loadData('filters', []);
 
             if (!selectedObjects.length || !selectedFilters.length ||
                 !_.without(selectedObjects, 'spec:related').length) {

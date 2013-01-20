@@ -17,15 +17,11 @@
                 dataType: 'json',
                 success: options.success,
                 error: options.error,
-                context: options.context
+                context: options.context,
+                timeout: app.settings.ajaxTimeout
             });
 
             app.utils.trackEvent('ajax', 'get', JSON.stringify(params));
-        },
-
-        submitPoint: function(form) {
-            // DO NOTHING
-            return true;
         }
     };
 })(jQuery, window.app);

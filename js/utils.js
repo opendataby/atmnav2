@@ -1,24 +1,29 @@
-(function(_, app) {
-    app.utils = {
-        loadArrayData: function(keyName) {
-            try {
-                return JSON.parse(localStorage.getItem(keyName)) || [];
-            } catch (e) {
-                app.utils.trackEvent('localStorage', 'loadArrayData', 'error', keyName);
-                return [];
-            }
-        },
+(function(_, app, global, undefined) {
+    var _cache = {};
 
-        loadData: function(keyName) {
+    app.utils = {
+        loadData: function(keyName, defaultValue) {
+            if (keyName in _cache) {
+                return _.clone(_cache[keyName]);
+            }
+
+            var data = defaultValue;
             try {
-                return JSON.parse(localStorage.getItem(keyName));
+                var storageData = localStorage.getItem(keyName);
+                if (storageData) {
+                    data = JSON.parse(storageData);
+                }
             } catch (e) {
                 app.utils.trackEvent('localStorage', 'loadData', 'error', keyName);
-                return false;
+            } finally {
+                _cache[keyName] = data;
+                return data;
             }
         },
 
         saveData: function(keyName, data) {
+            _cache[keyName] = data;
+
             setTimeout(function() {
                 localStorage.setItem(keyName, JSON.stringify(data));
             }, 0);
@@ -44,6 +49,10 @@
         isTouchMovePreventDefault: false,
 
         Scroll: function(element) {
+            if (global.device && global.device.version[0] == '4') {
+                return null; // do not create iScroll for Android v4+
+            }
+
             var self = this;
             self.iScroll = null;
 
@@ -127,13 +136,10 @@
         setDefaults: function() {
             app.utils.log('utils:setDefaults:start');
 
-            if (localStorage.getItem('theFirstStart') === undefined ||
-                localStorage.getItem('theFirstStart') === null ||
-                app.utils.loadData('theFirstStart')) {
-
+            if (app.utils.loadData('theFirstStart', true)) {
                 app.utils.saveData('theFirstStart', false);
 
-                var currentObjects = app.utils.loadArrayData('objects');
+                var currentObjects = app.utils.loadData('objects', []);
                 if (currentObjects.length) {
                     var deprecatedObjects = _.difference(currentObjects, app.settings.objects);
                     app.utils.saveData('objects', _.difference(currentObjects, deprecatedObjects));
@@ -141,7 +147,7 @@
                     app.utils.saveData('objects', app.settings.defaultObjects);
                 }
 
-                var currentFilters = app.utils.loadArrayData('filters');
+                var currentFilters = app.utils.loadData('filters', []);
                 if (currentFilters.length) {
                     var deprecatedFilters = _.difference(currentFilters, app.settings.filters);
                     app.utils.saveData('filters', _.difference(currentFilters, deprecatedFilters));
@@ -158,13 +164,12 @@
                 return;
             }
 
-            var _gaq = _gaq || [];
             var trackData = ['_trackEvent'];
 
             _.each(arguments, function(arg) {
                 trackData.push(arg);
             });
-            _gaq.push(trackData);
+            global._gaq.push(trackData);
         },
 
         trackPage: function(page) {
@@ -172,8 +177,7 @@
                 return;
             }
 
-            var _gaq = _gaq || [];
-            _gaq.push(['_trackPageview', page]);
+            global._gaq.push(['_trackPageview', page]);
         },
 
         getDeviceInfo: function() {
@@ -197,4 +201,4 @@
             return [device.platform, device.name, device.version, connectionType].join(' | ');
         }
     };
-})(_, window.app);
+})(_, window.app, window);
