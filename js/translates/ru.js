@@ -28,13 +28,12 @@
         "m": "м",
 
         // Create mode
-        "Provider": "Банк",
-        "Object type": "Тип объекта",
-        "Place": "Расположение",
-        "Comments": "Доп. информация",
-        "On this page you can tell us about missing point.": "Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте.",
-        "20 Vostochnaya street": "ул. Восточная, д.20",
-        "Moskowskaya underground": "ст.метро Московская",
+        "Error": "Ошибка",
+        "Message": "Сообщение",
+        "Opps, try later": "Ой, что-то не так. Попробуйте позже.",
+        "Please, fill the form": "Введите недостающие данные",
+        "Thank you for submit": "Спасибо за предоставленные данные! Мы обработаем их в самое ближайшее время.",
+        "On this page you can tell us about missing point": "Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте",
         "Submit": "Отправить",
 
         // Warnings
