@@ -27,6 +27,19 @@
             if (!_.all([type, provider, address])) {
                 app.utils.alert(tr('Please, fill the form'), tr('Alert'));
             } else {
+                var onError = function() {
+                    app.utils.alert(tr('Opps, try later'), tr('Error'));
+                };
+
+                var onSuccess = function(data) {
+                    if (data.success) {
+                        form.find('input').val('');
+                        app.utils.alert(tr('Thank you for submit'), tr('Message'));
+                    } else {
+                        onError();
+                    }
+                };
+
                 app.remote.submitPoint({
                     data: {
                         'type': type,
@@ -34,13 +47,8 @@
                         'address': address,
                         'place': place    
                     },
-                    error: function() {
-                        app.utils.alert(tr('Opps, try later'), tr('Error'));
-                    },
-                    success: function() {
-                        form.find('input').val('');
-                        app.utils.alert(tr('Thank you for submit'), tr('Message'));    
-                    }
+                    error: onError,
+                    success: onSuccess
                 });
             }
             return false;
