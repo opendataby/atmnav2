@@ -61,8 +61,7 @@
                 type = $('input[name=type]', form).val(),
                 provider = $('input[name=provider]', form).val(),
                 address = $('input[name=address]', form).val(),
-                place = $('input[name=place]', form).val(),
-                geolocation = JSON.stringify(app.utils.loadData('mapLastLocation'));
+                place = $('input[name=place]', form).val();
 
             if (!_.all([type, provider, address])) {
                 app.utils.alert(tr('Please, fill the form'), tr('Alert'));
@@ -87,7 +86,7 @@
                         'provider': provider,
                         'address': address,
                         'place': place,
-                        'geo': geolocation
+                        'geo': JSON.stringify(app.utils.loadData('mapLastLocation'))
                     },
                     error: onError,
                     success: onSuccess
