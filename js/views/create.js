@@ -1,6 +1,7 @@
 (function($, _, app) {
     app.CreateView = app.PageView.extend({
         _scroll: null,
+        _fastClick: null,
 
         events: {
             'submit': 'onSubmit'
@@ -26,6 +27,8 @@
             document.addEventListener("showkeyboard", function() {
                 navigationBar.hide();
             }, false);
+
+            this._fastClick = new FastClick(this.el);
 
             app.utils.log('create:initialize:end');
         },
