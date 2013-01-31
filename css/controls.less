@@ -24,3 +24,13 @@
   line-height: 40px;
   color: #FFFFFF;
 }
+
+.button:disabled {
+  background: @button-disabled-color-bottom;
+  background: -moz-linear-gradient(center top, @button-disabled-color-top, @button-disabled-color-bottom); /* Firefox 3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @button-disabled-color-top), color-stop(100%, @button-disabled-color-bottom)); /* Chrome 1-9, Safari 4-5 */
+  background: -webkit-linear-gradient(center top, @button-disabled-color-top, @button-disabled-color-bottom); /* Chrome 10+, Safari 5.1+ */
+  background: -o-linear-gradient(center top, @button-disabled-color-top, @button-disabled-color-bottom); /* Opera 11.10+ */
+  background: -ms-linear-gradient(center top, @button-disabled-color-top, @button-disabled-color-bottom); /* IE10 */
+  background: linear-gradient(center top, @button-disabled-color-top, @button-disabled-color-bottom); /* CSS3 */
+}
