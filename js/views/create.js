@@ -19,8 +19,8 @@
 
             document.addEventListener("hidekeyboard", function() {
                 setTimeout(function() {
-                    navigationBar.fadeIn(500);
-                }, 500);
+                    navigationBar.fadeIn(400);
+                }, 250);
             }, false);
 
             document.addEventListener("showkeyboard", function() {
