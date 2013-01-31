@@ -1,8 +1,10 @@
 /* About block */
+
 .nt-about-page {
   width: 100%;
   height: 100%;
   background: url("img/about-background.png") no-repeat center center;
+
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
   -o-background-size: 100% 100%;
@@ -58,19 +60,23 @@
   min-width: 150px;
   min-height: 40px;
   margin: 10px;
-  -moz-border-radius: 5px;
+
   -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
+
   background: @button-color-bottom;
-  background: -moz-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Firefox 3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @button-color-top), color-stop(100%, @button-color-bottom)); /* Chrome 1-9, Safari 4-5 */
   background: -webkit-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Chrome 10+, Safari 5.1+ */
-  background: -o-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Opera 11.10+ */
+  background: -moz-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Firefox 3.6+ */
   background: -ms-linear-gradient(center top, @button-color-top, @button-color-bottom); /* IE10 */
+  background: -o-linear-gradient(center top, @button-color-top, @button-color-bottom); /* Opera 11.10+ */
   background: linear-gradient(center top, @button-color-top, @button-color-bottom); /* CSS3 */
-  -moz-box-shadow: 0 0 3px 1px @button-shadow-color;
+
   -webkit-box-shadow: 0 0 3px 1px @button-shadow-color;
+  -moz-box-shadow: 0 0 3px 1px @button-shadow-color;
   box-shadow: 0 0 3px 1px @button-shadow-color;
+
   text-align: center;
   text-decoration: none;
   font-weight: bold;

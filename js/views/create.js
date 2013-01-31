@@ -12,6 +12,24 @@
             return _.template($('#create-template').html())();
         },
 
+        initialize: function() {
+            app.utils.log('create:initialize:start');
+
+            var navigationBar = $('.nt-nav');
+
+            document.addEventListener("hidekeyboard", function() {
+                setTimeout(function() {
+                    navigationBar.fadeIn(500);
+                }, 500);
+            }, false);
+
+            document.addEventListener("showkeyboard", function() {
+                navigationBar.hide();
+            }, false);
+
+            app.utils.log('create:initialize:end');
+        },
+
         attach: function(container) {
             app.utils.log('create:attach:start');
 

@@ -33,12 +33,20 @@
   width: @map-control-mobile-size;
   height: @map-control-mobile-size;
   margin: 6px;
-  -moz-border-radius: @map-control-mobile-radius;
   -webkit-border-radius: @map-control-mobile-radius;
+  -moz-border-radius: @map-control-mobile-radius;
   border-radius: @map-control-mobile-radius;
   background-size: @map-control-mobile-icon-size @map-control-mobile-icon-size;
   font-size: @map-control-mobile-icon-size;
   line-height: @map-control-mobile-size;
+}
+
+.zoom-in-icon.mobile {
+  bottom: @navigation-bar-height + @navigation-bar-border-height;
+}
+
+.zoom-out-icon.mobile {
+  bottom: @navigation-bar-height + @navigation-bar-border-height;
 }
 
 .zoom-in-icon:before {
