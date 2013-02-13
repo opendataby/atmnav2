@@ -1,4 +1,5 @@
 /* Navigation block */
+
 .nt-nav {
   position: absolute;
   bottom: 0;
@@ -8,13 +9,15 @@
   padding: 0;
   border-top: @navigation-bar-border-height solid @navigation-bar-border-color;
   overflow: hidden;
+
   background: @navigation-bar-color-bottom;
-  background: -moz-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Firefox 3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @navigation-bar-color-top), color-stop(100%, @navigation-bar-color-bottom)); /* Chrome 1-9, Safari 4-5 */
   background: -webkit-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Chrome 10+, Safari 5.1+ */
+  background: -moz-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Firefox 3.6+ */
   background: -o-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* IE10 */
   background: linear-gradient(top, @navigation-bar-color-top, @navigation-bar-color-bottom); /* CSS3 */
+
   text-align: center;
 }
 
@@ -50,8 +53,9 @@
 
 .nt-nav-tab-link.active {
   color: @navigation-bar-active-tab-color;
-  -moz-transform: translateZ(0);
+
   -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
   -o-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

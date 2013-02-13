@@ -27,6 +27,15 @@
         "km": "км",
         "m": "м",
 
+        // Create mode
+        "Error": "Ошибка",
+        "Message": "Сообщение",
+        "Opps, try later": "Ой, что-то не так. Попробуйте позже.",
+        "Please, fill the form": "Введите недостающие данные",
+        "Thank you for submit": "Спасибо за предоставленные данные! Мы обработаем их в самое ближайшее время.",
+        "On this page you can tell us about missing point": "Используя данную страницу, Вы можете сообщить нам об отсутствующем объекте на карте",
+        "Submit": "Отправить",
+
         // Warnings
         "Alert": "Предупреждение",
         "Could not determine the current position.": "Не удалось определить текущее положение.",

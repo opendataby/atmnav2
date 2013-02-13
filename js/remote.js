@@ -22,6 +22,18 @@
             });
 
             app.utils.trackEvent('ajax', 'get', JSON.stringify(params));
+        },
+
+        submitPoint: function(options) {
+            app.xhr = $.ajax({
+                url: app.settings.submitUrl,
+                type: 'POST',
+                data: options.data,
+                dataType: 'json',
+                error: options.error,
+                success: options.success,
+                timeout: app.settings.submitTimeout
+            });
         }
     };
 })(jQuery, window.app);

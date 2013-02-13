@@ -111,6 +111,64 @@
             </div>
         </script>
 
+        <script type="text/template" id="create-template">
+            <div class="nt-create-page">
+                <div class="nt-create-scroller">
+                    <div class="nt-create-description">
+                        <%= tr("On this page you can tell us about missing point") %>
+                    </div>
+
+                    <form class="nt-create-form">
+                        <div class="nt-create-input-container first">
+                            <div><input name="type" type="text" placeholder="Тип объекта" /></div>
+                        </div>
+                        <div class="nt-create-input-container">
+                            <div><input name="provider" type="text" placeholder="Название банка" /></div>
+                        </div>
+                        <div class="nt-create-input-container">
+                            <div><input name="address" type="text" placeholder="Адрес" /></div>
+                        </div>
+                        <div class="nt-create-input-container last">
+                            <div><input name="place" type="text" placeholder="Расположение" /></div>
+                        </div>
+
+                        <div class="nt-create-button-wrapper">
+                            <button class="button"><%= tr("Submit") %></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </script>
+
+        <!--/** unused:start */-->
+        <script type="text/template" id="more-info-template">
+            <div class="nt-info-container">
+                <div class="nt-info-caption">
+                    <% if (typeof(prov) != "undefined") {%>
+                        <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
+                    <%}%>
+                </div>
+                <div class="nt-info-body">
+                    <% if (typeof(currency) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Currency") %>:</b> <%= currency %></span><br/>
+                    <%}%>
+                    <% if (typeof(addr) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Address") %>:</b> <%= addr %></span><br/>
+                    <%}%>
+                    <% if (typeof(place) != "undefined" && place != "") {%>
+                        <span class="nt-info-title"><b><%= tr("Location") %>:</b> <%= place %></span><br/>
+                    <%}%>
+                    <% if (typeof(time) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Working time") %>:</b> <%= time %></span><br/>
+                    <%}%>
+                    <% if (typeof(phone) != "undefined") {%>
+                        <span class="nt-info-title"><b><%= tr("Phone") %>:</b> <%= phone %></span><br/>
+                    <%}%>
+                </div>
+            </div>
+        </script>
+        <!--/** unused:end */-->
+
         <script type="text/template" id="info-window-template">
             <div class="nt-info-container">
                 <div class="nt-info-caption">
@@ -198,6 +256,7 @@
         <script src="js/views/objects.js"></script>
         <script src="js/views/about.js"></script>
         <script src="js/views/panel.js"></script>
+        <script src="js/views/create.js"></script>
         <script src="js/routes/app.js"></script>
         <!--compress:js:end-->
 

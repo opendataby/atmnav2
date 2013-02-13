@@ -2,10 +2,11 @@
     app.settings = {
         debug: true,
 
-        version: '2.1.5',
+        version: '2.2.0',
 
         vibrateMilliseconds: 40,
         ajaxTimeout: 15000, // 15 sec
+        submitTimeout: 5000, // 5 sec
 
         mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
@@ -113,6 +114,7 @@
         },
 
         serverUrl: 'http://atmnav-server.appspot.com',
+        submitUrl: 'http://atmnav-server.appspot.com/submit/',
 
         language: {
             'default': 'ru'
