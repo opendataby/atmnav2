@@ -93,8 +93,12 @@
         },
 
         openExternalUrl: function(url) {
-            window.plugins.childBrowser.openExternal(url);
-            return false;
+            if (window.plugins && window.plugins.childBrowser) {
+                window.plugins.childBrowser.openExternal(url);
+                return false;
+            }
+
+            return true;
         },
 
         getRelatedObjects: function(relatedForObjects) {

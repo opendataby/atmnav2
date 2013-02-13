@@ -173,8 +173,14 @@
             <div class="nt-info-container">
                 <div class="nt-info-caption">
                     <img class="nt-info-icon" src="img/icons/<%= prov %>.png" />
-                    <span class="nt-info-title"><%= tr(prov) %></span>
+                    <span class="nt-info-title">
+                        <a href="<%= app.settings.objectUrls[prov] %>"
+                           target="_blank"
+                           onclick="return app.utils.openExternalUrl(this.href);"><%= tr(prov) %>
+                        </a>
+                    </span>
                 </div>
+
                 <div class="nt-info-body">
                     <% if (typeof(type) != "undefined") {%>
                         <span class="nt-info-title"><b><%= tr("Type") %>:</b> <%= tr(type) %></span><br/>
