@@ -2,7 +2,7 @@
     app.settings = {
         debug: true,
 
-        version: '2.2.0',
+        version: '2.2.1',
 
         vibrateMilliseconds: 40,
         ajaxTimeout: 15000, // 15 sec
