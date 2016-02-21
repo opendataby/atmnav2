@@ -2,10 +2,11 @@
     app.settings = {
         debug: true,
 
-        version: '2.1.5',
+        version: '2.2.1',
 
         vibrateMilliseconds: 40,
         ajaxTimeout: 15000, // 15 sec
+        submitTimeout: 5000, // 5 sec
 
         mapTileUrlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
@@ -112,7 +113,39 @@
             'zepter': []
         },
 
+        objectUrls: {
+            'absolut': 'http://www.absolutbank.by/',
+            'alfa': 'http://www.alfabank.by/',
+            'belagroprom': 'http://www.belapb.by/',
+            'belarus': 'http://www.belarusbank.by/',
+            'bve': 'http://www.bveb.by/',
+            'belgazprom': 'http://www.belgazprombank.by/',
+            'belinvest': 'http://www.belinvestbank.by/',
+            'bbmb': 'http://www.bbsb.by/',
+            'bnb': 'http://www.bnb.by/',
+            'belros': 'http://www.belrosbank.by/',
+            'belswiss': 'http://www.bsb.by/',
+            'bps': 'http://www.bps-sberbank.by/',
+            'bta': 'http://www.btabank.by/',
+            'vtb': 'http://www.vtb-bank.by/',
+            'delta': 'http://www.deltabank.by/',
+            'euro': 'http://www.eurobank.by/',
+            'credex': 'http://www.credexbank.by/',
+            'mm': 'http://www.mmbank.by/',
+            'mtb': 'http://www.mtbank.by/',
+            'paritet': 'http://www.paritetbank.by/',
+            'prior': 'http://www.priorbank.by/',
+            'rrb': 'http://www.rrb.by/',
+            'sbb': 'http://www.sbb.by/',
+            'techno': 'http://www.tb.by/',
+            'trust': 'http://www.trustbank.by/',
+            'fransa': 'http://www.fransabank.by/',
+            'homecredit': 'http://www.homecredit.by/',
+            'zepter': 'http://www.zepterbank.by/'
+        },
+
         serverUrl: 'http://atmnav-server.appspot.com',
+        submitUrl: 'http://atmnav-server.appspot.com/submit/',
 
         language: {
             'default': 'ru'

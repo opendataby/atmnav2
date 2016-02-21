@@ -4,8 +4,8 @@
     xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
     id = "com.appspot.atmnavigator_minsk"
-    versionCode = "215"
-    version = "2.1.5">
+    versionCode = "221"
+    version = "2.2.1">
 
     <name>ATM Навигатор</name>
 
@@ -20,7 +20,7 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
 
-    <preference name="phonegap-version" value="2.2.0" />
+    <preference name="phonegap-version" value="2.3.0" />
     <preference name="orientation" value="default" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
