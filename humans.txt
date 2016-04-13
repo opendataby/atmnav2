@@ -6,7 +6,7 @@ Developer: Max Usachev
 Email: maxusachev@gmail.com
 Location: Minsk, Belarus
 
-Developer: Pavel Tyslyatsky
+Developer: Pavel Tyslacki
 Email: pavel.tyslyatsky@gmail.com
 Location: Minsk, Belarus
 

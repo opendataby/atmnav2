@@ -104,6 +104,6 @@
         "Developers": "Разработчики",
         "License": "Лицензия",
         "Max Usachev": "Максим Усачев",
-        "Pavel Tyslyatsky": "Павел Тысляцкий"
+        "Pavel Tyslacki": "Павел Тысляцкий"
     };
 })(window.app);
