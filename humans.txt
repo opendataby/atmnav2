@@ -14,7 +14,7 @@ Location: Minsk, Belarus
 Thanks anyone who helped release ATM Navigator, posted feedback and used our application
 
 /* SITE */
-Site: atms.by
+Site: atms.opendata.by
 Last update: 2012/11/10
 Standards: HTML5, CSS3,
 Components: backbone.js, jQuery, phonegap

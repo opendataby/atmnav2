@@ -287,7 +287,7 @@ def main(options):
     print 'Copying sources...'
     copy(['css', 'img', 'js', 'index.html'], SRC_DIR, BUILD_DIR)
     if options.platform == 'desktop':
-        copy(['app.yaml', 'humans.txt', 'robots.txt'], SRC_DIR, BUILD_DIR)
+        copy(['app.yaml', 'humans.txt', 'robots.txt', 'LICENSE.txt'], SRC_DIR, BUILD_DIR)
     else:
         copy(['*.png', 'config.xml'], SRC_DIR, BUILD_DIR)
 
